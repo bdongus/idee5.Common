@@ -1,0 +1,100 @@
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+Desktop.ini
+$RECYCLE.BIN/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+
+[Dd]ebug/
+[Rr]elease/
+[Bb]uild/
+x64/
+[Bb]in/
+[Oo]bj/
+*.exe
+*.pdb
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# Click-Once directory
+publish/
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.pubxml
+*.azurePubxml
+
+# NuGet Packages Directory
+## TODO: If you have NuGet Package Restore enabled, uncomment the next line
+packages/
+## TODO: If the tool you use requires repositories.config, also uncomment the next line
+!packages/repositories.config
+
+# Omit temporary files
+project.lock.json
+project.assets.json
+*.nuget.props
+
+# Windows Azure Build Output
+csx/
+*.build.csdef
+
+# Windows Store app package directory
+AppPackages/
+
+# Backup & report files from converting an old project file to a newer
+# Visual Studio version. Backup files are not needed, because we have git ;-)
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+
+# SQL Server files
+App_Data/*.mdf
+App_Data/*.ldf
+
+#Visual Studio files
+*.publishsettings
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+ipch/
+Ankh.NoLoad
+
+#InstallShield
+[Ss]ingle[Ii]mage/
+[Dd][Vv][Dd]-5/
+[Ii]nterm/
+
+#Tooling
+_ReSharper*/
+*.resharper
+
+#Subversion files
+.svn

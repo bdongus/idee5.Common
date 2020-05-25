@@ -1,0 +1,148 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Common", "idee5.Common\idee5.Common.csproj", "{7192BF9A-8552-4AD3-9746-5865433BEE36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CA5C5094-DE3C-47E5-A5E8-D6E20EE3C047}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Common.Tests", "idee5.Common.Tests\idee5.Common.Tests.csproj", "{B1A008EA-1F30-412C-BBD0-061AB0027FEA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Common.Data", "idee5.Common.Data\idee5.Common.Data.csproj", "{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Common.Data.Tests", "idee5.Common.Data.Tests\idee5.Common.Data.Tests.csproj", "{D711C080-B8AC-4BCF-9837-341E2C4E1098}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{33848DDC-7D2E-4105-8FAE-FEA94D8C8C6A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.tfignore = .tfignore
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{808F0A23-0B58-46EC-BF38-B06FB06D6891}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.config = .nuget\NuGet.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idee5.Common.461Tests", "idee5.Common.461Tests\idee5.Common.461Tests.csproj", "{EF15698B-3682-4205-9060-CEA23CD90F2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idee5.Common.NET461", "idee5.Common.NET45\idee5.Common.NET461.csproj", "{79963D30-2117-48E7-9079-0D3C949AA26B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Common.Net", "idee5.Common.Net\idee5.Common.Net.csproj", "{4975B48E-C73F-46DE-AFC7-51816BCB592A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Common.Net.Tests", "idee5.Common.Net.Tests\idee5.Common.Net.Tests.csproj", "{23EAB5BC-B588-4225-96A7-16A4B2F33871}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		nuget|Any CPU = nuget|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7192BF9A-8552-4AD3-9746-5865433BEE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7192BF9A-8552-4AD3-9746-5865433BEE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7192BF9A-8552-4AD3-9746-5865433BEE36}.nuget|Any CPU.ActiveCfg = Release|Any CPU
+		{7192BF9A-8552-4AD3-9746-5865433BEE36}.nuget|Any CPU.Build.0 = Release|Any CPU
+		{7192BF9A-8552-4AD3-9746-5865433BEE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7192BF9A-8552-4AD3-9746-5865433BEE36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A008EA-1F30-412C-BBD0-061AB0027FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A008EA-1F30-412C-BBD0-061AB0027FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A008EA-1F30-412C-BBD0-061AB0027FEA}.nuget|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A008EA-1F30-412C-BBD0-061AB0027FEA}.nuget|Any CPU.Build.0 = Release|Any CPU
+		{B1A008EA-1F30-412C-BBD0-061AB0027FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A008EA-1F30-412C-BBD0-061AB0027FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8}.nuget|Any CPU.ActiveCfg = Release|Any CPU
+		{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8}.nuget|Any CPU.Build.0 = Release|Any CPU
+		{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.nuget|Any CPU.ActiveCfg = Release|Any CPU
+		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.nuget|Any CPU.Build.0 = Release|Any CPU
+		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF15698B-3682-4205-9060-CEA23CD90F2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF15698B-3682-4205-9060-CEA23CD90F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF15698B-3682-4205-9060-CEA23CD90F2F}.nuget|Any CPU.ActiveCfg = Release|Any CPU
+		{EF15698B-3682-4205-9060-CEA23CD90F2F}.nuget|Any CPU.Build.0 = Release|Any CPU
+		{EF15698B-3682-4205-9060-CEA23CD90F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF15698B-3682-4205-9060-CEA23CD90F2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79963D30-2117-48E7-9079-0D3C949AA26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79963D30-2117-48E7-9079-0D3C949AA26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79963D30-2117-48E7-9079-0D3C949AA26B}.nuget|Any CPU.ActiveCfg = nuget|Any CPU
+		{79963D30-2117-48E7-9079-0D3C949AA26B}.nuget|Any CPU.Build.0 = nuget|Any CPU
+		{79963D30-2117-48E7-9079-0D3C949AA26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79963D30-2117-48E7-9079-0D3C949AA26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.nuget|Any CPU.ActiveCfg = Debug|Any CPU
+		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.nuget|Any CPU.Build.0 = Debug|Any CPU
+		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.nuget|Any CPU.ActiveCfg = Debug|Any CPU
+		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.nuget|Any CPU.Build.0 = Debug|Any CPU
+		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7192BF9A-8552-4AD3-9746-5865433BEE36} = {CA5C5094-DE3C-47E5-A5E8-D6E20EE3C047}
+		{B1A008EA-1F30-412C-BBD0-061AB0027FEA} = {4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}
+		{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8} = {CA5C5094-DE3C-47E5-A5E8-D6E20EE3C047}
+		{D711C080-B8AC-4BCF-9837-341E2C4E1098} = {4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}
+		{EF15698B-3682-4205-9060-CEA23CD90F2F} = {4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}
+		{79963D30-2117-48E7-9079-0D3C949AA26B} = {CA5C5094-DE3C-47E5-A5E8-D6E20EE3C047}
+		{4975B48E-C73F-46DE-AFC7-51816BCB592A} = {CA5C5094-DE3C-47E5-A5E8-D6E20EE3C047}
+		{23EAB5BC-B588-4225-96A7-16A4B2F33871} = {4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B315A4B-0135-4E24-A66E-BFBBFB09AF8F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.idee5.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = idee5.Common\\idee5.Common.csproj
+		SccProjectTopLevelParentUniqueName1 = idee5.Common.sln
+		SccProjectName1 = idee5.Common
+		SccLocalPath1 = idee5.Common
+		SccProjectUniqueName2 = idee5.Common.Data\\idee5.Common.Data.csproj
+		SccProjectTopLevelParentUniqueName2 = idee5.Common.sln
+		SccProjectName2 = idee5.Common.Data
+		SccLocalPath2 = idee5.Common.Data
+		SccProjectUniqueName3 = idee5.Common.Data.Tests\\idee5.Common.Data.Tests.csproj
+		SccProjectTopLevelParentUniqueName3 = idee5.Common.sln
+		SccProjectName3 = idee5.Common.Data.Tests
+		SccLocalPath3 = idee5.Common.Data.Tests
+		SccProjectUniqueName4 = idee5.Common.Tests\\idee5.Common.Tests.csproj
+		SccProjectTopLevelParentUniqueName4 = idee5.Common.sln
+		SccProjectName4 = idee5.Common.Tests
+		SccLocalPath4 = idee5.Common.Tests
+		SccProjectUniqueName5 = idee5.Common.461Tests\\idee5.Common.461Tests.csproj
+		SccProjectTopLevelParentUniqueName5 = idee5.Common.sln
+		SccProjectName5 = idee5.Common.461Tests
+		SccLocalPath5 = idee5.Common.461Tests
+		SccProjectUniqueName6 = idee5.Common.NET45\\idee5.Common.NET461.csproj
+		SccProjectTopLevelParentUniqueName6 = idee5.Common.sln
+		SccProjectName6 = idee5.Common.NET45
+		SccLocalPath6 = idee5.Common.NET45
+		SccProjectUniqueName7 = idee5.Common.Net\\idee5.Common.Net.csproj
+		SccProjectTopLevelParentUniqueName7 = idee5.Common.sln
+		SccProjectName7 = idee5.Common.Net
+		SccLocalPath7 = idee5.Common.Net
+		SccProjectUniqueName8 = idee5.Common.Net.Tests\\idee5.Common.Net.Tests.csproj
+		SccProjectTopLevelParentUniqueName8 = idee5.Common.sln
+		SccProjectName8 = idee5.Common.Net.Tests
+		SccLocalPath8 = idee5.Common.Net.Tests
+	EndGlobalSection
+EndGlobal
