@@ -16,8 +16,8 @@
     <Copyright>Copyright © 2017 - 2020</Copyright>
     <PackageTags>idee5</PackageTags>
     <Version>1.4.12</Version>
-    <AssemblyVersion>1.4.12</AssemblyVersion>
-    <FileVersion>1.4.12.0532</FileVersion>
+    <AssemblyVersion>1.4.13</AssemblyVersion>
+    <FileVersion>1.4.13.1555</FileVersion>
     <PackageReleaseNotes>Escape the quotation mark during csv export</PackageReleaseNotes>
   </PropertyGroup>
 
@@ -50,11 +50,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.5">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

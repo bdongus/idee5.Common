@@ -11,8 +11,8 @@
     <Company>idee5 GmbH</Company>
     <Copyright>Copyright © 2013 - 2020</Copyright>
     <Description>Sammlung oft verwendeter Funktionen der idee5</Description>
-    <AssemblyVersion>3.3.10</AssemblyVersion>
-    <FileVersion>3.3.10</FileVersion>
+    <AssemblyVersion>3.3.11</AssemblyVersion>
+    <FileVersion>3.3.11</FileVersion>
     <PackageTags>idee5</PackageTags>
     <Version>3.3.10</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -59,7 +59,7 @@
     <Copy SourceFiles="$(ProjectDir)bin\$(Configuration)\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="K:\nuget" />
   </Target>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="2.9.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
