@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
+#pragma warning disable HAA0603 // Delegate allocation from a method group
+#pragma warning disable HAA0302 // Display class allocation to capture closure
 namespace idee5.Common.Data {
     /// <summary>
     /// Abstract repository with basic implementations
@@ -18,9 +20,7 @@ namespace idee5.Common.Data {
 
         /// <inheritdoc />
         public virtual void Add(IEnumerable<T> items) {
-#pragma warning disable HAA0603 // Delegate allocation from a method group
             _ = items?.ForEach(Add);
-#pragma warning restore HAA0603 // Delegate allocation from a method group
         }
 
         /// <inheritdoc />
@@ -34,9 +34,7 @@ namespace idee5.Common.Data {
 
         /// <inheritdoc />
         public virtual void Remove(IEnumerable<T> items) {
-#pragma warning disable HAA0603 // Delegate allocation from a method group
             _ = items?.ForEach(Remove);
-#pragma warning restore HAA0603 // Delegate allocation from a method group
         }
 
         /// <inheritdoc />
@@ -47,15 +45,12 @@ namespace idee5.Common.Data {
 
         /// <inheritdoc />
         public virtual void Update(IEnumerable<T> items) {
-#pragma warning disable HAA0603 // Delegate allocation from a method group
-            items?.ForEach(Update);
-#pragma warning restore HAA0603 // Delegate allocation from a method group
+            _ = (items?.ForEach(Update));
         }
 
         /// <inheritdoc />
         public abstract Task ExecuteAsync(Expression<Func<T, bool>> predicate, Action<T> action, CancellationToken cancellationToken = default);
 
-#pragma warning disable HAA0302 // Display class allocation to capture closure
         /// <summary>
         /// Update an item in the repository. If it doesn't exist, it will be added.
         /// </summary>
@@ -68,13 +63,8 @@ namespace idee5.Common.Data {
         /// </list>
         /// </remarks>
         public virtual async Task UpdateOrAddAsync(T item, CancellationToken cancellationToken = default) {
-#pragma warning restore HAA0302 // Display class allocation to capture closure
-#pragma warning disable HAA0601 // Value type to reference type conversion causing boxing allocation
-#pragma warning disable HAA0301 // Closure Allocation Source
             bool exists = await GetAsync(q => q.Any(i => i.Id.Equals(item.Id))).ConfigureAwait(false);
-#pragma warning restore HAA0301 // Closure Allocation Source
-#pragma warning restore HAA0601 // Value type to reference type conversion causing boxing allocation
-            if (exists)
+            if (!exists)
                 Add(item);
             else
                 Update(item);
@@ -84,12 +74,12 @@ namespace idee5.Common.Data {
         public virtual async Task UpdateOrAddAsync(IEnumerable<T> items, CancellationToken cancellationToken = default) {
             if (items?.Any() ?? false) {
                 // Task.WhenAll is not possible with most ORM implementations, so do da for loop
-#pragma warning disable HAA0401 // Possible allocation of reference type enumerator
                 foreach (T item in items) {
-#pragma warning restore HAA0401 // Possible allocation of reference type enumerator
                     await UpdateOrAddAsync(item, cancellationToken).ConfigureAwait(false);
                 }
             }
         }
     }
 }
+#pragma warning restore HAA0302 // Display class allocation to capture closure
+#pragma warning restore HAA0603 // Delegate allocation from a method group

@@ -15,10 +15,10 @@
     <Description>Data access abstractions used by idee5.</Description>
     <Copyright>Copyright © 2017 - 2020</Copyright>
     <PackageTags>idee5</PackageTags>
-    <Version>1.4.12</Version>
+    <Version>1.4.13</Version>
     <AssemblyVersion>1.4.13</AssemblyVersion>
-    <FileVersion>1.4.13.1555</FileVersion>
-    <PackageReleaseNotes>Escape the quotation mark during csv export</PackageReleaseNotes>
+    <FileVersion>1.4.13.1855</FileVersion>
+    <PackageReleaseNotes>Fixed an issue in ARepository</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

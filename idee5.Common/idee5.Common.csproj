@@ -11,8 +11,8 @@
     <Company>idee5 GmbH</Company>
     <Copyright>Copyright © 2013 - 2020</Copyright>
     <Description>Sammlung oft verwendeter Funktionen der idee5</Description>
-    <AssemblyVersion>3.3.11</AssemblyVersion>
-    <FileVersion>3.3.11</FileVersion>
+    <AssemblyVersion>3.3.19</AssemblyVersion>
+    <FileVersion>3.3.19</FileVersion>
     <PackageTags>idee5</PackageTags>
     <Version>3.3.10</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -52,6 +52,16 @@
     <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
     <UpdatePackageVersion>True</UpdatePackageVersion>
     <PackageVersionSettings>AssemblyVersion.IncrementWithAutoReset.None</PackageVersionSettings>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdatePackageVersion>False</UpdatePackageVersion>
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
   </PropertyGroup>

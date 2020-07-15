@@ -119,3 +119,5 @@ Do a for loop in the UpdateOrAddAsync method of the abstract repositories. Most 
 * Fixed AudtitingRepository's UpdateOrAddAsync.
 ### 1.4.12
 * ExportToCsv: Escape the quotation mark
+### 1.4.13
+* Fixed an issue in ARepository.UpdateOrAddAsync

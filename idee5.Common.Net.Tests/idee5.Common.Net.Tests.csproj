@@ -8,13 +8,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyVersion>1.0.19.1555</AssemblyVersion>
+    <AssemblyVersion>1.0.25.1745</AssemblyVersion>
 
-    <FileVersion>1.0.19.1555</FileVersion>
+    <FileVersion>1.0.25.1745</FileVersion>
 
     <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
