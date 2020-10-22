@@ -59,11 +59,11 @@ namespace idee5.Common.Data {
         /// <remarks>
         /// <list type="bullet">
         /// <item>In most cases this hits the database for querying the existence</item>
-        /// <item>The default uses Count() to check for an items existence</item>
+        /// <item>The default uses Any() to check for an items existence</item>
         /// </list>
         /// </remarks>
         public virtual async Task UpdateOrAddAsync(T item, CancellationToken cancellationToken = default) {
-            bool exists = await GetAsync(q => q.Any(i => i.Id.Equals(item.Id))).ConfigureAwait(false);
+            bool exists = await GetAsync(q => q.Any(i => i.Id.Equals(item.Id)), cancellationToken).ConfigureAwait(false);
             if (!exists)
                 Add(item);
             else
