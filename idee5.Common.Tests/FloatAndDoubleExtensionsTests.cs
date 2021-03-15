@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using idee5.Common;
 
 namespace idee5.Common.Tests {
     [TestClass]
@@ -7,17 +6,46 @@ namespace idee5.Common.Tests {
         [TestMethod]
         public void FloatsThatDontMatch() {
             // Arrange
-            const float f1 = 0.15f + 0.15f;
-            const float f2 = 0.1f + 0.2f;
+            const float f1 = 0.33333f;
+            const float f2 = (float) 1/3;
             // Act
 
             // Assert
-            Assert.AreEqual(f1, f2);
+            Assert.AreNotEqual(f1, f2);
         }
 
         [TestMethod]
-        public void NearyEqualsTest1() {
-            Assert.Fail();
+        public void FloatsNearyEqual() {
+            // Arrange
+            const float f1 = 0.33333f;
+            const float f2 = (float) 1/3;
+
+            // Act
+            bool result = f1.NearyEquals(f2, 0.0001f);
+            // Assert
+            Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void DoublesThatDontMatch() {
+            // Arrange
+            const double d1 = 0.33333d;
+            const double d2 = (double) 1/3;
+            // Act
+
+            // Assert
+            Assert.AreNotEqual(d1, d2);
+        }
+
+        [TestMethod]
+        public void DoublesNearyEqual() {
+            // Arrange
+            const double d1 = 0.33333f;
+            const double d2 = (double) 1/3;
+
+            // Act
+            bool result = d1.NearyEquals(d2, 0.0001f);
+            // Assert
+            Assert.IsTrue(result);
         }
     }
 }
