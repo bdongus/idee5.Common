@@ -138,7 +138,7 @@ namespace idee5.Common {
         #region rounding
 
         /// <summary>
-        /// Round a <see cref="DateTime"/> up. 
+        /// Round a <see cref="DateTime"/> up.
         /// </summary>
         /// <param name="dt">This instance.</param>
         /// <param name="d"><see cref="TimeSpan"/> interval to round up to.</param>
@@ -150,7 +150,7 @@ namespace idee5.Common {
         }
 
         /// <summary>
-        /// Round a <see cref="DateTime"/> down. 
+        /// Round a <see cref="DateTime"/> down.
         /// </summary>
         /// <param name="dt">This instance.</param>
         /// <param name="d"><see cref="TimeSpan"/> interval to round down to.</param>

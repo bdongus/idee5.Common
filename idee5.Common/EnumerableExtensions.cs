@@ -12,7 +12,6 @@ namespace idee5.Common {
     /// <see cref="IEnumerable{T}"/> extension methods.
     /// </summary>
     public static class EnumerableExtensions {
-
         #region Public Methods
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace idee5.Common {
         /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <param name="other"></param>
-        /// <returns><c>true</c> if if all items in the other collection exist in this collection</returns>
+        /// <returns><c>true</c> if all items in the other collection exist in this collection</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is <c>null</c>.</exception>
         public static bool ContainsAll<TSource>(this IEnumerable<TSource> source, IEnumerable<TSource> other) {
             if (other == null)
@@ -151,7 +150,7 @@ namespace idee5.Common {
             if (index > 0)
                 items = items.Skip(index);
 
-            foreach (var item in items) {
+            foreach (T item in items) {
                 if (predicate(item))
                     return index;
                 index++;
@@ -209,7 +208,7 @@ namespace idee5.Common {
         /// <typeparam name="TItem">Item type</typeparam>
         /// <returns>list of TItem</returns>
         public static IEnumerable<TItem> ForEach<TItem>(this IEnumerable<TItem> items, Action<TItem> action) {
-            if (items != null) {
+            if (items != null && action != null) {
                 foreach (TItem item in items) { action(item); }
             }
 
@@ -409,8 +408,10 @@ namespace idee5.Common {
         /// <param name="list">The list.</param>
         /// <param name="predicate">The predicate.</param>
         public static void RemoveAll<T>(this IList<T> list, Func<T, bool> predicate) {
-            for (var i = 0; i < list.Count; i++) {
-                if (predicate(list[i])) { list.RemoveAt(i--); }
+            if (list != null && predicate != null) {
+                for (int i = 0; i < list.Count; i++) {
+                    if (predicate(list[i])) { list.RemoveAt(i--); }
+                }
             }
         }
 
@@ -424,7 +425,7 @@ namespace idee5.Common {
             if (list == null)
                 throw new ArgumentNullException(nameof(list));
 
-            foreach (var match in list.Where(predicate).ToArray()) { list.Remove(match); }
+            foreach (T match in list.Where(predicate).ToArray()) { list.Remove(match); }
         }
 
         /// <summary>
@@ -440,10 +441,9 @@ namespace idee5.Common {
         public static IEnumerable<T> SelectRecursive<T>(
             this IEnumerable<T> enumerables,
             Func<T, IEnumerable<T>> recursiveSelector, int maxRecusionDepth = 100) {
-            if (enumerables == null)
-                throw new ArgumentNullException(nameof(enumerables));
-
-            return TriggerImmediateValidation();
+            if (enumerables != null && recursiveSelector != null)
+                return TriggerImmediateValidation();
+            return enumerables;
 
             IEnumerable<T> TriggerImmediateValidation() {
                 var stack = new Stack<IEnumerator<T>>();

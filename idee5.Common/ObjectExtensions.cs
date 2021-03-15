@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 
-namespace idee5.Common
-{
+namespace idee5.Common {
     /// <summary>
     /// C# object extension methods.
     /// </summary>
@@ -13,10 +13,15 @@ namespace idee5.Common
         /// </summary>
         /// <param name="o">This instance.</param>
         /// <param name="propertyName">Name of the property to read.</param>
-        /// <returns>The property's value as object or <see langword="null"/> if <paramref name="o"/> is <see langword="null"/>
-        /// or the property does not exist.</returns>
-        public static object GetPropertyValue(this object o, string propertyName)
-            => o?.GetType().GetProperty(propertyName)?.GetValue(o, null);
+        /// <returns>The property's value as object</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="o"/> is <c>null</c>.</exception>
+        public static object GetPropertyValue(this object o, string propertyName) {
+            if (o == null)
+                throw new ArgumentNullException(nameof(o));
+
+            PropertyInfo propertyInfo = o.GetType().GetProperty(propertyName);
+            return propertyInfo?.GetValue(o, null) ?? String.Empty;
+        }
 
         /// <summary>
         /// Gets whether <paramref name="item"/> is among the elements of <paramref name="set"/>.
@@ -44,7 +49,9 @@ namespace idee5.Common
         /// ]]></code>
         /// </example>
         public static bool In<T>(this T item, params T[] set) {
-            int length = set?.Length ?? 0;
+            int length;
+            if (set == null || (length = set.Length) == 0)
+                return false;
             // special case enum comparison
             IEqualityComparer<T> comparer = item is Enum ? (IEqualityComparer<T>) EnumComparer<T>.Instance : EqualityComparer<T>.Default;
             for (int i = 0; i < length; i++) {
@@ -64,7 +71,7 @@ namespace idee5.Common
         /// <returns><c>True</c> if the conversion succeeded.</returns>
         public static bool TryConvert<T>(this object value, out T result) {
             // default output value
-            result = default;
+            result = default(T);
 
             if (value == null || value == DBNull.Value) return false;
 

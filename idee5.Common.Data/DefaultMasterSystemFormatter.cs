@@ -2,7 +2,7 @@
 
 namespace idee5.Common.Data {
     /// <summary>
-    /// Default implementation foramtting a <see cref="IMasterSystemReference"/> as trimmed '<see cref="IMasterSystemReference.MasterSystemHierarchy"/> <see cref="IMasterSystemReference.MasterSystemId"/>
+    /// Default implementation formatting a <see cref="IMasterSystemReference"/> as trimmed '<see cref="IMasterSystemReference.MasterSystemHierarchy"/> <see cref="IMasterSystemReference.MasterSystemId"/>
     /// </summary>
     public class DefaultMasterSystemFormatter : IMasterSystemFormatter
     {

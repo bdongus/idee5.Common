@@ -6,8 +6,7 @@ namespace idee5.Common {
     /// <summary>
     /// Extensions methods for <see cref="DateTime"/>.
     /// </summary>
-    public static class DateTimeOffsetExtensions
-    {
+    public static class DateTimeOffsetExtensions {
         /// <summary>
         /// Base value to convert between <see cref="TimeSpan"/> and <see cref="DateTime"/>
         /// </summary>
@@ -19,8 +18,7 @@ namespace idee5.Common {
         /// <param name="d">The starting date.</param>
         /// <param name="days">Workdays to be added..</param>
         /// <returns></returns>
-        public static DateTimeOffset AddWorkdays(this DateTimeOffset d, int days)
-        {
+        public static DateTimeOffset AddWorkdays(this DateTimeOffset d, int days) {
             for (int i = 0; i < days; i++) {
                 d = d.AddDays(1.0);
                 // leap over the weekend
@@ -35,9 +33,8 @@ namespace idee5.Common {
         /// </summary>
         /// <param name="date">The date.</param>
         /// <returns>End of month's date.</returns>
-        public static DateTimeOffset EndOfTheMonth(this DateTimeOffset date)
-        {
-            return date.AddDays(-date.Day+1).AddMonths(months: 1).AddDays(-1);
+        public static DateTimeOffset EndOfTheMonth(this DateTimeOffset date) {
+            return date.AddDays(-date.Day + 1).AddMonths(months: 1).AddDays(-1);
         }
 
         /// <summary>
@@ -59,8 +56,7 @@ namespace idee5.Common {
         /// </summary>
         /// <param name="instant">The time.</param>
         /// <returns>the week of the year according to ISO 8601</returns>
-        public static int Iso8601WeekOfYear(this DateTimeOffset instant)
-        {
+        public static int Iso8601WeekOfYear(this DateTimeOffset instant) {
             // explanation https://blogs.msdn.microsoft.com/shawnste/2006/01/24/iso-8601-week-of-year-format-in-microsoft-net/
             DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(instant.DateTime);
             if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday) {
@@ -76,8 +72,7 @@ namespace idee5.Common {
         /// </summary>
         /// <param name="date">The date.</param>
         /// <returns>The CYYMMDD integer</returns>
-        public static int ToCYYMMDD(this DateTimeOffset date)
-        {
+        public static int ToCYYMMDD(this DateTimeOffset date) {
             int cyymmdd = date.Day;
             cyymmdd += date.Month * 100;
             cyymmdd += date.Year % 100 * 10000;
@@ -91,8 +86,7 @@ namespace idee5.Common {
         /// </summary>
         /// <param name="date">The date.</param>
         /// <returns>The HHMMSS integer</returns>
-        public static int TimeAsInt(this DateTimeOffset date)
-        {
+        public static int TimeAsInt(this DateTimeOffset date) {
             int time = date.Second;
             time += date.Minute * 100;
             time += date.Hour * 10000;
@@ -106,8 +100,7 @@ namespace idee5.Common {
         /// <param name="date">CYYMMDD date.</param>
         /// <param name="time">HHMMSS time.</param>
         /// <returns></returns>
-        public static DateTimeOffset ToDateTimeOffset(this int date, int time = 0)
-        {
+        public static DateTimeOffset ToDateTimeOffset(this int date, int time = 0) {
             // If there is no date, just return the minimum value. No need to waste time.
             if (date == 0)
                 return DateTimeOffset.MinValue;
@@ -127,26 +120,24 @@ namespace idee5.Common {
         #region rounding
 
         /// <summary>
-        /// Round a <see cref="DateTimeOffset"/> up. 
+        /// Round a <see cref="DateTimeOffset"/> up.
         /// </summary>
         /// <param name="dt">This instance.</param>
         /// <param name="d"><see cref="TimeSpan"/> interval to round up to.</param>
         /// <returns>A new <see cref="DateTimeOffset"/>.</returns>
-        public static DateTimeOffset RoundUp(this DateTimeOffset dt, TimeSpan d)
-        {
+        public static DateTimeOffset RoundUp(this DateTimeOffset dt, TimeSpan d) {
             long modTicks = dt.Ticks % d.Ticks;
             long delta = modTicks != 0 ? d.Ticks - modTicks : 0;
             return dt.AddTicks(delta);
         }
 
         /// <summary>
-        /// Round a <see cref="DateTimeOffset"/> down. 
+        /// Round a <see cref="DateTimeOffset"/> down.
         /// </summary>
         /// <param name="dt">This instance.</param>
         /// <param name="d"><see cref="TimeSpan"/> interval to round down to.</param>
         /// <returns>A new <see cref="DateTimeOffset"/>.</returns>
-        public static DateTimeOffset RoundDown(this DateTimeOffset dt, TimeSpan d)
-        {
+        public static DateTimeOffset RoundDown(this DateTimeOffset dt, TimeSpan d) {
             long delta = dt.Ticks % d.Ticks;
             return dt.AddTicks(-delta);
         }
@@ -157,8 +148,7 @@ namespace idee5.Common {
         /// <param name="dt">This instance.</param>
         /// <param name="d"><see cref="TimeSpan"/> interval to round to.</param>
         /// <returns>A new <see cref="DateTimeOffset"/>.</returns>
-        public static DateTimeOffset RoundToNearest(this DateTimeOffset dt, TimeSpan d)
-        {
+        public static DateTimeOffset RoundToNearest(this DateTimeOffset dt, TimeSpan d) {
             long delta = dt.Ticks % d.Ticks;
             bool roundUp = delta > d.Ticks / 2;
             long offset = roundUp ? d.Ticks : 0;
@@ -174,8 +164,7 @@ namespace idee5.Common {
         /// cref="TimeSpanBaseValue"/> To be able to store time spans in databases. </summary>
         /// <param name="date">The date.</param>
         /// <returns>The DateTime value.</returns>
-        public static TimeSpan ToTimeSpan(this DateTimeOffset date)
-        {
+        public static TimeSpan ToTimeSpan(this DateTimeOffset date) {
             return date - TimeSpanBaseValue;
         }
 
@@ -184,8 +173,7 @@ namespace idee5.Common {
         /// </summary>
         /// <param name="span">The span.</param>
         /// <returns></returns>
-        public static DateTimeOffset ToDateTimeOffset(this TimeSpan span)
-        {
+        public static DateTimeOffset ToDateTimeOffset(this TimeSpan span) {
             return TimeSpanBaseValue + span;
         }
 

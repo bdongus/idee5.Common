@@ -29,7 +29,6 @@ namespace idee5.Common.Data {
         /// <param name="func">The <see cref="Func{T,TResult}"> function</see> that shapes the <see cref="IQueryable{T}">query</see> to execute.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken">cancellation token</see> that can be used to cancel the operation.</param>
         /// <returns>A <see cref="Task{T}">task</see> containing the <typeparamref name="TResult">result</typeparamref> of the operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Required for generics support.")]
         Task<TResult> GetAsync<TResult>(Func<IQueryable<T>, TResult> func, CancellationToken cancellationToken = default);
     }
 }

@@ -10,14 +10,10 @@ namespace idee5.Common {
     /// </summary>
     /// <typeparam name="TEnum">The type of the enumeration. Must be an <see cref="Enum"/> type.</typeparam>
     public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvertible, IFormattable {
-
         #region Private Fields
 
         private static readonly Type _enumType = typeof(TEnum);
-
-#pragma warning disable HAA0101 // Array allocation for params parameter
         private static readonly bool _isSigned = new TypeCode[] { TypeCode.SByte, TypeCode.Int16, TypeCode.Int32, TypeCode.Int64 }.IndexOf(_typeCode) > -1;
-#pragma warning restore HAA0101 // Array allocation for params parameter
 #pragma warning disable HAA0502 // Explicit new reference type allocation
         private static readonly object _syncRoot = new object();
 #pragma warning restore HAA0502 // Explicit new reference type allocation
@@ -45,7 +41,7 @@ namespace idee5.Common {
 #pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
         /// Create a dictionary for an enum.
-        /// <code>DayOfWeek.Monday.ToDictionary</code>
+        /// <c>DayOfWeek.Monday.ToDictionary</c>
         /// </summary>
         /// <returns>A dictionary with the integer values as keys and the names as values.</returns>
         public static Dictionary<int, string> ToDictionary {

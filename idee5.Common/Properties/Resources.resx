@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AmbientServiceNotConfigured" xml:space="preserve">
+    <value>Create not configured for AmbientService&lt;{0}&gt;</value>
+  </data>
   <data name="ErrorInDeserializationOf" xml:space="preserve">
     <value>Error in Deserialization of {0}</value>
     <comment>SerializableDictionary</comment>

@@ -9,8 +9,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.7.1745</AssemblyVersion>
-    <FileVersion>1.0.7.1745</FileVersion>
+    <AssemblyVersion>1.0.9.1724</AssemblyVersion>
+    <FileVersion>1.0.9.1724</FileVersion>
     <Copyright>2019 idee5 GmbH</Copyright>
     <PackageTags>idee5, common, net</PackageTags>
     <Description>Commonly used helpers for network operations.</Description>
@@ -30,7 +30,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="idee5.Common" Version="3.3.5" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.7.0" />
   </ItemGroup>
 

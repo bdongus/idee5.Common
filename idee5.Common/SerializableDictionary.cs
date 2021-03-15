@@ -89,9 +89,12 @@ namespace idee5.Common {
         #region ISerializable Members
 
         protected SerializableDictionary(SerializationInfo info, StreamingContext context) : base(info, context) {
+            if (info == null)
+                throw new ArgumentNullException(nameof(info));
+
             int itemCount = info.GetInt32(name: "itemsCount");
             for (int i = 0; i < itemCount; i++) {
-                var kvp = (KeyValuePair<TKey, TVal>) info.GetValue(String.Format(CultureInfo.InvariantCulture, format: "Item{0}", args: new object[] { i }), typeof(KeyValuePair<TKey, TVal>));
+                var kvp = (KeyValuePair<TKey, TVal>)info.GetValue(String.Format(CultureInfo.InvariantCulture, format: "Item{0}", args: new object[] { i }), typeof(KeyValuePair<TKey, TVal>));
                 Add(kvp.Key, kvp.Value);
             }
         }
@@ -128,10 +131,7 @@ namespace idee5.Common {
                 return;
             // Move past container
             if (reader.NodeType == XmlNodeType.Element && !reader.Read())
-                throw new XmlException(String.Format(
-                    CultureInfo.InvariantCulture,
-                    Resources.ErrorInDeserializationOf,
-                    typeof(SerializableDictionary<,>).Name));
+                throw new XmlException(String.Format(CultureInfo.InvariantCulture, Resources.ErrorInDeserializationOf, typeof(SerializableDictionary<,>).Name));
             while (reader.NodeType != XmlNodeType.EndElement) {
                 reader.ReadStartElement(name: "item");
                 reader.ReadStartElement(name: "key");
@@ -145,13 +145,15 @@ namespace idee5.Common {
                 reader.MoveToContent();
             }
             // Move past container
-            if (reader.NodeType == XmlNodeType.EndElement)
+            if (reader.NodeType == XmlNodeType.EndElement) {
                 reader.ReadEndElement();
-            else
+            }
+            else {
                 throw new XmlException(String.Format(
-                    CultureInfo.InvariantCulture,
-                    Resources.ErrorInDeserializationOf,
-                    typeof(SerializableDictionary<,>).Name));
+                   CultureInfo.InvariantCulture,
+                   Resources.ErrorInDeserializationOf,
+                   typeof(SerializableDictionary<,>).Name));
+            }
         }
 
         System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() {

@@ -123,29 +123,26 @@ namespace idee5.Common {
         public static string ReplaceStringInstance(this string origString, string findString,
                                                    string replaceWith, int instance,
                                                    bool caseInsensitive) {
-            if (findString == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
-                throw new ArgumentNullException(nameof(findString));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
+            if (origString != null && findString != null) {
+                if (instance == -1)
+                    return ReplaceString(origString, findString, replaceWith, caseInsensitive);
 
-            if (instance == -1)
-                return ReplaceString(origString, findString, replaceWith, caseInsensitive);
+                int at1 = 0;
+                for (int x = 0; x < instance; x++) {
+                    if (caseInsensitive)
+                        at1 = origString.IndexOf(findString, at1, origString.Length - at1, StringComparison.CurrentCultureIgnoreCase);
+                    else
+                        at1 = origString.IndexOf(findString, at1, StringComparison.CurrentCulture);
 
-            int at1 = 0;
-            for (int x = 0; x < instance; x++) {
-                if (caseInsensitive)
-                    at1 = origString.IndexOf(findString, at1, origString.Length - at1, StringComparison.CurrentCultureIgnoreCase);
-                else
-                    at1 = origString.IndexOf(findString, at1, StringComparison.CurrentCulture);
+                    if (at1 == -1)
+                        return origString;
 
-                if (at1 == -1)
-                    return origString;
-
-                if (x < instance - 1)
-                    at1 += findString.Length;
+                    if (x < instance - 1)
+                        at1 += findString.Length;
+                }
+                return origString.Substring(startIndex: 0, length: at1) + replaceWith + origString.Substring(at1 + findString.Length);
             }
-
-            return $"{origString.Substring(startIndex: 0, length: at1)}{replaceWith}{origString.Substring(at1 + findString.Length)}";
+            return origString;
         }
 
         /// <summary>
@@ -634,7 +631,7 @@ namespace idee5.Common {
         /// Strips carriage returns and line feeds from the specified text.
         /// </summary>
         /// <param name="input">The input.</param>
-        /// <returns>The string string.</returns>
+        /// <returns>The string.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="input"/> is <c>null</c>.</exception>
         public static string StripNewLines(this string input) {
             if (input == null)
@@ -774,7 +771,6 @@ namespace idee5.Common {
                     index++;
                 }
                 return sumOfDigits % 10 == 0;
-
         }
 
         /// <summary>

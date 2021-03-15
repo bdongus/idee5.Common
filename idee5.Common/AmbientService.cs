@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace idee5.Common {
     /// <summary>
@@ -50,7 +51,7 @@ namespace idee5.Common {
         }
 
         private static T NoCreate() {
-            string message = $"Create not setup for AmbientService<{typeof(T).Name}>";
+            string message = String.Format(CultureInfo.InvariantCulture, Properties.Resources.AmbientServiceNotConfigured, typeof(T).Name);
             throw new Exception(message);
         }
     }

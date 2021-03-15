@@ -22,11 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{808F0A23-0B58-46EC-BF38-B06FB06D6891}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.config = .nuget\NuGet.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idee5.Common.461Tests", "idee5.Common.461Tests\idee5.Common.461Tests.csproj", "{EF15698B-3682-4205-9060-CEA23CD90F2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idee5.Common.NET461", "idee5.Common.NET45\idee5.Common.NET461.csproj", "{79963D30-2117-48E7-9079-0D3C949AA26B}"

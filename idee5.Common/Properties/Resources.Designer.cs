@@ -9,8 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace idee5.Common.Properties {
-
-
+    using System;
+    
+    
     /// <summary>
     ///   Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
     /// </summary>
@@ -56,6 +57,15 @@ namespace idee5.Common.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create not configured for AmbientService&lt;{0}&gt; ähnelt.
+        /// </summary>
+        internal static string AmbientServiceNotConfigured {
+            get {
+                return ResourceManager.GetString("AmbientServiceNotConfigured", resourceCulture);
             }
         }
         
