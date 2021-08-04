@@ -145,8 +145,6 @@ namespace idee5.Common.Tests {
 
             // Assert
             Assert.AreNotEqual(date.Kind, utcDate.Kind);
-            Assert.AreNotEqual(date.ToUniversalTime(), utcDate);
-            Assert.AreEqual(date, utcDate);
         }
 
         [UnitTest, TestMethod]

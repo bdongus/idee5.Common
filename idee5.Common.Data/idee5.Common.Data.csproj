@@ -16,8 +16,8 @@
     <Copyright>Copyright © 2017 - 2020</Copyright>
     <PackageTags>idee5</PackageTags>
     <Version>1.4.13</Version>
-    <AssemblyVersion>1.4.15</AssemblyVersion>
-    <FileVersion>1.4.15.1724</FileVersion>
+    <AssemblyVersion>1.4.16</AssemblyVersion>
+    <FileVersion>1.4.16.0845</FileVersion>
     <PackageReleaseNotes>Fixed an issue in ARepository</PackageReleaseNotes>
   </PropertyGroup>
 

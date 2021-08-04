@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Dynamic;
 
 namespace idee5.Common {
+    /// <summary>
+    /// Extension methods for <see cref="ExpandoObject"/>s.
+    /// </summary>
     public static class ExpandoExtensions {
         #region Public Methods
 

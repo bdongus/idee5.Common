@@ -33,7 +33,7 @@ namespace idee5.Common {
         /// <returns><see langword="true"/> if <paramref name="item"/> is among the elements of <paramref name="set"/>; otherwise, <see langword="false"/>.</returns>
         /// <remarks>
         /// <para>This method works similarly to the <c>in</c> operator in SQL and Pascal.</para>
-        /// <para>This overload uses generic <see cref="IEqualityComparer{T}"/> implementations to compare the items for the best performance.
+        /// <para>This overload uses generic <see cref="IEqualityComparer{T}"/> implementations to compare the items for the best performance.</para>
         /// </remarks>
         /// <example>
         /// <code lang="C#"><![CDATA[

@@ -1,6 +1,9 @@
 ﻿using System;
 
 namespace idee5.Common {
+    /// <summary>
+    /// Extension methods for <see cref="float"/> and <see cref="double"/> types.
+    /// </summary>
     public static class FloatAndDoubleExtensions {
         /// <summary>
         /// Check if two <see cref="float"/>s are nearly equal.

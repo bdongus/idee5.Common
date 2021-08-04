@@ -4,7 +4,15 @@ using System.Linq.Expressions;
 
 // taken from https://www.codeproject.com/articles/33528/accelerating-enum-based-dictionaries-with-generic
 namespace idee5.Common {
+    /// <summary>
+    /// Generic generator for enum comparers.
+    /// </summary>
     public static class EnumComparer {
+        /// <summary>
+        /// Create a comparer for <typeparamref name="TEnum"/>.
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns>The comparer.</returns>
         public static EnumComparer<TEnum> For<TEnum>()
             where TEnum : struct, IComparable, IConvertible, IFormattable {
             return EnumComparer<TEnum>.Instance;
@@ -31,6 +39,9 @@ namespace idee5.Common {
         /// </summary>
         private static readonly Lazy<EnumComparer<TEnum>> _instance = new Lazy<EnumComparer<TEnum>>(() => new EnumComparer<TEnum>());
 
+        /// <summary>
+        /// Access to the comparer.
+        /// </summary>
         public static EnumComparer<TEnum> Instance {
             get { return _instance.Value; }
         }

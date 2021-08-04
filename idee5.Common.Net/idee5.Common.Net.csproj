@@ -9,8 +9,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.9.1724</AssemblyVersion>
-    <FileVersion>1.0.9.1724</FileVersion>
+    <AssemblyVersion>1.0.10.0845</AssemblyVersion>
+    <FileVersion>1.0.10.0845</FileVersion>
     <Copyright>2019 idee5 GmbH</Copyright>
     <PackageTags>idee5, common, net</PackageTags>
     <Description>Commonly used helpers for network operations.</Description>
