@@ -25,3 +25,13 @@ jobs:
       with:
        PROJECT_FILE_PATH: idee5.Common/idee5.Common.csproj
        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Publish data lib
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+       PROJECT_FILE_PATH: idee5.Common/idee5.Common.Data.csproj
+       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Publish net lib
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+       PROJECT_FILE_PATH: idee5.Common/idee5.Common.Net.csproj
+       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
