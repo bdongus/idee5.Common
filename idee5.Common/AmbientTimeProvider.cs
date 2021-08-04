@@ -5,8 +5,7 @@ namespace idee5.Common {
     /// <see cref="ITimeProvider"/> wrapped in an ambient context.
     /// </summary>
     /// <example>public readonly AmbientTimeProvider TimeProvider = new AmbientTimeProvider();</example>
-    public class AmbientTimeProvider : AmbientService<ITimeProvider>, ITimeProvider
-    {
+    public class AmbientTimeProvider : AmbientService<ITimeProvider>, ITimeProvider {
         /// <inheritdoc />
         protected override ITimeProvider DefaultCreate() => new DefaultTimeProvider();
 
