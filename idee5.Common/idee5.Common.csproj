@@ -11,14 +11,15 @@
     <Company>idee5 GmbH</Company>
     <Copyright>Copyright © 2013 - 2021</Copyright>
     <Description>Sammlung oft verwendeter Funktionen der idee5</Description>
-    <AssemblyVersion>3.3.27</AssemblyVersion>
-    <FileVersion>3.3.27</FileVersion>
+    <AssemblyVersion>3.3.29</AssemblyVersion>
+    <FileVersion>3.3.29</FileVersion>
     <PackageTags>idee5</PackageTags>
-    <Version>3.3.10</Version>
+    <Version>3.3.11</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>idee5.snk</AssemblyOriginatorKeyFile>
-    <PackageReleaseNotes>Added a "nearly equals" comparison for floats and doubles</PackageReleaseNotes>
+    <PackageReleaseNotes>Added "as" to the object extensions
+Added "IsTypeOf" to the object extensions</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">

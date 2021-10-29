@@ -5,6 +5,41 @@ namespace idee5.Common.Tests {
     [TestClass]
     public class ObjectExtensionsTests {
         [TestMethod]
+        public void CanCastObjectTo() {
+            // Arrange
+            object intObj = 42;
+
+            // Act
+            int result = intObj.As<int>();
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(int));
+        }
+
+        [TestMethod]
+        public void ReturnsDefaultIfCastFails() {
+            // Arrange
+            object obj = "idee5";
+
+            // Act
+            int result = obj.AsOrDefault<int>();
+
+            // Assert
+            Assert.AreEqual(default(int), result);
+        }
+
+        [TestMethod]
+        public void CanCheckTypeOfObject() {
+            // Arrange
+            object obj = "idee5";
+
+            // Act
+
+            // Assert
+            Assert.IsTrue(obj.IsTypeOf(typeof(string)));
+        }
+
+        [TestMethod]
         public void CanDetectEnumValueNotInList() {
             // Arrange
 

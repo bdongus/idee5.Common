@@ -9,6 +9,38 @@ namespace idee5.Common {
     /// </summary>
     public static class ObjectExtensions {
         /// <summary>
+        /// Cast an anonymous type to the specified type.
+        /// </summary>
+        /// <typeparam name="T">Generic type parameter. The specified type.</typeparam>
+        /// <param name="obj">The object to cast.</param>
+        /// <returns>The object as the specified type.</returns>
+        public static T As<T>(this object obj) => (T)obj;
+
+        /// <summary>
+        /// Cast an anonymous type to the specified type or the type's default value.
+        /// </summary>
+        /// <typeparam name="T">Generic type parameter. The specified type.</typeparam>
+        /// <param name="obj">The object to cast.</param>
+        /// <returns>The object as the specified type.</returns>
+        public static T AsOrDefault<T>(this object obj) {
+            try {
+                return (T)obj;
+            }
+            catch (InvalidCastException) {
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// Check if an <see cref="object"/> is of the given <see cref="Type"/>.
+        /// </summary>
+        /// <typeparam name="T">Generic type parameter.</typeparam>
+        /// <param name="obj">Object to check.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>true if type of, false if not.</returns>
+        public static bool IsTypeOf<T>(this T obj, Type type) => obj.GetType() == type;
+
+        /// <summary>
         /// Gets an object's property value.
         /// </summary>
         /// <param name="o">This instance.</param>

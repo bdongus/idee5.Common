@@ -62,6 +62,9 @@ Moved localizable strings to internal resource file.
 * Added the Chunk enumerable extension method
 * removed the unused "tmp" variable in StringExtension.ToHex
 * Code reformatting
+### 3.3.11
+* Added "as" to the object extensions
+* Added "IsTypeOf" to the object extensions
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -121,3 +124,5 @@ Do a for loop in the UpdateOrAddAsync method of the abstract repositories. Most 
 * ExportToCsv: Escape the quotation mark
 ### 1.4.13
 * Fixed an issue in ARepository.UpdateOrAddAsync
+### 1.4.14
+* FAdded the AllowedValues attribute
