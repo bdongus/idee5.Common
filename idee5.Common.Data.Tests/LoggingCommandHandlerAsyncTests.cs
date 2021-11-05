@@ -29,17 +29,11 @@ namespace idee5.Common.Data.Tests {
             await handler.HandleAsync(testCommand).ConfigureAwait(false);
 
             // Assert
+            var msgText = String.Format("Command parameters are : {0}", Environment.NewLine + testCommand.AsString());
             Assert.AreEqual(3, loggerFactory.Sink.LogEntries.Count());
-            Assert.AreEqual(@"Command parameters are : 
-Id: 42
-Text: The answer is
-IsSomething: True
-FloatNum: 47,11
-DoubleNum: 47,12
-DecimalNum: 0,815
-UUID: 00000000-0000-0000-0000-000000000000"
-                , loggerFactory.Sink.LogEntries.ElementAt(1).Message);
+            Assert.AreEqual(msgText, loggerFactory.Sink.LogEntries.ElementAt(1).Message);
         }
+
         [TestMethod]
         public async Task CanHandleNullProperties() {
             // Arrange
@@ -62,16 +56,9 @@ UUID: 00000000-0000-0000-0000-000000000000"
             await handler.HandleAsync(testCommand).ConfigureAwait(false);
 
             // Assert
+            var msgText = String.Format("Command parameters are : {0}", Environment.NewLine + testCommand.AsString());
             Assert.AreEqual(3, loggerFactory.Sink.LogEntries.Count());
-            Assert.AreEqual(@"Command parameters are : 
-Id: 42
-Text: 
-IsSomething: True
-FloatNum: 47,11
-DoubleNum: 47,12
-DecimalNum: 0,815
-UUID: 00000000-0000-0000-0000-000000000000"
-                , loggerFactory.Sink.LogEntries.ElementAt(1).Message);
+            Assert.AreEqual(msgText, loggerFactory.Sink.LogEntries.ElementAt(1).Message);
         }
     }
 }

@@ -11,8 +11,8 @@
     <Company>idee5 GmbH</Company>
     <Copyright>Copyright © 2013 - 2021</Copyright>
     <Description>Sammlung oft verwendeter Funktionen der idee5</Description>
-    <AssemblyVersion>3.3.32</AssemblyVersion>
-    <FileVersion>3.3.32</FileVersion>
+    <AssemblyVersion>3.3.33</AssemblyVersion>
+    <FileVersion>3.3.33</FileVersion>
     <PackageTags>idee5</PackageTags>
     <Version>3.3.11</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
