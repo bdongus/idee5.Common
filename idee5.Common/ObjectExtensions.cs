@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 
 namespace idee5.Common {
@@ -103,7 +104,7 @@ namespace idee5.Common {
         /// <returns><c>True</c> if the conversion succeeded.</returns>
         public static bool TryConvert<T>(this object value, out T result) {
             // default output value
-            result = default(T);
+            result = default;
 
             if (value == null || value == DBNull.Value) return false;
 
@@ -127,5 +128,12 @@ namespace idee5.Common {
 
             return true;
         }
+
+        /// <summary>
+        /// Returns all properties with their value in a <see cref="string"/>.
+        /// </summary>
+        /// <param name="value">Object to convert.</param>
+        /// <returns>The object properties and their values in a <see cref="string"/></returns>
+        public static string AsString(this object value) => string.Join(Environment.NewLine, value.GetType().GetProperties().Select(prop => $"{prop.Name}: {prop.GetValue(value, null)}"));
     }
 }

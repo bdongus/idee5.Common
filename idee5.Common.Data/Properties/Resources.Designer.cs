@@ -9,8 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace idee5.Common.Data.Properties {
-
-
+    using System;
+    
+    
     /// <summary>
     ///   Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
     /// </summary>
@@ -60,6 +61,24 @@ namespace idee5.Common.Data.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Command {0} invoked. ähnelt.
+        /// </summary>
+        internal static string CommandInvoked {
+            get {
+                return ResourceManager.GetString("CommandInvoked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Command parameters are : {0} ähnelt.
+        /// </summary>
+        internal static string CommandParametersAre {
+            get {
+                return ResourceManager.GetString("CommandParametersAre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Error : {0} ähnelt.
         /// </summary>
         internal static string Error {
@@ -69,11 +88,29 @@ namespace idee5.Common.Data.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invoking command {0} ähnelt.
+        /// </summary>
+        internal static string InvokingComand {
+            get {
+                return ResourceManager.GetString("InvokingComand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Member names : {0} ähnelt.
         /// </summary>
         internal static string MemberNames {
             get {
                 return ResourceManager.GetString("MemberNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Validation result is NULL. ähnelt.
+        /// </summary>
+        internal static string NoValidationResult {
+            get {
+                return ResourceManager.GetString("NoValidationResult", resourceCulture);
             }
         }
     }

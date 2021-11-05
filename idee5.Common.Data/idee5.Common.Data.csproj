@@ -15,10 +15,10 @@
     <Description>Data access abstractions used by idee5.</Description>
     <Copyright>Copyright © 2017 - 2021</Copyright>
     <PackageTags>idee5</PackageTags>
-    <Version>1.4.14</Version>
-    <AssemblyVersion>1.4.18</AssemblyVersion>
-    <FileVersion>1.4.18.0911</FileVersion>
-    <PackageReleaseNotes>AllowdValues attribute added</PackageReleaseNotes>
+    <Version>1.4.15</Version>
+    <AssemblyVersion>1.4.24</AssemblyVersion>
+    <FileVersion>1.4.24.1501</FileVersion>
+    <PackageReleaseNotes>Fixed a namespace, Added LogValidationReporter</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -54,6 +54,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
