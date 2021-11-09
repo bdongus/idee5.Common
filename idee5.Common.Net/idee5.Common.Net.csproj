@@ -9,8 +9,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.10.0845</AssemblyVersion>
-    <FileVersion>1.0.10.0845</FileVersion>
+    <AssemblyVersion>1.0.11.1055</AssemblyVersion>
+    <FileVersion>1.0.11.1055</FileVersion>
     <Copyright>© 2021 idee5</Copyright>
     <PackageTags>idee5, common, net</PackageTags>
     <Version>1.0.1</Version>

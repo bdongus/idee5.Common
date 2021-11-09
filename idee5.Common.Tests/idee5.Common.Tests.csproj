@@ -14,9 +14,9 @@
 
     <PackageReleaseNotes></PackageReleaseNotes>
 
-    <AssemblyVersion>1.0.42.0744</AssemblyVersion>
+    <AssemblyVersion>1.0.43.1055</AssemblyVersion>
 
-    <FileVersion>1.0.42.0744</FileVersion>
+    <FileVersion>1.0.43.1055</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

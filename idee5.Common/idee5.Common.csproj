@@ -11,8 +11,8 @@
     <Company>idee5 GmbH</Company>
     <Copyright>Copyright © 2013 - 2021</Copyright>
     <Description>Collection of often used stuff</Description>
-    <AssemblyVersion>3.3.33</AssemblyVersion>
-    <FileVersion>3.3.33</FileVersion>
+    <AssemblyVersion>3.3.34</AssemblyVersion>
+    <FileVersion>3.3.34</FileVersion>
     <PackageTags>idee5</PackageTags>
     <Version>3.3.13</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
