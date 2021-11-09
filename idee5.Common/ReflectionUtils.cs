@@ -6,8 +6,7 @@ namespace idee5.Common {
     /// <summary>
     /// Reflection helper methods.
     /// </summary>
-    public static class ReflectionUtils
-    {
+    public static class ReflectionUtils {
         /// <summary>
         /// Creates an instance of a type based on a string.
         /// </summary>

@@ -27,8 +27,7 @@ namespace idee5.Common.Net {
     /// and exponential backoff when querying public NTP server.
     /// </para>
     /// </remarks>
-    public class NtpClient : IDisposable
-    {
+    public class NtpClient : IDisposable {
         private readonly Socket _socket;
         private readonly IPEndPoint _endpoint;
 

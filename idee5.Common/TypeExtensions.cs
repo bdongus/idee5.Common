@@ -4,8 +4,7 @@ using System.Linq;
 using System.Reflection;
 
 namespace idee5.Common {
-    public static class TypeExtensions
-    {
+    public static class TypeExtensions {
         /// <summary>
         /// Gets all public constant values
         /// </summary>

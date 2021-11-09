@@ -66,7 +66,9 @@ Moved localizable strings to internal resource file.
 * Added "as" to the object extensions
 * Added "IsTypeOf" to the object extensions
 ### 3.3.12
-* Added "SaString" to the Object extensions.
+* Added "AsString" to the Object extensions.
+### 3.3.13
+* Added DateTimeRange
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -131,3 +133,6 @@ Do a for loop in the UpdateOrAddAsync method of the abstract repositories. Most 
 ### 1.4.15
 * Added LogValidationReporter
 * Fixed the namespace of DebugValidationReporter
+### 1.4.16
+* Added LoggingCommandHandler, LogValidationReporter
+* Minor improvements

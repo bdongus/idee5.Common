@@ -10,16 +10,15 @@
     <Authors>Bernd Dongus</Authors>
     <Company>idee5 GmbH</Company>
     <Copyright>Copyright © 2013 - 2021</Copyright>
-    <Description>Sammlung oft verwendeter Funktionen der idee5</Description>
+    <Description>Collection of often used stuff</Description>
     <AssemblyVersion>3.3.33</AssemblyVersion>
     <FileVersion>3.3.33</FileVersion>
     <PackageTags>idee5</PackageTags>
-    <Version>3.3.11</Version>
+    <Version>3.3.13</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>idee5.snk</AssemblyOriginatorKeyFile>
-    <PackageReleaseNotes>Added "as" to the object extensions
-Added "IsTypeOf" to the object extensions</PackageReleaseNotes>
+    <PackageReleaseNotes>See the readme</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">

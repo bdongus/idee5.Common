@@ -5,8 +5,7 @@ namespace idee5.Common.Net {
     /// <summary>
     /// Generic class generating a WCF service proxy and handling exceptions.
     /// </summary>
-    public static class WcfProxy
-    {
+    public static class WcfProxy {
         // Visual C# 2012 Praxisbuch Seite 510 ff.
         /// <summary>
         /// Execute the specified lambda body.

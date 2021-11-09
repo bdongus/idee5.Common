@@ -2,12 +2,11 @@
     /// <summary>
     /// Ermöglicht das Binden von Zeichenketten an WPF-Elemente
     /// </summary>
-    public class StringObject
-    {
+    public class StringObject {
         /// <summary>
         /// Erstellt eine neue Instanz der <see cref="StringObject"/>-Klasse.
         /// </summary>
-        public StringObject() : base() { }
+        public StringObject() { }
 
         /// <summary>
         /// Erstellt eine neue Instanz der <see cref="StringObject"/>-Klasse.

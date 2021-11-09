@@ -2,8 +2,7 @@
     /// <summary>
     /// Represents leap second warning from the server that instructs the client to add or remove leap second.
     /// </summary>
-    public enum NtpLeapIndicator
-    {
+    public enum NtpLeapIndicator {
         /// <summary>
         /// No leap second warning. No action required.
         /// </summary>

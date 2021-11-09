@@ -4,8 +4,7 @@ namespace idee5.Common.Net {
     /// <summary>
     /// Represents errors that occur in SNTP packets or during SNTP operation.
     /// </summary>
-    public class NtpException : Exception
-    {
+    public class NtpException : Exception {
         /// <summary>
         /// Gets the SNTP packet that caused this exception, if any.
         /// </summary>

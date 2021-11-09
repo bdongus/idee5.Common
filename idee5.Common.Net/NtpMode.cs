@@ -2,8 +2,7 @@
     /// <summary>
     /// Describes SNTP packet mode, i.e. client or server.
     /// </summary>
-    public enum NtpMode
-    {
+    public enum NtpMode {
         /// <summary>
         /// Identifies client-to-server SNTP packet.
         /// </summary>

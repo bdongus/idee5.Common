@@ -15,10 +15,10 @@
     <Description>Data access abstractions used by idee5.</Description>
     <Copyright>Copyright © 2017 - 2021</Copyright>
     <PackageTags>idee5</PackageTags>
-    <Version>1.4.15</Version>
+    <Version>1.4.16</Version>
     <AssemblyVersion>1.4.25</AssemblyVersion>
     <FileVersion>1.4.25.2036</FileVersion>
-    <PackageReleaseNotes>Fixed a namespace, Added LogValidationReporter</PackageReleaseNotes>
+    <PackageReleaseNotes>Check the readme</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

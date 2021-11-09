@@ -23,8 +23,7 @@ namespace idee5.Common.Net {
     /// </para>
     /// </remarks>
     /// <seealso cref="CorrectionOffset" />
-    public class NtpPacket
-    {
+    public class NtpPacket {
         private static readonly DateTime _epoch = new DateTime(1900, 1, 1);
 
         /// <summary>

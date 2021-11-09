@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace idee5.Common.Data {
-
     /// <summary>
     /// Report a <see cref="ValidationResult"/> to the <see cref="ILogger"/> output.
     /// </summary>

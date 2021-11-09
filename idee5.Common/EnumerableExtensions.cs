@@ -26,9 +26,13 @@ namespace idee5.Common {
                 throw new ArgumentOutOfRangeException(nameof(chunkSize), Resources.MustBeGreaterThanZero);
             }
 
-            while (list.Any()) {
-                yield return list.Take(chunkSize);
-                list = list.Skip(chunkSize);
+            return CreateChunk();
+
+            IEnumerable<IEnumerable<T>> CreateChunk() {
+                while (list.Any()) {
+                    yield return list.Take(chunkSize);
+                    list = list.Skip(chunkSize);
+                }
             }
         }
 

@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace idee5.Common {
-    public static class TimeSpanExtensions
-    {
+    public static class TimeSpanExtensions {
         /// <summary>
         /// Rounds a <see cref="TimeSpan"/> value to the nearest time span given.
         /// </summary>
