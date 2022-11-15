@@ -26,6 +26,8 @@ namespace idee5.Common.Data {
             _loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
             _logger = _loggerFactory.CreateLogger<TCommand>();
         }
+
+        /// <inheritdoc/>
         public async Task HandleAsync(TCommand command, CancellationToken cancellationToken = default) {
             _logger.LogTrace(Resources.InvokingComand, typeof(TCommand).Name);
             _logger.LogInformation(Resources.CommandParametersAre, Environment.NewLine + command.AsString());

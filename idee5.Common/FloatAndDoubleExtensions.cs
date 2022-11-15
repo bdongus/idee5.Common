@@ -11,7 +11,7 @@ namespace idee5.Common {
         /// <param name="left"><see cref="float"/> to be compared.</param>
         /// <param name="right">Compare with <see cref="float"/></param>
         /// <param name="epsilon">Allowed epsilon</param>
-        /// <returns><see langword="true"/> if the difference between both <see cref="float"/> dosen't exceed the <paramref name="epsilon"/>.</returns>
+        /// <returns><see langword="true"/> if the difference between both <see cref="float"/>s doesn't exceed the <paramref name="epsilon"/>.</returns>
         public static bool NearyEquals(this float left, float right, float epsilon) => Math.Abs(left - right) < epsilon;
 
         /// <summary>

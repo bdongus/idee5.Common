@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-// https://blogs.msdn.microsoft.com/mrtechnocal/2014/03/16/asynchronous-repositories/
 namespace idee5.Common.Data {
     /// <summary>
     /// Defines the behavior of a repository of items. Used for simple CRUD operations.
@@ -12,8 +11,7 @@ namespace idee5.Common.Data {
     /// </summary>
     /// <typeparam name="T">The <see cref="Type">type</see> of item in the repository.</typeparam>
     /// <typeparam name="TKey"> The <see cref="Type"/> of the <see cref="IEntity{TPrimaryKey}"/> primary key.</typeparam>
-    public interface IRepository<T, TKey> : IQueryRepository<T> where T : class, IEntity<TKey>
-    {
+    public interface IRepository<T, TKey> : IQueryRepository<T> where T : class, IEntity<TKey> {
         /// <summary>
         /// Adds a new item to the repository.
         /// </summary>

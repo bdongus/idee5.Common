@@ -59,14 +59,12 @@ namespace idee5.Common.Data {
         /// </summary>
         /// <value>The total count of all items.</value>
         public long TotalCount {
-            get {
-                return _totalCount;
-            }
-            protected set {
-                if (value < 0)
-                    throw new ArgumentOutOfRangeException(nameof(TotalCount));
-                _totalCount = value;
-            }
-        }
-    }
+			get => _totalCount;
+			protected set {
+				if (value < 0)
+					throw new ArgumentOutOfRangeException(nameof(TotalCount));
+				_totalCount = value;
+			}
+		}
+	}
 }

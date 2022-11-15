@@ -6,10 +6,10 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-// https://blogs.msdn.microsoft.com/mrtechnocal/2014/03/16/asynchronous-repositories/
 namespace idee5.Common.Data {
     /// <summary>
     /// Provides extension methods for the <see cref="IQueryRepository{T}"/> interface.
+    /// Be careful! Using those can create a dependency to the used ORM.
     /// </summary>
     public static class RepositoryExtensions {
         /// <summary>

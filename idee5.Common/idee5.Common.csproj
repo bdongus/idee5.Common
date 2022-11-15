@@ -9,17 +9,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Bernd Dongus</Authors>
     <Company>idee5 GmbH</Company>
-    <Copyright>Copyright © 2013 - 2021</Copyright>
+    <Copyright>Copyright © 2013 - 2022</Copyright>
     <Description>Collection of often used stuff</Description>
     <AssemblyVersion>3.3.34</AssemblyVersion>
     <FileVersion>3.3.34</FileVersion>
     <PackageTags>idee5</PackageTags>
-    <Version>3.3.13</Version>
+    <Version>3.3.14</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>idee5.snk</AssemblyOriginatorKeyFile>
     <PackageReleaseNotes>See the readme</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
+    <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
     <DefineConstants>RELEASE;NETSTANDARD2_0</DefineConstants>
@@ -65,14 +66,14 @@
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
   </PropertyGroup>
-  <Target Name="CopyPackage" AfterTargets="Pack">
+  <!--<Target Name="CopyPackage" AfterTargets="Pack">
     <Copy SourceFiles="$(ProjectDir)bin\$(Configuration)\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="K:\nuget" />
-  </Target>
+  </Target>-->
   <ItemGroup>
     <None Remove="idee5.Common.csproj.vspscc" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

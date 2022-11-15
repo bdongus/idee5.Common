@@ -69,6 +69,8 @@ Moved localizable strings to internal resource file.
 * Added "AsString" to the Object extensions.
 ### 3.3.13
 * Added DateTimeRange
+### 3.3.14
+* Added DateTimeRange equality comparability
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -136,3 +138,5 @@ Do a for loop in the UpdateOrAddAsync method of the abstract repositories. Most 
 ### 1.4.16
 * Added LoggingCommandHandler, LogValidationReporter
 * Minor improvements
+# 1.4.17
+* package updates, fixed some typos and added more documentation

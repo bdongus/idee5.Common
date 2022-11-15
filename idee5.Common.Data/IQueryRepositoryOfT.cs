@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-// https://blogs.msdn.microsoft.com/mrtechnocal/2014/03/16/asynchronous-repositories/
+
 namespace idee5.Common.Data {
     /// <summary>
     /// Read only repository.

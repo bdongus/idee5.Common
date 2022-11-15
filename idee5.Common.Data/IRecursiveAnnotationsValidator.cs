@@ -2,8 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace idee5.Common.Data {
-    public interface IRecursiveAnnotationsValidator
-    {
+    public interface IRecursiveAnnotationsValidator {
         /// <summary>
         /// Tries to validate an object. Used for deep validation of nested classes.
         /// </summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 
-// https://blogs.msdn.microsoft.com/mrtechnocal/2014/03/16/asynchronous-repositories/
 // Async is not neccessary, as the unit of work saves all changes.
 namespace idee5.Common.Data {
     /// <summary>
