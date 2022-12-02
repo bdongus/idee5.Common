@@ -37,10 +37,7 @@ namespace idee5.Common {
         /// <exception cref="ArgumentNullException"><paramref name="suffix"/> is <c>null</c>.</exception>
         public static string Truncate(this string value, int maxLength, string suffix) {
             if (suffix == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(suffix));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             int strLength = maxLength - suffix.Length;
             if (value.HasValue() && suffix.Length < value.Length && value.Length > maxLength)
                 return value.Substring(startIndex: 0, length: strLength).TrimEnd(" ") + suffix;
@@ -61,15 +58,9 @@ namespace idee5.Common {
         /// <exception cref="ArgumentNullException"><paramref name="beginDelim"/> or <paramref name="endDelim"/> is <c>null</c>.</exception>
         public static string ExtractString(this string source, string beginDelim, string endDelim, bool caseSensitive = false, bool allowMissingEndDelimiter = false, bool returnDelimiters = false) {
             if (beginDelim == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(beginDelim));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             if (endDelim == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(endDelim));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             int at1, at2;
 
             if (String.IsNullOrEmpty(source))
@@ -158,20 +149,11 @@ namespace idee5.Common {
         public static string ReplaceString(this string origString, string findString,
                                            string replaceString, bool caseInsensitive) {
             if (origString == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(origString));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             if (findString == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(findString));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             if (replaceString == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(replaceString));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             int at1 = 0;
             while (true) {
                 if (caseInsensitive)
@@ -223,9 +205,7 @@ namespace idee5.Common {
         private static string ConvertCase(string phrase, bool firstUpper) {
             // ignore leading special characters
             int start = phrase.FindIndex(ch => Char.IsLetterOrDigit(ch) && !Char.IsWhiteSpace(ch));
-#pragma warning disable HAA0502 // Explicit new reference type allocation
             var sb = new StringBuilder(phrase.Length - start);
-#pragma warning restore HAA0502 // Explicit new reference type allocation
             bool nextUpper = firstUpper;
 
             foreach (char ch in phrase.Substring(start)) {
@@ -258,10 +238,7 @@ namespace idee5.Common {
         /// <exception cref="ArgumentNullException"><paramref name="word"/> is <c>null</c>.</exception>
         public static string PascalToCamelCase(this string word) {
             if (word == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(word));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             return Char.ToLowerInvariant(word[0]) + word.Substring(startIndex: 1);
         }
 
@@ -321,13 +298,11 @@ namespace idee5.Common {
         /// <returns>A new stripped string.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="input"/> is <c>null</c>.</exception>
         public static string StripNonNumber(this string input) {
-#pragma warning disable HAA0502 // Explicit new reference type allocation
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
             char[] chars = input.ToCharArray();
             var sb = new StringBuilder();
-#pragma warning restore HAA0502 // Explicit new reference type allocation
             for (int i = 0; i < chars.Length; i++) {
                 if (Char.IsDigit(chars[i]))
                     sb.Append(chars[i]);
@@ -371,9 +346,7 @@ namespace idee5.Common {
         /// <returns>Changed string.</returns>
         public static string RemoveTags(this string input) {
             // Will this simple expression replace all tags???
-#pragma warning disable HAA0502 // Explicit new reference type allocation
             var tagsExpression = new Regex(pattern: "</?.+?>");
-#pragma warning restore HAA0502 // Explicit new reference type allocation
             return tagsExpression.Replace(input, replacement: " ");
         }
 
@@ -482,17 +455,13 @@ namespace idee5.Common {
         public static string ToHex(this string value) {
             if (String.IsNullOrEmpty(value))
                 return String.Empty;
-
-#pragma warning disable HAA0502 // Explicit new reference type allocation
             var sb = new StringBuilder(value.Length);
-#pragma warning restore HAA0502 // Explicit new reference type allocation
             foreach (char c in value) {
                 sb.AppendFormat(CultureInfo.CurrentCulture, "{0:x2}", new object[] { Convert.ToUInt32(c) });
             }
             return sb.ToString();
         }
 
-#pragma warning disable CA1055
         // Uri return values should not be strings
         ///<summary>
         /// Encodes a string to a safe URL base64 string
@@ -500,7 +469,6 @@ namespace idee5.Common {
         ///<param name="value"></param>
         ///<returns>The encoded strin.</returns>
         public static string ToUrlBase64(this string value) {
-#pragma warning restore CA1055 // Uri return values should not be strings
             if (String.IsNullOrEmpty(value))
                 return String.Empty;
 
@@ -508,17 +476,15 @@ namespace idee5.Common {
             return bytes.UrlTokenEncode();
         }
 
-#pragma warning disable CA1055 // Uri return values should not be strings
         /// <summary>
         /// Decodes a URL safe base64 string back
         /// </summary>
         /// <param name="value"></param>
         /// <returns>The decoded string.</returns>
         public static string FromUrlBase64(this string value) {
-#pragma warning restore CA1055 // Uri return values should not be strings
             try {
                 byte[] decodedBytes = value.UrlTokenDecode();
-                return decodedBytes != null ? Encoding.UTF8.GetString(decodedBytes, index: 0, count: decodedBytes.Length) : null;
+                return decodedBytes != null ? Encoding.UTF8.GetString(decodedBytes) : null;
             }
             catch (FormatException) { return null; }
         }
@@ -540,9 +506,7 @@ namespace idee5.Common {
             bool isGuid = false;
 
             if (value.HasValue()) {
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 var guidRegEx = new Regex(withHyphens ? _guidWithHyphensPattern : _guidPattern);
-#pragma warning restore HAA0502 // Explicit new reference type allocation
                 isGuid = guidRegEx.IsMatch(value);
             }
             return isGuid;
@@ -555,15 +519,16 @@ namespace idee5.Common {
         /// <returns>The decoded string as byte array.</returns>
         internal static byte[] UrlTokenDecode(this string input) {
             if (input == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(input));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
             int length = input.Length;
             if (length < 1) { return Array.Empty<byte>(); }
-            int num2 = input[length - 1] - '0';
-            if ((num2 < 0) || (num2 > 10)) { return null; }
-            var inArray = new char[length - 1 + num2];
-            for (int i = 0; i < (length - 1); i++) {
+
+            var remain = length % 4;
+            if (remain != 0) {
+                length += 4 - remain;
+            }
+            var inArray = new char[length];
+            for (int i = 0; i < input.Length; i++) {
                 char ch = input[i];
                 switch (ch) {
                     case '-':
@@ -579,7 +544,8 @@ namespace idee5.Common {
                     break;
                 }
             }
-            for (int j = length - 1; j < inArray.Length; j++) { inArray[j] = '='; }
+            // pad with '='
+            for (int j = input.Length; j < inArray.Length; j++) { inArray[j] = '='; }
             return Convert.FromBase64CharArray(inArray, offset: 0, length: inArray.Length);
         }
 
@@ -591,21 +557,18 @@ namespace idee5.Common {
         /// <exception cref="ArgumentNullException"><paramref name="input"/> is <c>null</c>.</exception>
         internal static string UrlTokenEncode(this byte[] input) {
             if (input == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(input));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
             if (input.Length < 1) { return String.Empty; }
 
             string str = Convert.ToBase64String(input);
             if (str == null) { return null; }
-            int index = str.Length;
-            while (index > 0) {
-                if (str[index - 1] != '=')
-                    break;
-                index--;
+            // if there is a trailing '=', keep it
+            int index = str.IndexOf('=');
+            if (index < 0) {
+                index = str.Length;
             }
-            char[] chArray = new char[index + 1];
-            chArray[index] = (char) ((0x30 + str.Length) - index);
+            char[] chArray = new char[index];
+            // replace problematic URL characters
             for (int i = 0; i < index; i++) {
                 char ch = str[i];
                 switch (ch) {
@@ -622,9 +585,8 @@ namespace idee5.Common {
                     break;
                 }
             }
-#pragma warning disable HAA0502 // Explicit new reference type allocation
+
             return new string(chArray);
-#pragma warning restore HAA0502 // Explicit new reference type allocation
         }
 
         /// <summary>
@@ -702,10 +664,7 @@ namespace idee5.Common {
         public static string BinaryToBinHex(this byte[] data) {
             if (data == null)
                 return null;
-
-#pragma warning disable HAA0502 // Explicit new reference type allocation
             var sb = new StringBuilder(data.Length * 2);
-#pragma warning restore HAA0502 // Explicit new reference type allocation
             foreach (byte val in data)
                 sb.AppendFormat(CultureInfo.CurrentCulture, "{0:x2}", new object[] { val });
             return sb.ToString();

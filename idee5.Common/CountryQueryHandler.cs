@@ -14,7 +14,6 @@ namespace idee5.Common {
         /// <returns>All country culture infos containing the name in the native or english name</returns>
         /// <exception cref="System.ArgumentNullException"><paramref name="query"/> is <c>null</c>.</exception>
         public IDictionary<string, CultureInfo> Handle(CountryQuery query) {
-#pragma warning disable HAA0502 // Explicit new reference type allocation
             if (query == null)
                 throw new System.ArgumentNullException(nameof(query));
 
@@ -28,7 +27,6 @@ namespace idee5.Common {
                 }
             }
             return resultset;
-#pragma warning restore HAA0502 // Explicit new reference type allocation
         }
     }
 }

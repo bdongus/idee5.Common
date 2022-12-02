@@ -23,9 +23,7 @@ namespace idee5.Common {
             private static Func<TSource, TDest> Get() {
                 ParameterExpression p = Expression.Parameter(typeof(TSource));
                 UnaryExpression c = Expression.ConvertChecked(p, typeof(TDest));
-#pragma warning disable HAA0101 // Array allocation for params parameter
                 return Expression.Lambda<Func<TSource, TDest>>(c, p).Compile();
-#pragma warning restore HAA0101 // Array allocation for params parameter
             }
         }
     }

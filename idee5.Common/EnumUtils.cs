@@ -14,9 +14,7 @@ namespace idee5.Common {
 
         private static readonly Type _enumType = typeof(TEnum);
         private static readonly bool _isSigned = new TypeCode[] { TypeCode.SByte, TypeCode.Int16, TypeCode.Int32, TypeCode.Int64 }.IndexOf(_typeCode) > -1;
-#pragma warning disable HAA0502 // Explicit new reference type allocation
         private static readonly object _syncRoot = new object();
-#pragma warning restore HAA0502 // Explicit new reference type allocation
         private static readonly TypeCode _typeCode = Type.GetTypeCode(Enum.GetUnderlyingType(_enumType));
 
         // locks are used so that multiple threads may assign a field multiple times but it is still faster than locking fields even on non-null access

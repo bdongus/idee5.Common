@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using idee5.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
 using System.Threading;
 
@@ -264,6 +265,31 @@ namespace idee5.Common.Tests {
 
             // Assert
             Assert.ThrowsException<System.FormatException>(() => "treu".ParseInto<bool>());
+        }
+
+        [TestMethod()]
+        public void ToUrlBase64Test() {
+            // Arrange
+            var encoded = "w5xiZXJhbGw";
+            var raw = "Überall";
+            // Act
+
+
+            // Assert
+            Assert.AreEqual(encoded, raw.ToUrlBase64());
+        }
+
+        [TestMethod()]
+        public void FromUrlBase64Test() {
+            // Arrange
+            var encoded = "w5xiZXJhbGw";
+            var raw = "Überall";
+
+            // Act
+
+
+            // Assert
+            Assert.AreEqual(raw, encoded.FromUrlBase64());
         }
     }
 }

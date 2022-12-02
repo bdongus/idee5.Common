@@ -16,10 +16,7 @@ namespace idee5.Common {
         /// <exception cref="ArgumentNullException"><paramref name="typeName"/> is <c>null</c>.</exception>
         public static object CreateInstanceFromString(string typeName, params object[] args) {
             if (typeName == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(typeName));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             object instance = null;
             try {
                 Type type = GetTypeFromName(typeName);
@@ -40,10 +37,7 @@ namespace idee5.Common {
         /// <exception cref="ArgumentNullException"><paramref name="typeName"/> is <c>null</c>.</exception>
         public static Type GetTypeFromName(string typeName) {
             if (typeName == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(typeName));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             var type = Type.GetType(typeName, throwOnError: false);
             if (type != null)
                 return type;
@@ -67,13 +61,10 @@ namespace idee5.Common {
         /// <exception cref="ArgumentNullException"><paramref name="typeName"/> or <paramref name="property"/> is <c>null</c>.</exception>
         public static object GetStaticProperty(string typeName, string property) {
             if (typeName == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(typeName));
 
             if (property == null)
                 throw new ArgumentNullException(nameof(property));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             Type type = GetTypeFromName(typeName);
             if (type == null)
                 return null;
@@ -90,13 +81,10 @@ namespace idee5.Common {
         /// <exception cref="ArgumentNullException"><paramref name="type"/> or <paramref name="property"/> is <c>null</c>.</exception>
         public static object GetStaticProperty(Type type, string property) {
             if (type == null)
-#pragma warning disable HAA0502 // Explicit new reference type allocation
                 throw new ArgumentNullException(nameof(type));
 
             if (property == null)
                 throw new ArgumentNullException(nameof(property));
-#pragma warning restore HAA0502 // Explicit new reference type allocation
-
             object result;
             try { result = type.InvokeMember(
                 property,
@@ -105,9 +93,7 @@ namespace idee5.Common {
                 target: type,
                 args: null,
                 CultureInfo.CurrentCulture); }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch { return null; }
-#pragma warning restore CA1031 // Do not catch general exception types
 
             return result;
         }

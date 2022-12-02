@@ -82,10 +82,7 @@ namespace idee5.Common {
 
             if (keySelector == null)
                 throw new ArgumentNullException(nameof(keySelector));
-
-#pragma warning disable HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
             return source.GroupBy(keySelector).Select(grps => grps).Select(e => e.First());
-#pragma warning restore HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
         }
 
         /// <summary>
@@ -178,12 +175,7 @@ namespace idee5.Common {
         /// <param name="source"></param>
         /// <param name="projection"></param>
         /// <returns></returns>
-        public static IEnumerable<TBase> ForAllThatAre<TBase, TActual>(this IEnumerable<TBase> source, Action<TActual> projection) where TActual : class
-#pragma warning disable HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
-#pragma warning disable HAA0301 // Closure Allocation Source
-            => source.Select(x => {
-#pragma warning restore HAA0301 // Closure Allocation Source
-#pragma warning restore HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
+        public static IEnumerable<TBase> ForAllThatAre<TBase, TActual>(this IEnumerable<TBase> source, Action<TActual> projection) where TActual : class => source.Select(x => {
                 // use GetTypeInfo because IsAssignableFrom in CPL projects is only available on TypeInfo
                 if (typeof(TActual).GetTypeInfo().IsAssignableFrom(x.GetType().GetTypeInfo())) {
                     var casted = x as TActual;
@@ -306,9 +298,7 @@ namespace idee5.Common {
                 throw new ArgumentNullException(nameof(separator));
             if (output == null)
                 throw new ArgumentNullException(nameof(output));
-#pragma warning disable HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
             Format(source, separator, output, s => s.ToString());
-#pragma warning restore HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
         }
 
         /// <summary>
@@ -380,13 +370,8 @@ namespace idee5.Common {
                 throw new ArgumentNullException(nameof(source));
             if (groupSize <= 0)
                 throw new ArgumentException(Resources.MustBeGreaterThanZero, nameof(groupSize));
-
-#pragma warning disable HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
-#pragma warning disable HAA0301 // Closure Allocation Source
             return source.Select((x, i) => Tuple.Create(i / groupSize, x))
                 .GroupBy(t => t.Item1, t => t.Item2);
-#pragma warning restore HAA0301 // Closure Allocation Source
-#pragma warning restore HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
         }
 
         /// <summary>
@@ -449,7 +434,6 @@ namespace idee5.Common {
 
             IEnumerable<T> TriggerImmediateValidation() {
                 var stack = new Stack<IEnumerator<T>>();
-#pragma warning disable HAA0401 // Possible allocation of reference type enumerator
                 stack.Push(enumerables.GetEnumerator());
 
                 try {
@@ -470,7 +454,6 @@ namespace idee5.Common {
                 finally {
                     while (stack.Count > 0) { stack.Pop().Dispose(); }
                 }
-#pragma warning restore HAA0401 // Possible allocation of reference type enumerator
             }
         }
 
@@ -535,11 +518,8 @@ namespace idee5.Common {
         /// A dictionary of groupings such that the key of the dictionary is TKey type and the value
         /// is List of TValue type.
         /// </returns>
-        public static Dictionary<TKey, List<TValue>> ToDictionary<TKey, TValue>(this IEnumerable<IGrouping<TKey, TValue>> groupings)
-#pragma warning disable HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
-            => groupings.ToDictionary(group => group.Key, group => group.ToList());
+        public static Dictionary<TKey, List<TValue>> ToDictionary<TKey, TValue>(this IEnumerable<IGrouping<TKey, TValue>> groupings) => groupings.ToDictionary(group => group.Key, group => group.ToList());
 
-#pragma warning restore HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
         /// <summary>
         /// Transposes the rows and columns of its argument
         /// </summary>
@@ -549,11 +529,8 @@ namespace idee5.Common {
         public static IEnumerable<IEnumerable<T>> Transpose<T>(this IEnumerable<IEnumerable<T>> source) {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
-
-#pragma warning disable HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
             return source.Select(a => a.Select(b => Enumerable.Repeat(b, count: 1))).DefaultIfEmpty(Enumerable.Empty<IEnumerable<T>>())
                        .Aggregate((a, b) => a.Zip(b, (f, g) => f.Concat(g)));
-#pragma warning restore HAA0303 // Lambda or anonymous method in a generic method allocates a delegate instance
         }
 
         /// <summary>
