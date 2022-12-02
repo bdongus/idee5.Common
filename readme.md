@@ -71,6 +71,8 @@ Moved localizable strings to internal resource file.
 * Added DateTimeRange
 ### 3.3.14
 * Added DateTimeRange equality comparability
+### 3.3.15
+* Added DateTimeRange equality operators
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release

@@ -29,6 +29,12 @@ namespace idee5.Common {
 		public override bool Equals(object obj) => obj is DateTimeRange timeSlot && Equals(timeSlot);
 
 		/// <inheritdoc/>
+	   public static bool operator ==(DateTimeRange left, DateTimeRange right) => (left is null && right is null) || (!(left is null) && left.Equals(right));
+
+		/// <inheritdoc/>
+	   public static bool operator !=(DateTimeRange left, DateTimeRange right) => !(left == right);
+
+		/// <inheritdoc/>
 		public override int GetHashCode() {
 			var hash = new HashCodeCombiner();
 			hash.AddDateTime(Start);

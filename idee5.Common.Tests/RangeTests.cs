@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace idee5.Common.Tests {
 
@@ -53,6 +55,22 @@ namespace idee5.Common.Tests {
 
 			// Assert
 			Assert.AreEqual(dr1, dr2);
+		}
+		[IntegrationTest, TestMethod]
+		public void CanCompareDateRangesInLinq() {
+			// Arrange
+			var start = new DateTime(year: 1970, month: 2, day: 21);
+			var end = new DateTime(year: 2000, month: 2, day: 21);
+			var dr1 = new DateTimeRange(start, end);
+			List<DateTimeRange> ranges = new List<DateTimeRange> {
+				new DateTimeRange(start, end),
+				new DateTimeRange(start, end.AddDays(5))
+			};
+			// Act
+			var result = ranges.SingleOrDefault(dr => dr == dr1);
+
+			// Assert
+			Assert.IsNotNull(result);
 		}
 	}
 }
