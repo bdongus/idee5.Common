@@ -14,7 +14,7 @@
     <AssemblyVersion>3.3.34</AssemblyVersion>
     <FileVersion>3.3.34</FileVersion>
     <PackageTags>idee5</PackageTags>
-    <Version>3.3.14</Version>
+    <Version>3.3.15</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>idee5.snk</AssemblyOriginatorKeyFile>

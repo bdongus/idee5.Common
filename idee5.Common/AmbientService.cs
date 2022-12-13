@@ -5,9 +5,6 @@ namespace idee5.Common {
     /// <summary>
     /// Base ambient context class.
     /// </summary>
-    /// <remarks>Taken from https://github.com/nrjohnstone/AmbientContext.
-    /// Inspired by http://blog.ploeh.dk/2010/04/27/FunwithliteralextensionsandAmbientContext/
-    /// </remarks>
     /// <typeparam name="T">Ambient service type.</typeparam>
     public abstract class AmbientService<T> where T : class {
         /// <summary>
@@ -50,6 +47,10 @@ namespace idee5.Common {
             }
         }
 
+        /// <summary>
+        /// Throws an exception to inform the developer that no instance creator was configured.
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         private static T NoCreate() {
             string message = String.Format(CultureInfo.InvariantCulture, Properties.Resources.AmbientServiceNotConfigured, typeof(T).Name);
             throw new Exception(message);
