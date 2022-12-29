@@ -124,7 +124,7 @@ namespace idee5.SoureGeneratorTests {
             // Arrange
             const string sourceFileName = "../../../TestClass.cs";
             var testSource = File.ReadAllText(sourceFileName);
-            var expected = VerifyCS.Diagnostic(DiagnosticDescriptors.TemplateNotFound.Id).WithArguments("NoDocProperty.txt", "TestClass").WithSpan(6, 20, 6, 29);
+            var expected = VerifyCS.Diagnostic(DiagnosticDescriptors.TemplateNotFound.Id).WithArguments("NoDocProperty.txt", "TestClass").WithSpan(8, 20, 8, 29);
 
             // Act
             var analyzerTest = new VerifyCS.Test {
