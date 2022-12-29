@@ -4,7 +4,6 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace idee5.Common.Plugins {
-    //[Serializable] --- not needed? https://stackoverflow.com/a/50833829/784725
     public class PluginConfiguration {
         /// <summary>
         /// Initializes a new instance of the <see cref="PluginConfiguration"/> class.

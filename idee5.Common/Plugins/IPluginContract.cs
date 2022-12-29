@@ -6,15 +6,18 @@
     /// a plugin.
     /// </summary>
     public interface IPluginContract {
+        /// <summary>
+        /// Version of the plugin
+        /// </summary>
         string Version { get; }
 
         /// <summary>
-        /// Installs the plugin.
+        /// Installs the plugin
         /// </summary>
         void Install();
 
         /// <summary>
-        /// Uninstalls the plugin.
+        /// Uninstalls the plugin
         /// </summary>
         void Uninstall();
     }

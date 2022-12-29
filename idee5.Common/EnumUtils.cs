@@ -28,22 +28,18 @@ namespace idee5.Common {
 
         #region Public Properties
 
-#pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
         /// Count the members of an enum.
         /// </summary>
         /// <returns>Number of members.</returns>
         public static int Count => Names.Length;
-#pragma warning restore CA1000 // Do not declare static members on generic types
 
-#pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
         /// Create a dictionary for an enum.
         /// <c>DayOfWeek.Monday.ToDictionary</c>
         /// </summary>
         /// <returns>A dictionary with the integer values as keys and the names as values.</returns>
         public static Dictionary<int, string> ToDictionary {
-#pragma warning restore CA1000 // Do not declare static members on generic types
             get {
                 // avoid locking if the cache is filled
                 if (_intNamePairs == null) {
@@ -121,12 +117,10 @@ namespace idee5.Common {
 
         #region Public Methods
 
-#pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
         /// Clears caches associated with <typeparamref name="TEnum"/> enumeration.
         /// </summary>
         public static void ClearCaches() {
-#pragma warning restore CA1000 // Do not declare static members on generic types
             lock (_syncRoot) {
                 _values = null;
                 _names = null;
@@ -135,14 +129,12 @@ namespace idee5.Common {
             }
         }
 
-#pragma warning disable CA1000 // Do not declare static members on generic types
         /// <summary>
         /// Returns the <see cref="string"/> representation of the given <see langword="enum"/>&#160;value specified in the <paramref name="value"/> parameter.
         /// </summary>
         /// <param name="value">A <typeparamref name="TEnum"/> value that has to be converted to <see cref="string"/>.</param>
         /// <returns>The string representation of <paramref name="value"/>.</returns>
         public static string ToString(TEnum value) {
-#pragma warning restore CA1000 // Do not declare static members on generic types
             // defined value exists
             if (ValueNamePairs.TryGetValue(value, out string name))
                 return name;

@@ -68,7 +68,7 @@ namespace idee5.Common.Plugins {
         /// <summary>
         /// Calls the Install method of the plugin"/>
         /// </summary>
-        /// <param name="name">Name of the plugin.</param>
+        /// <param name="name">NativeName of the plugin.</param>
         public void InstallPlugin(string name) {
             PluginLoader.Plugins.Single(p => p.GetType().Name == name).Install();
         }

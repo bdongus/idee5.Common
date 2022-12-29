@@ -11,13 +11,11 @@ namespace idee5.Common {
         /// <value>The start.</value>
         T Start { get; }
 
-#pragma warning disable CA1716
         /// <summary>
         /// Gets the end.
         /// </summary>
         /// <value>The end.</value>
         T End { get; }
-#pragma warning restore CA1716 // Identifiers should not match keywords
 
         /// <summary>
         /// Checks if the two ranges intersect/collide.

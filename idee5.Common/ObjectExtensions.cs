@@ -45,7 +45,7 @@ namespace idee5.Common {
         /// Gets an object's property value.
         /// </summary>
         /// <param name="o">This instance.</param>
-        /// <param name="propertyName">Name of the property to read.</param>
+        /// <param name="propertyName">NativeName of the property to read.</param>
         /// <returns>The property's value as object</returns>
         /// <exception cref="ArgumentNullException"><paramref name="o"/> is <c>null</c>.</exception>
         public static object GetPropertyValue(this object o, string propertyName) {

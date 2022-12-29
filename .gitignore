@@ -99,3 +99,6 @@ _ReSharper*/
 
 #Subversion files
 .svn
+
+# Verify Test files
+*.received.*

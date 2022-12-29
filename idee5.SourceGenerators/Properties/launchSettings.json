@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "idee5.SourceGenerators": {
+      "commandName": "Project"
+    },
+    "Profil \"1\"": {
+      "commandName": "DebugRoslynComponent"
+    }
+  }
+}

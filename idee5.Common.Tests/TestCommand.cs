@@ -2,6 +2,6 @@
     public class TestCommand {
         public bool Execute { get; set; }
 
-        public int Counter { get; set; } // return value! In real apps normally commands DON'T return anything!
+        public int Counter { get; set; } // return value! In real apps commands do NOT return anything!
     }
 }

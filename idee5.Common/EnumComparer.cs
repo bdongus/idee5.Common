@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-// taken from https://www.codeproject.com/articles/33528/accelerating-enum-based-dictionaries-with-generic
+
 namespace idee5.Common {
     /// <summary>
     /// Generic generator for enum comparers.
@@ -30,7 +30,6 @@ namespace idee5.Common {
     /// </example>
     /// <typeparam name="TEnum">The type of the Enum.</typeparam>
     public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
-        //where TEnum : IComparable, IConvertible, IFormattable {
         private static readonly Lazy<Func<TEnum, TEnum, bool>> _equals = new Lazy<Func<TEnum, TEnum, bool>>(GenerateEquals);
         private static readonly Lazy<Func<TEnum, int>> _getHashCode = new Lazy<Func<TEnum, int>>(GenerateGetHashCode);
 

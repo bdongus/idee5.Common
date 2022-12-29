@@ -16,7 +16,7 @@ namespace idee5.Common {
         DCESecurity = 2,
 
         /// <summary>
-        /// Name-based GUID using the MD5 hashing algorithm.
+        /// NativeName-based GUID using the MD5 hashing algorithm.
         /// </summary>
         NameBasedUsingMD5 = 3,
 
@@ -26,7 +26,7 @@ namespace idee5.Common {
         Random = 4,
 
         /// <summary>
-        /// Name-based GUID using the SHA-1 hashing algorithm.
+        /// NativeName-based GUID using the SHA-1 hashing algorithm.
         /// </summary>
         NameBasedUsingSHA1 = 5,
     }

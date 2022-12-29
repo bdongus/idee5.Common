@@ -74,6 +74,9 @@ Moved localizable strings to internal resource file.
 ### 3.3.15
 * Added DateTimeRange equality operators
 * Fixed a Base64 issue
+### 3.4.0
+* Source generator attribute added
+* Currency query added
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -143,3 +146,5 @@ Do a for loop in the UpdateOrAddAsync method of the abstract repositories. Most 
 * Minor improvements
 # 1.4.17
 * package updates, fixed some typos and added more documentation
+# 1.5
+* AbstractEventstore added

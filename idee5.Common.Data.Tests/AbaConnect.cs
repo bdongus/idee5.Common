@@ -35,7 +35,7 @@ namespace idee5.Common.Data.Tests.Abacus {
         [XmlElement(ElementName = "Number")]
         public string Number { get; set; }
 
-        [XmlElement(ElementName = "Name")]
+        [XmlElement(ElementName = "NativeName")]
         public string Name { get; set; }
 
         [XmlAttribute(AttributeName = "id")]

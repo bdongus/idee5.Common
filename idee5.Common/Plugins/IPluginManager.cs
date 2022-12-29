@@ -1,5 +1,12 @@
 ﻿namespace idee5.Common.Plugins {
+    /// <summary>
+    /// The plugin manager interface.
+    /// </summary>
+    /// <typeparam name="TContract">Plugin manger entry</typeparam>
     public interface IPluginManager<TContract> where TContract : IPluginContract {
+        /// <summary>
+        /// <see cref="IPluginLoader{TContract}"/> to load and access the plugins
+        /// </summary>
         IPluginLoader<TContract> PluginLoader { get; }
 
         /// <summary>
@@ -23,7 +30,7 @@
         /// <summary>
         /// Installs a plugin.
         /// </summary>
-        /// <param name="name">The name name of the plugin.</param>
+        /// <param name="name">The name of the plugin.</param>
         void InstallPlugin(string name);
 
         /// <summary>

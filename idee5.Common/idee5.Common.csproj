@@ -7,14 +7,15 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <Authors>Bernd Dongus</Authors>
     <Company>idee5 GmbH</Company>
     <Copyright>Copyright © 2013 - 2022</Copyright>
     <Description>Collection of often used stuff</Description>
-    <AssemblyVersion>3.3.34</AssemblyVersion>
-    <FileVersion>3.3.34</FileVersion>
+    <AssemblyVersion>3.4.0</AssemblyVersion>
+    <FileVersion>3.4.0</FileVersion>
     <PackageTags>idee5</PackageTags>
-    <Version>3.3.15</Version>
+    <Version>3.4.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>idee5.snk</AssemblyOriginatorKeyFile>
@@ -71,6 +72,13 @@
   </Target>-->
   <ItemGroup>
     <None Remove="idee5.Common.csproj.vspscc" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="IsExternalInit" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Immutable" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

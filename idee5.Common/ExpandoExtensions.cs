@@ -13,7 +13,7 @@ namespace idee5.Common {
         /// Add a property to an <see cref="ExpandoObject"/>.
         /// </summary>
         /// <param name="expando">This instance.</param>
-        /// <param name="propertyName">Name of the property to add.</param>
+        /// <param name="propertyName">NativeName of the property to add.</param>
         /// <param name="propertyValue">Value of the property.</param>
         /// <exception cref="ArgumentNullException"><paramref name="expando"/> is <c>null</c>.</exception>
         public static void AddProperty(this ExpandoObject expando, string propertyName, object propertyValue) {

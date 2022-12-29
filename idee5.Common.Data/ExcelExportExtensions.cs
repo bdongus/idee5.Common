@@ -11,7 +11,7 @@ namespace idee5.Common.Data {
         /// Create excel XML from an <see cref="System.Collections.Generic.IEnumerable"/>.
         /// </summary>
         /// <param name="rows">The <see cref="System.Collections.Generic.IEnumerable"/> object to create the Excel document from.</param>
-        /// <param name="sheetName">Name of the sheet. The name will NOT be validated!</param>
+        /// <param name="sheetName">NativeName of the sheet. The name will NOT be validated!</param>
         /// <returns>Excel 2003 document as <see cref="XDocument"/>.</returns>
         public static XDocument ToExcelXml(this IEnumerable<object> rows, string sheetName = "data") {
             if (sheetName == null)
@@ -55,7 +55,7 @@ namespace idee5.Common.Data {
                 new XElement(mainNamespace + "Styles",
                     new XElement(mainNamespace + "Style",
                         new XAttribute(ss + "ID", "Default"),
-                        new XAttribute(ss + "Name", "Normal"),
+                        new XAttribute(ss + "NativeName", "Normal"),
                         new XElement(mainNamespace + "Alignment",
                             new XAttribute(ss + "Vertical", "Bottom")),
                         new XElement(mainNamespace + "Borders"),
@@ -76,7 +76,7 @@ namespace idee5.Common.Data {
                             new XAttribute(ss + "Color", "#000000"),
                             new XAttribute(ss + "Bold", "1")))), // close styles
                 new XElement(mainNamespace + "Worksheet",
-                    new XAttribute(ss + "Name", sheetName /* Sheet name */),
+                    new XAttribute(ss + "NativeName", sheetName /* Sheet name */),
                     new XElement(mainNamespace + "Table",
                         new XAttribute(ss + "ExpandedColumnCount", headerRow.Count().ToString(cultureToUse)),
                         new XAttribute(ss + "ExpandedRowCount", (rows.Count() + 1).ToString(cultureToUse)),
