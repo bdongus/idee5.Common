@@ -39,3 +39,9 @@ jobs:
        PROJECT_FILE_PATH: idee5.Common.Net/idee5.Common.Net.csproj
        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
        NO_BUILD: true
+    - name: Publish source generators
+      uses: alirezanet/publish-nuget@v3.0.4
+      with:
+       PROJECT_FILE_PATH: idee5.Common.SourceGenerators/idee5.Common.SourceGenerators.csproj
+       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+       NO_BUILD: true
