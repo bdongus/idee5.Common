@@ -1,5 +1,7 @@
 ﻿#nullable enable
 using idee5.Common;
+using System;
+using System.Collections.Generic;
 
 namespace idee5.SoureGeneratorTests {
     [GenerateCommands("HandlerTemplate.txt", PropertyTemplate = "NoDocProperty.txt")]

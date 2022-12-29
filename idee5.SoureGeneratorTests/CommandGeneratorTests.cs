@@ -1,7 +1,12 @@
 using idee5.SourceGenerators;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using System;
 using System.Collections.Immutable;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using VerifyMSTest;
 
 namespace idee5.SoureGeneratorTests;
 /// <summary>
@@ -9,6 +14,7 @@ namespace idee5.SoureGeneratorTests;
 /// </summary>
 [TestClass]
 public class CommandGeneratorTests : VerifyBase {
+
     /// <summary>
     /// Can generate sources.
     /// </summary>

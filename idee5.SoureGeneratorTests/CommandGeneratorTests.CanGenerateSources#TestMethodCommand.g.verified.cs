@@ -11,7 +11,7 @@ namespace idee5.SoureGeneratorTests {
 		/// Create a new command.
 		/// </summary>
 		/// <param name="para1"></param>
-		/// <param name="para2">42 <see cref="!:StackOverflowException" /></param>
+		/// <param name="para2">42 <see cref="T:System.StackOverflowException" /></param>
 		public TestMethodCommand(int para1, idee5.Common.DateTimeRange? para2) {
 			Para1 = para1;
 			Para2 = para2;

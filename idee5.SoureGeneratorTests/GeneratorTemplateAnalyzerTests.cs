@@ -1,5 +1,7 @@
 ﻿using idee5.Common;
 using idee5.SourceGenerators;
+using System.IO;
+using System.Threading.Tasks;
 using VerifyCS = idee5.SoureGeneratorTests.Verifiers.CSharpAnalyzerVerifier<idee5.SourceGenerators.GeneratorTemplateAnalyzer>;
 
 namespace idee5.SoureGeneratorTests {
@@ -118,7 +120,7 @@ namespace idee5.SoureGeneratorTests {
         /// </summary>
         /// <returns>A Task.</returns>
         [TestMethod]
-        public async Task CorrectHandlerConfigHasNoDiagnosic() {
+        public async Task MissingPropertyTemplateHasNoDiagnosic() {
             // Arrange
             const string sourceFileName = "../../../TestClass.cs";
             var testSource = File.ReadAllText(sourceFileName);

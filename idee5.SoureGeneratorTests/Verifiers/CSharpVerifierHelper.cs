@@ -1,11 +1,11 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using System;
 using System.Collections.Immutable;
 
-namespace idee5.SoureGeneratorTests.Verifiers
-{
-    internal static class CSharpVerifierHelper
-    {
+namespace idee5.SoureGeneratorTests.Verifiers {
+    internal static class CSharpVerifierHelper {
+
         /// <summary>
         /// By default, the compiler reports diagnostics for nullable reference types at
         /// <see cref="DiagnosticSeverity.Warning"/>, and the analyzer test framework defaults to only validating
@@ -15,8 +15,7 @@ namespace idee5.SoureGeneratorTests.Verifiers
         /// </summary>
         internal static ImmutableDictionary<string, ReportDiagnostic> NullableWarnings { get; } = GetNullableWarningsFromCompiler();
 
-        private static ImmutableDictionary<string, ReportDiagnostic> GetNullableWarningsFromCompiler()
-        {
+        private static ImmutableDictionary<string, ReportDiagnostic> GetNullableWarningsFromCompiler() {
             string[] args = { "/warnaserror:nullable" };
             var commandLineArguments = CSharpCommandLineParser.Default.Parse(args, baseDirectory: Environment.CurrentDirectory, sdkDirectory: Environment.CurrentDirectory);
             var nullableWarnings = commandLineArguments.CompilationOptions.SpecificDiagnosticOptions;
@@ -29,5 +28,4 @@ namespace idee5.SoureGeneratorTests.Verifiers
             return nullableWarnings;
         }
     }
-
 }
