@@ -11,9 +11,9 @@
     <Description>Source generator and analyzer for the "GenerateCommands" attribute and the command handler interface defined in idee5.Common</Description>
     <Copyright>© 2022 idee5 GmbH</Copyright>
     <PackageTags>idee5;source generator</PackageTags>
-    <AssemblyVersion>0.1</AssemblyVersion>
-    <FileVersion>0.1</FileVersion>
-    <Version>0.1.0-alpha9</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
