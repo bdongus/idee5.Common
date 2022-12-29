@@ -36,10 +36,4 @@
     <ProjectReference Include="..\idee5.Common\idee5.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="ProjektePlantafel.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

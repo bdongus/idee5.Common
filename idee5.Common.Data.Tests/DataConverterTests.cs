@@ -19,21 +19,6 @@ namespace idee5.Common.Data.Tests {
             Assert.IsTrue(outputHandler.Executed);
         }
 
-        [UnitTest, TestMethod]
-        public async Task CanConvertAbacusXml()
-        {
-            // Arrange
-            var cancellationToken = new CancellationToken();
-            var outputHandler = new Abacus.AbaProjektOutputHandler();
-            var converter = new DataConverterAsync<Abacus.AbaProjektQuery, Abacus.AbaProjektResult>(new Abacus.AbaProjektInputHandler(), outputHandler);
-
-            // Act
-            await converter.ExecuteAsync(new Abacus.AbaProjektQuery() { NameFilter = "" }, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.IsTrue(outputHandler.Executed);
-        }
-
         [IntegrationTest, TestMethod]
         public async Task CanFailValidateOutputHandler()
         {
