@@ -16,11 +16,12 @@
     <Description>Data access abstractions used by idee5.</Description>
     <Copyright>Copyright © 2017 - 2022</Copyright>
     <PackageTags>idee5</PackageTags>
-    <Version>1.5</Version>
-    <AssemblyVersion>1.5.0</AssemblyVersion>
-    <FileVersion>1.5.0</FileVersion>
+    <Version>1.6</Version>
+    <AssemblyVersion>1.6.0</AssemblyVersion>
+    <FileVersion>1.6.0</FileVersion>
     <PackageReleaseNotes>Check the readme</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

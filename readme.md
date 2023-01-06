@@ -148,3 +148,5 @@ Do a for loop in the UpdateOrAddAsync method of the abstract repositories. Most 
 * package updates, fixed some typos and added more documentation
 # 1.5
 * AbstractEventstore added
+# 1.6
+* Enabled NULLABLE

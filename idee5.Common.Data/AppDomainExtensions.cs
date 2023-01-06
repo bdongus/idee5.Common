@@ -16,7 +16,7 @@ namespace idee5.Common.Data {
             if (!dataDirectory.HasValue()) {
                 dataDirectory = appDomain.BaseDirectory;
             }
-            return dataDirectory;
+            return dataDirectory ?? "";
         }
     }
 }

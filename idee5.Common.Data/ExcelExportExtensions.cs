@@ -5,8 +5,10 @@ using System.Linq;
 using System.Xml.Linq;
 
 namespace idee5.Common.Data {
-    public static class ExcelExportExtensions
-    {
+    /// <summary>
+    /// The excel export extensions.
+    /// </summary>
+    public static class ExcelExportExtensions {
         /// <summary>
         /// Create excel XML from an <see cref="System.Collections.Generic.IEnumerable"/>.
         /// </summary>

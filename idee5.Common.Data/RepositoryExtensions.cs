@@ -74,7 +74,6 @@ namespace idee5.Common.Data {
         /// <param name="cancellationToken">The <see cref="CancellationToken">cancellation token</see> that can be used to cancel the operation.</param>
         /// <returns>A <see cref="Task{T}">task</see> containing the <see cref="PagedCollection{T}">paged collection</see>
         /// of <typeparamref name="T">items</typeparamref>.</returns>
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Required to support paging.")]
         public static async Task<PagedCollection<T>> PaginateAsync<T>(this IQueryRepository<T> queryRepository, int pageIndex, int pageSize, CancellationToken cancellationToken = default) where T : class {
             if (queryRepository == null)
                 throw new ArgumentNullException(nameof(queryRepository));
@@ -116,7 +115,6 @@ namespace idee5.Common.Data {
         /// <param name="cancellationToken">The <see cref="CancellationToken">cancellation token</see> that can be used to cancel the operation.</param>
         /// <returns>A <see cref="Task{T}">task</see> containing the <see cref="PagedCollection{T}">paged collection</see>
         /// of <typeparamref name="T">items</typeparamref>.</returns>
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Required to support paging.")]
         public static async Task<PagedCollection<T>> PaginateAsync<T>(this IQueryRepository<T> queryRepository, Func<IQueryable<T>, IQueryable<T>> queryShaper, int pageIndex, int pageSize, CancellationToken cancellationToken = default) where T : class {
             if (queryRepository == null)
                 throw new ArgumentNullException(nameof(queryRepository));

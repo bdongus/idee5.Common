@@ -17,6 +17,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         public int Id { get; set; }
+        public string MasterSystem { get; set; }
         public string MasterSystemHierarchy { get; set; }
 
         [Required(AllowEmptyStrings = false)]
@@ -29,6 +30,7 @@ namespace idee5.Common.Data.Tests {
         public string CreatedBy { get; set; }
         public DateTime? DateModified { get; set; }
         public string ModifiedBy { get; set; }
+
 
         public override bool Equals(object obj)
         {

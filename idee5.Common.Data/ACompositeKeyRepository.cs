@@ -6,15 +6,17 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace idee5.Common.Data {
+    /// <summary>
+    /// Abstract composite key repository.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class ACompositeKeyRepository<T> : ICompositeKeyRepository<T> where T : class {
         /// <inheritdoc />
         public abstract void Add(T item);
 
         /// <inheritdoc />
         public virtual void Add(IEnumerable<T> items) {
-#pragma warning disable HAA0603 // Delegate allocation from a method group
             _ = items?.ForEach(Add);
-#pragma warning restore HAA0603 // Delegate allocation from a method group
         }
 
         /// <inheritdoc />
@@ -28,9 +30,7 @@ namespace idee5.Common.Data {
 
         /// <inheritdoc />
         public virtual void Remove(IEnumerable<T> items) {
-#pragma warning disable HAA0603 // Delegate allocation from a method group
             items?.ForEach(Remove);
-#pragma warning restore HAA0603 // Delegate allocation from a method group
         }
 
         /// <inheritdoc />
@@ -41,9 +41,7 @@ namespace idee5.Common.Data {
 
         /// <inheritdoc />
         public void Update(IEnumerable<T> items) {
-#pragma warning disable HAA0603 // Delegate allocation from a method group
             items?.ForEach(Update);
-#pragma warning restore HAA0603 // Delegate allocation from a method group
         }
 
         /// <inheritdoc />
@@ -56,9 +54,7 @@ namespace idee5.Common.Data {
         public virtual async Task UpdateOrAddAsync(IEnumerable<T> items, CancellationToken cancellationToken = default) {
             if (items?.Any() ?? false) {
                 // Task.WhenAll is not possible with most ORM implementations, so do da for loop
-#pragma warning disable HAA0401 // Possible allocation of reference type enumerator
                 foreach (T item in items) {
-#pragma warning restore HAA0401 // Possible allocation of reference type enumerator
                     await UpdateOrAddAsync(item, cancellationToken).ConfigureAwait(false);
                 }
             }

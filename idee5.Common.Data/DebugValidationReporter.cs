@@ -11,6 +11,7 @@ namespace idee5.Common.Data {
     /// Report a <see cref="ValidationResult"/> to the <see cref="Debug"/> output.
     /// </summary>
     public class DebugValidationReporter : IValidationResultReporter {
+        /// <inheritdoc/>
         public void Report(ValidationResult validationResult) {
             if (validationResult == null)
                 throw new ArgumentNullException(nameof(validationResult));
@@ -19,6 +20,7 @@ namespace idee5.Common.Data {
             Console.WriteLine(String.Format(CultureInfo.InvariantCulture, Resources.Error, validationResult.ErrorMessage));
         }
 
+        /// <inheritdoc/>
         public Task ReportAsync(ValidationResult validationResult, CancellationToken cancellationToken = default) {
             if (validationResult == null)
                 throw new ArgumentNullException(nameof(validationResult));

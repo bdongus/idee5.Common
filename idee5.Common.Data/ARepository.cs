@@ -5,8 +5,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-#pragma warning disable HAA0603 // Delegate allocation from a method group
-#pragma warning disable HAA0302 // Display class allocation to capture closure
 namespace idee5.Common.Data {
     /// <summary>
     /// Abstract repository with basic implementations
@@ -81,5 +79,3 @@ namespace idee5.Common.Data {
         }
     }
 }
-#pragma warning restore HAA0302 // Display class allocation to capture closure
-#pragma warning restore HAA0603 // Delegate allocation from a method group

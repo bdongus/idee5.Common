@@ -4,12 +4,11 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Linq;
 using System.Reflection;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
 namespace idee5.Common.Data {
     /// <summary>
-    /// The abstract event store.
+    /// Abstract event store class for simple event stores.
     /// </summary>
     /// <typeparam name="TEvent">Base event type/interface</typeparam>
     public abstract class AbstractEventStore<TEvent> {
@@ -52,30 +51,32 @@ namespace idee5.Common.Data {
                 }
             }
             // create the argument values
-            Dictionary<string, JsonElement> dict = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(eventEntry.Data);
-            object[] ps = new object[paramsInfo.Length];
+            Dictionary<string, JsonElement>? dict = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(eventEntry.Data);
+            object?[] ps = new object[paramsInfo.Length];
             for (int i = 0; i < paramsInfo.Length; i++) {
                 ParameterInfo item = paramsInfo[i];
                 Type paramType = item.ParameterType;
                 string paramName = item.Name;
-                JsonElement jsonElement = dict[paramName.CamelToPascalCase()];
-                object p = null;
-                if (jsonElement.ValueKind != JsonValueKind.Null) {
-                    if (paramType == typeof(object)) {
-                        p = jsonElement.GetRawText();
-                    }
-                    else if (paramType == typeof(DateTimeRange)) {
-                        p = jsonElement.Deserialize(paramType);
-                    }
-                    else {
-                        p = TypeDescriptor.GetConverter(paramType).ConvertFromInvariantString(jsonElement.ToString());
+                object? p = null;
+                if (dict != null) {
+                    JsonElement jsonElement = dict[paramName.CamelToPascalCase()];
+                    if (jsonElement.ValueKind != JsonValueKind.Null) {
+                        if (paramType == typeof(object)) {
+                            p = jsonElement.GetRawText();
+                        }
+                        else if (paramType == typeof(DateTimeRange)) {
+                            p = jsonElement.Deserialize(paramType);
+                        }
+                        else {
+                            p = TypeDescriptor.GetConverter(paramType).ConvertFromInvariantString(jsonElement.ToString());
+                        }
                     }
                 }
                 ps[i] = p;
             }
             // create the event
             TEvent result = (TEvent)ctor.DynamicInvoke(new object[] { ps });
-            AdditionalMappings(ref result, dict);
+            if (dict != null) AdditionalMappings(ref result, dict);
             return result;
         }
         /// <summary>
@@ -85,45 +86,4 @@ namespace idee5.Common.Data {
         /// <param name="dict"><The dictionary of JSON elements/param>
         protected abstract void AdditionalMappings(ref TEvent ev, Dictionary<string, JsonElement> dict);
     }
-    /// <summary>
-    /// Event store row definition
-    /// </summary>
-    public class EventEntry {
-        /// <summary>
-        /// Clustering index.
-        /// </summary>
-        [Key]
-        public int Index { get; set; }
-
-        /// <summary>
-        /// Id of the aggregate root.
-        /// </summary>
-        [Required]
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// Version of the aggregate root
-        /// </summary>
-        [Required]
-        public int Version { get; set; }
-
-        /// <summary>
-        /// Serialized event data.
-        /// </summary>
-        [MaxLength]
-        public string Data { get; set; }
-
-        /// <summary>
-        /// Instant the event was created.
-        /// </summary>
-        [Required]
-        public DateTimeOffset TimeStamp { get; set; }
-
-        /// <summary>
-        /// Name of the event
-        /// </summary>
-        [Required]
-        public string EventName { get; set; }
-    }
-
 }
