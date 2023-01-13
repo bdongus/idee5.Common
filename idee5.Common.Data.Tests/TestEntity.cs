@@ -12,7 +12,7 @@ namespace idee5.Common.Data.Tests {
         {
             _timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
             _currentUserIdProvider = currentUserIdProvider ?? throw new ArgumentNullException(nameof(currentUserIdProvider));
-            DateCreated = _timeProvider.UtcNow;
+            DateCreatedUTC = _timeProvider.UtcNow;
             CreatedBy = _currentUserIdProvider.GetCurrentUserId();
         }
 
@@ -26,9 +26,9 @@ namespace idee5.Common.Data.Tests {
         [Required(AllowEmptyStrings = false)]
         public string Label { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreatedUTC { get; set; }
         public string CreatedBy { get; set; }
-        public DateTime? DateModified { get; set; }
+        public DateTime? DateModifiedUTC { get; set; }
         public string ModifiedBy { get; set; }
 
 
@@ -40,9 +40,9 @@ namespace idee5.Common.Data.Tests {
                    MasterSystemHierarchy == entity.MasterSystemHierarchy &&
                    MasterSystemId == entity.MasterSystemId &&
                    Label == entity.Label &&
-                   DateCreated == entity.DateCreated &&
+                   DateCreatedUTC == entity.DateCreatedUTC &&
                    CreatedBy == entity.CreatedBy &&
-                   DateModified == entity.DateModified &&
+                   DateModifiedUTC == entity.DateModifiedUTC &&
                    ModifiedBy == entity.ModifiedBy;
         }
 
@@ -53,9 +53,9 @@ namespace idee5.Common.Data.Tests {
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(MasterSystemHierarchy);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(MasterSystemId);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Label);
-            hashCode = hashCode * -1521134295 + DateCreated.GetHashCode();
+            hashCode = hashCode * -1521134295 + DateCreatedUTC.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CreatedBy);
-            hashCode = hashCode * -1521134295 + EqualityComparer<DateTime?>.Default.GetHashCode(DateModified);
+            hashCode = hashCode * -1521134295 + EqualityComparer<DateTime?>.Default.GetHashCode(DateModifiedUTC);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ModifiedBy);
             return hashCode;
         }

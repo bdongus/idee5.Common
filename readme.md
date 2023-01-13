@@ -150,3 +150,5 @@ Do a for loop in the UpdateOrAddAsync method of the abstract repositories. Most 
 * AbstractEventstore added
 # 1.6
 * Enabled NULLABLE
+# 1.6.1
+Nullable support in IAuditedEntity

@@ -4,13 +4,12 @@ namespace idee5.Common.Data {
     /// <summary>
     /// Adds auditing properties to an entity.
     /// </summary>
-    public interface IAuditedEntity
-    {
+    public interface IAuditedEntity {
         /// <summary>
-        /// Date and time of the entity's creation. Usually in UTC.
+        /// UTC-Timestamp of the entity's creation
         /// </summary>
         /// <remarks>Best set via a <see cref="ITimeProvider"/>.</remarks>
-        DateTime DateCreated { get; set; }
+        DateTime DateCreatedUTC { get; set; }
 
         /// <summary>
         /// Identification who created this instance.
@@ -19,15 +18,15 @@ namespace idee5.Common.Data {
         string CreatedBy { get; set; }
 
         /// <summary>
-        /// Date and time of last modification. Usually in UTC.
+        /// UTC-Timestamp of last modification
         /// </summary>
         /// <remarks>Best set via a <see cref="ITimeProvider"/>.</remarks>
-        DateTime? DateModified { get; set; }
+        DateTime? DateModifiedUTC { get; set; }
 
         /// <summary>
         /// Last one modifiying this instance.
         /// </summary>
         /// <remarks>Best set via a <see cref="ICurrentUserIdProvider"/>.</remarks>
-       string ModifiedBy { get; set; }
+       string? ModifiedBy { get; set; }
     }
 }

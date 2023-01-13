@@ -9,7 +9,7 @@ namespace idee5.Common {
     /// <typeparam name="TResult">The result data type.</typeparam>
     public interface IQueryHandlerAsync<TQuery, TResult> where TQuery : IQuery<TResult> {
         /// <summary>
-        /// Handle the query call asynchrnously.
+        /// Handle the query call asynchronously.
         /// </summary>
         /// <param name="query">query parameter(s).</param>
         /// <param name="cancellationToken"></param>

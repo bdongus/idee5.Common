@@ -12,9 +12,9 @@ namespace idee5.Common.Data.Tests {
         private readonly AmbientTimeProvider _timeProvider = new AmbientTimeProvider();
         private readonly AmbientUserProvider _userProvider = new AmbientUserProvider();
         internal class AuditedEntity : IAuditedEntity, IEntity {
-            public DateTime DateCreated { get; set; }
+            public DateTime DateCreatedUTC { get; set; }
             public string CreatedBy { get; set; }
-            public DateTime? DateModified { get; set; }
+            public DateTime? DateModifiedUTC { get; set; }
             public string ModifiedBy { get; set; }
             public int Id { get; set; }
         }

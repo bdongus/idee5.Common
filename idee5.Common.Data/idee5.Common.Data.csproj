@@ -16,7 +16,7 @@
     <Description>Data access abstractions used by idee5.</Description>
     <Copyright>Copyright © 2017 - 2022</Copyright>
     <PackageTags>idee5</PackageTags>
-    <Version>1.6</Version>
+    <Version>1.6.1</Version>
     <AssemblyVersion>1.6.0</AssemblyVersion>
     <FileVersion>1.6.0</FileVersion>
     <PackageReleaseNotes>Check the readme</PackageReleaseNotes>
