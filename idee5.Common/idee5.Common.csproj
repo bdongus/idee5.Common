@@ -10,18 +10,20 @@
     <LangVersion>latest</LangVersion>
     <Authors>Bernd Dongus</Authors>
     <Company>idee5 GmbH</Company>
-    <Copyright>Copyright © 2013 - 2022</Copyright>
+    <Copyright>Copyright © 2013 - 2023</Copyright>
     <Description>Collection of often used stuff</Description>
-    <AssemblyVersion>3.4.0</AssemblyVersion>
-    <FileVersion>3.4.0</FileVersion>
+    <AssemblyVersion>3.4.1</AssemblyVersion>
+    <FileVersion>3.4.1</FileVersion>
     <PackageTags>idee5</PackageTags>
-    <Version>3.4.0</Version>
+    <Version>3.4.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>idee5.snk</AssemblyOriginatorKeyFile>
     <PackageReleaseNotes>See the readme</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
     <DefineConstants>RELEASE;NETSTANDARD2_0</DefineConstants>

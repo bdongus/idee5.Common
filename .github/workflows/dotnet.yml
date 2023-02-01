@@ -33,12 +33,6 @@ jobs:
        PROJECT_FILE_PATH: idee5.Common.Data/idee5.Common.Data.csproj
        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
        NO_BUILD: true
-    - name: Publish net lib
-      uses: alirezanet/publish-nuget@v3.0.4
-      with:
-       PROJECT_FILE_PATH: idee5.Common.Net/idee5.Common.Net.csproj
-       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-       NO_BUILD: true
     - name: Publish source generators
       uses: alirezanet/publish-nuget@v3.0.4
       with:

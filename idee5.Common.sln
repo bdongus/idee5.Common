@@ -20,16 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		.tfignore = .tfignore
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		LICENSE.txt = LICENSE.txt
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Common.Net", "idee5.Common.Net\idee5.Common.Net.csproj", "{4975B48E-C73F-46DE-AFC7-51816BCB592A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.SourceGenerators", "idee5.SourceGenerators\idee5.SourceGenerators.csproj", "{1CCE391B-441B-4395-8B1F-C0234DE82922}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.Common.Net.Tests", "idee5.Common.Net.Tests\idee5.Common.Net.Tests.csproj", "{23EAB5BC-B588-4225-96A7-16A4B2F33871}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idee5.SourceGenerators", "idee5.SourceGenerators\idee5.SourceGenerators.csproj", "{1CCE391B-441B-4395-8B1F-C0234DE82922}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idee5.SoureGeneratorTests", "idee5.SoureGeneratorTests\idee5.SoureGeneratorTests.csproj", "{616969E3-8AD2-485A-A961-680B07EE7059}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.SoureGeneratorTests", "idee5.SoureGeneratorTests\idee5.SoureGeneratorTests.csproj", "{616969E3-8AD2-485A-A961-680B07EE7059}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,18 +59,6 @@ Global
 		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.nuget|Any CPU.Build.0 = Release|Any CPU
 		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D711C080-B8AC-4BCF-9837-341E2C4E1098}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.nuget|Any CPU.ActiveCfg = Debug|Any CPU
-		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.nuget|Any CPU.Build.0 = Debug|Any CPU
-		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4975B48E-C73F-46DE-AFC7-51816BCB592A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.nuget|Any CPU.ActiveCfg = Debug|Any CPU
-		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.nuget|Any CPU.Build.0 = Debug|Any CPU
-		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23EAB5BC-B588-4225-96A7-16A4B2F33871}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1CCE391B-441B-4395-8B1F-C0234DE82922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CCE391B-441B-4395-8B1F-C0234DE82922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CCE391B-441B-4395-8B1F-C0234DE82922}.nuget|Any CPU.ActiveCfg = Debug|Any CPU
@@ -95,8 +80,6 @@ Global
 		{B1A008EA-1F30-412C-BBD0-061AB0027FEA} = {4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}
 		{9FDF1B09-9FF7-4AB6-AABD-145D5C9FCBD8} = {CA5C5094-DE3C-47E5-A5E8-D6E20EE3C047}
 		{D711C080-B8AC-4BCF-9837-341E2C4E1098} = {4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}
-		{4975B48E-C73F-46DE-AFC7-51816BCB592A} = {CA5C5094-DE3C-47E5-A5E8-D6E20EE3C047}
-		{23EAB5BC-B588-4225-96A7-16A4B2F33871} = {4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}
 		{1CCE391B-441B-4395-8B1F-C0234DE82922} = {CA5C5094-DE3C-47E5-A5E8-D6E20EE3C047}
 		{616969E3-8AD2-485A-A961-680B07EE7059} = {4988BFB8-9BEB-4EC7-A3C3-A54AF8671BD5}
 	EndGlobalSection

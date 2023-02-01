@@ -77,6 +77,8 @@ Moved localizable strings to internal resource file.
 ### 3.4.0
 * Source generator attribute added
 * Currency query added
+### 3.4.1
+* MIT license
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -101,7 +103,7 @@ Added bulk operations to the repository interface.
 ### 1.2.0
 Adjusted the repository interface to the real world asynchrony.
 ### 1.3.0
-Removed the specifications. The NSpeciation package now supports netstandard.
+Removed the specifications. The NSpecification package now supports netstandard.
 ### 1.4.0
 IRepository now needs a TKey type parameter to handle UpdateOrAdd in ARepository.
 ### 1.4.1
@@ -144,11 +146,14 @@ Do a for loop in the UpdateOrAddAsync method of the abstract repositories. Most 
 ### 1.4.16
 * Added LoggingCommandHandler, LogValidationReporter
 * Minor improvements
-# 1.4.17
+### 1.4.17
 * package updates, fixed some typos and added more documentation
-# 1.5
+### 1.5
 * AbstractEventstore added
-# 1.6
+### 1.6
 * Enabled NULLABLE
-# 1.6.1
+### 1.6.1
 Nullable support in IAuditedEntity
+### 1.7
+* MIT license
+* Added RegisterHandlers to add query and command handlers to the DI container
