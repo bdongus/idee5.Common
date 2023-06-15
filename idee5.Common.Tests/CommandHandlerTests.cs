@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace idee5.Common.Tests {
 
@@ -9,8 +10,7 @@ namespace idee5.Common.Tests {
         /// Handles the specified command.
         /// </summary>
         /// <param name="command">The command.</param>
-        public void Handle(TestCommand command)
-        {
+        public void Handle(TestCommand command) {
             if (command.Execute)
                 command.Counter++;
         }
@@ -19,8 +19,7 @@ namespace idee5.Common.Tests {
     [TestClass]
     public class CommandHandlerTests {
         [UnitTest, TestMethod]
-        public void CanUseCommandHandler()
-        {
+        public void CanUseCommandHandler() {
             var cmd = new TestCommand();
             cmd.Execute = false;
             var command = new TestCommandHandler();
@@ -32,6 +31,14 @@ namespace idee5.Common.Tests {
             command.Handle(cmd);
 
             Assert.AreEqual(expected: 1, actual: cmd.Counter);
+        }
+        [UnitTest, TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void CanUseRecordAsCommand() {
+            var cmd = new TestCommandRecord(42);
+            var command = new RecordCommandHandler();
+
+            command.Handle(cmd);
         }
     }
 }

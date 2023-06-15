@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Immutable;
 using System.Xml.Linq;
 
+// install the nuget package as dev dependency
 namespace idee5.SourceGenerators;
 /// <summary>
 /// Generate commands and handlers for all public methods of marked classes.
@@ -98,9 +99,12 @@ public class CommandGenerator : IIncrementalGenerator {
                 .Replace("{{PropertyName}}", propName);
             // add the constructor and its documentation
             pList += $", {parameter.Type} {parameter.Name}";
+            // TODO: Add a configuration option instead of using Environment
+#pragma warning disable RS1035 // Verwenden Sie keine für Analysetools gesperrte APIs
             if (parameter.Description != null) pDoc += $"\t\t/// <param name=\"{parameter.Name}\">{parameter.Description}</param>" + Environment.NewLine;
-            // add the property initialization
+                              // add the property initialization
             constructorBody += $"\t\t\t{propName} = {parameter.Name};" + Environment.NewLine;
+#pragma warning restore RS1035 // Verwenden Sie keine für Analysetools gesperrte APIs
         }
 
         return commandTemplate.Replace("{{Namespace}}", ns)

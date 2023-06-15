@@ -6,7 +6,7 @@ namespace idee5.Common {
         /// Rounds a <see cref="TimeSpan"/> value to the nearest time span given.
         /// </summary>
         /// <param name="spanToRound">The time span to be rounded.</param>
-        /// <param name="roundTo">The tiem span to round to.</param>
+        /// <param name="roundTo">The time span to round to.</param>
         /// <returns>The new <see cref="TimeSpan"/>.</returns>
         public static TimeSpan RoundToNearest(this TimeSpan spanToRound, TimeSpan roundTo)
         {

@@ -79,6 +79,8 @@ Moved localizable strings to internal resource file.
 * Currency query added
 ### 3.4.1
 * MIT license
+### 3.4.2
+* Ambient providers marked as obsolete to give a compiler hint on maybe wrong usage outside test scenarios.
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -157,3 +159,6 @@ Nullable support in IAuditedEntity
 ### 1.7
 * MIT license
 * Added RegisterHandlers to add query and command handlers to the DI container
+### 1.7.1
+* event store test now uses a record type instead of a class
+* Added the MasterSystemReference type.

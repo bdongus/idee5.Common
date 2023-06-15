@@ -13,9 +13,13 @@
     <PackageTags>idee5;source generator</PackageTags>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>1.0.0</FileVersion>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Authors>Bernd Dongus</Authors>
+    <Company>idee5</Company>
+    <RepositoryUrl>https://github.com/bdongus/idee5.Common/tree/master/idee5.SourceGenerators</RepositoryUrl>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
 
   <ItemGroup>
