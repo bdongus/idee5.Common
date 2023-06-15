@@ -16,13 +16,13 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: |
+          dotnet nuget add source 'MyTelerikFeed' --source 'https://nuget.telerik.com/v3/index.json' --username 'api-key' --password '${{secrets.NUGET_API_KEY}}' --configfile './nuget.config' --store-password-in-clear-text
+          dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: |
-          dotnet nuget add source 'MyTelerikFeed' --source 'https://nuget.telerik.com/v3/index.json' --username 'api-key' --password '${{secrets.NUGET_API_KEY}}' --configfile './nuget.config' --store-password-in-clear-text
-          dotnet test --filter FullyQualifiedName\!~NtpClientTests --configuration Release --no-build --verbosity normal
+      run: dotnet test --filter FullyQualifiedName\!~NtpClientTests --configuration Release --no-build --verbosity normal
     - name: Pack
       uses: alirezanet/publish-nuget@v3.1.0
       with:
