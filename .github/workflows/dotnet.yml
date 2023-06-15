@@ -17,7 +17,7 @@ jobs:
         dotnet-version: 7.0.x
     - name: Restore dependencies
       run: |
-          dotnet nuget add source 'https://nuget.telerik.com/v3/index.json' --name 'MyTelerikFeed' --username 'api-key' --password '${{secrets.NUGET_API_KEY}}' --store-password-in-clear-text
+          dotnet nuget add source https://nuget.telerik.com/v3/index.json -n MyTelerikFeed -u api-key -p ${{secrets.NUGET_API_KEY}} --store-password-in-clear-text
           dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
