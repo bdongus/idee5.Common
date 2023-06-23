@@ -14,7 +14,7 @@ namespace idee5.Common.Data {
         void Report(ValidationResult validationResult);
 
         /// <summary>
-        /// Report the validation result synchronously.
+        /// Report the validation result asynchronously.
         /// </summary>
         /// <param name="validationResult">The <see cref="ValidationResult"/> to report/output.</param>
         /// <param name="cancellationToken">Token to cancel to operation.</param>

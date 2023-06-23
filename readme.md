@@ -162,3 +162,5 @@ Nullable support in IAuditedEntity
 ### 1.7.1
 * event store test now uses a record type instead of a class
 * Added the MasterSystemReference type.
+### 1.8
+* Configurable master system formatter
