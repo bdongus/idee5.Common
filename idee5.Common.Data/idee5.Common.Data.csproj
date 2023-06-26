@@ -24,6 +24,7 @@
     <Nullable>enable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageIcon>idee5 nuget icon.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -52,6 +53,13 @@
 
   <ItemGroup>
     <Compile Remove="CompositeValidationResult.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\idee5 nuget icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

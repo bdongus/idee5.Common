@@ -81,6 +81,8 @@ Moved localizable strings to internal resource file.
 * MIT license
 ### 3.4.2
 * Ambient providers marked as obsolete to give a compiler hint on maybe wrong usage outside test scenarios.
+### 3.5
+* Added ProblemDetailsWithErrors
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release

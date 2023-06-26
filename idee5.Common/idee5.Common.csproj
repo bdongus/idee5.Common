@@ -24,6 +24,7 @@
     <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageIcon>idee5 nuget icon.png</PackageIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
     <DefineConstants>RELEASE;NETSTANDARD2_0</DefineConstants>
@@ -74,6 +75,12 @@
   </Target>-->
   <ItemGroup>
     <None Remove="idee5.Common.csproj.vspscc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\idee5 nuget icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IsExternalInit" Version="1.0.3">

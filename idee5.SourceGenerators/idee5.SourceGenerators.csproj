@@ -20,6 +20,7 @@
     <Company>idee5</Company>
     <RepositoryUrl>https://github.com/bdongus/idee5.Common/tree/master/idee5.SourceGenerators</RepositoryUrl>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <PackageIcon>idee5 nuget icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -48,6 +49,10 @@
   <!-- This ensures the library will be packaged as a source generator when we use `dotnet pack` -->
   <ItemGroup>
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="..\idee5 nuget icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
