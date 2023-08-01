@@ -11,8 +11,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CantExportComplexObjectToCsv()
-        {
+        public void CantExportComplexObjectToCsv() {
             var list = new List<TestCsvItem>() {
                 new TestCsvItem {MyIntProperty = 21, MyStringProperty = "Half magic" },
                 new TestCsvItem {MyIntProperty = 2, MyStringProperty ="double quote \"" },
@@ -24,8 +23,7 @@ namespace idee5.Common.Data.Tests {
 
         [UnitTest, TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ThrowsArgumentNullException()
-        {
+        public void ThrowsArgumentNullException() {
             // Arrange
             System.Data.DataTable dataTable = null;
 

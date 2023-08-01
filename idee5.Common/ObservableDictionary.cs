@@ -117,7 +117,7 @@ namespace idee5.Common {
         }
 
         public TValue this[TKey key] {
-            get { return (TValue) keyedEntryCollection[key].Value; }
+            get { return (TValue)keyedEntryCollection[key].Value; }
             set { DoSetEntry(key, value); }
         }
 
@@ -134,7 +134,7 @@ namespace idee5.Common {
                 if (_dictionaryCacheVersion != _version) {
                     _dictionaryCache.Clear();
                     foreach (DictionaryEntry entry in keyedEntryCollection)
-                        _dictionaryCache.Add((TKey) entry.Key, (TValue) entry.Value);
+                        _dictionaryCache.Add((TKey)entry.Key, (TValue)entry.Value);
                     _dictionaryCacheVersion = _version;
                 }
                 return _dictionaryCache;
@@ -175,7 +175,7 @@ namespace idee5.Common {
 
         public bool TryGetValue(TKey key, out TValue value) {
             bool result = keyedEntryCollection.Contains(key);
-            value = result ? (TValue) keyedEntryCollection[key].Value : default;
+            value = result ? (TValue)keyedEntryCollection[key].Value : default;
             return result;
         }
 
@@ -225,7 +225,7 @@ namespace idee5.Common {
             bool keyExists = keyedEntryCollection.Contains(key);
 
             // if identical key/value pair already exists, nothing to do
-            if (keyExists && value.Equals((TValue) keyedEntryCollection[key].Value))
+            if (keyExists && value.Equals((TValue)keyedEntryCollection[key].Value))
                 return false;
 
             // otherwise, remove the existing entry
@@ -297,7 +297,7 @@ namespace idee5.Common {
 
             // fire CollectionChanged notification
             if (index > -1)
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>((TKey) entry.Key, (TValue) entry.Value), index));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>((TKey)entry.Key, (TValue)entry.Value), index));
             else
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
@@ -308,7 +308,7 @@ namespace idee5.Common {
 
             // fire CollectionChanged notification
             if (index > -1)
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>((TKey) entry.Key, (TValue) entry.Value), index));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>((TKey)entry.Key, (TValue)entry.Value), index));
             else
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
@@ -364,7 +364,7 @@ namespace idee5.Common {
         }
 
         TValue IDictionary<TKey, TValue>.this[TKey key] {
-            get { return (TValue) keyedEntryCollection[key].Value; }
+            get { return (TValue)keyedEntryCollection[key].Value; }
             set { DoSetEntry(key, value); }
         }
 
@@ -373,7 +373,7 @@ namespace idee5.Common {
         #region IDictionary
 
         void IDictionary.Add(object key, object value) {
-            DoAddEntry((TKey) key, (TValue) value);
+            DoAddEntry((TKey)key, (TValue)value);
         }
 
         void IDictionary.Clear() {
@@ -381,7 +381,7 @@ namespace idee5.Common {
         }
 
         bool IDictionary.Contains(object key) {
-            return keyedEntryCollection.Contains((TKey) key);
+            return keyedEntryCollection.Contains((TKey)key);
         }
 
         IDictionaryEnumerator IDictionary.GetEnumerator() {
@@ -397,8 +397,8 @@ namespace idee5.Common {
         }
 
         object IDictionary.this[object key] {
-            get { return keyedEntryCollection[(TKey) key].Value; }
-            set { DoSetEntry((TKey) key, (TValue) value); }
+            get { return keyedEntryCollection[(TKey)key].Value; }
+            set { DoSetEntry((TKey)key, (TValue)value); }
         }
 
         ICollection IDictionary.Keys {
@@ -406,7 +406,7 @@ namespace idee5.Common {
         }
 
         void IDictionary.Remove(object key) {
-            DoRemoveEntry((TKey) key);
+            DoRemoveEntry((TKey)key);
         }
 
         ICollection IDictionary.Values {
@@ -438,7 +438,7 @@ namespace idee5.Common {
                 throw new ArgumentException(Resources.SuppliedArrayWasTooSmall);
 
             foreach (DictionaryEntry entry in keyedEntryCollection)
-                array[index++] = new KeyValuePair<TKey, TValue>((TKey) entry.Key, (TValue) entry.Value);
+                array[index++] = new KeyValuePair<TKey, TValue>((TKey)entry.Key, (TValue)entry.Value);
         }
 
         int ICollection<KeyValuePair<TKey, TValue>>.Count {
@@ -458,7 +458,7 @@ namespace idee5.Common {
         #region ICollection
 
         void ICollection.CopyTo(Array array, int index) {
-            ((ICollection) keyedEntryCollection).CopyTo(array, index);
+            ((ICollection)keyedEntryCollection).CopyTo(array, index);
         }
 
         int ICollection.Count {
@@ -466,11 +466,11 @@ namespace idee5.Common {
         }
 
         bool ICollection.IsSynchronized {
-            get { return ((ICollection) keyedEntryCollection).IsSynchronized; }
+            get { return ((ICollection)keyedEntryCollection).IsSynchronized; }
         }
 
         object ICollection.SyncRoot {
-            get { return ((ICollection) keyedEntryCollection).SyncRoot; }
+            get { return ((ICollection)keyedEntryCollection).SyncRoot; }
         }
 
         #endregion ICollection
@@ -512,7 +512,7 @@ namespace idee5.Common {
                 var entries = (Collection<DictionaryEntry>)
                     _siInfo.GetValue(name: "entries", type: typeof(Collection<DictionaryEntry>));
                 foreach (DictionaryEntry entry in entries)
-                    AddEntry((TKey) entry.Key, (TValue) entry.Value);
+                    AddEntry((TKey)entry.Key, (TValue)entry.Value);
             }
         }
 
@@ -566,7 +566,7 @@ namespace idee5.Common {
             #region protected
 
             protected override T GetKeyForItem(DictionaryEntry item) {
-                return (T) item.Key;
+                return (T)item.Key;
             }
 
             #endregion protected
@@ -622,7 +622,7 @@ namespace idee5.Common {
                 ValidateVersion();
                 _index++;
                 if (_index < _dictionary.keyedEntryCollection.Count) {
-                    _current = new KeyValuePair<T, TVal>((T) _dictionary.keyedEntryCollection[_index].Key, (TVal) _dictionary.keyedEntryCollection[_index].Value);
+                    _current = new KeyValuePair<T, TVal>((T)_dictionary.keyedEntryCollection[_index].Key, (TVal)_dictionary.keyedEntryCollection[_index].Value);
                     return true;
                 }
                 _index = -2;
@@ -717,7 +717,7 @@ namespace idee5.Common {
         protected KeyedDictionaryEntryCollection<TKey> keyedEntryCollection;
 
         private int _countCache;
-        private readonly Dictionary<TKey, TValue> _dictionaryCache = new Dictionary<TKey, TValue>();
+        private readonly Dictionary<TKey, TValue> _dictionaryCache = new();
         private int _dictionaryCacheVersion;
         private int _version;
 

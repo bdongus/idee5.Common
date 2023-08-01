@@ -135,10 +135,10 @@ namespace idee5.Common {
             while (reader.NodeType != XmlNodeType.EndElement) {
                 reader.ReadStartElement(name: "item");
                 reader.ReadStartElement(name: "key");
-                var key = (TKey) KeySerializer.Deserialize(reader);
+                var key = (TKey)KeySerializer.Deserialize(reader);
                 reader.ReadEndElement();
                 reader.ReadStartElement(name: "value");
-                var value = (TVal) ValueSerializer.Deserialize(reader);
+                var value = (TVal)ValueSerializer.Deserialize(reader);
                 reader.ReadEndElement();
                 reader.ReadEndElement();
                 Add(key, value);
@@ -147,8 +147,7 @@ namespace idee5.Common {
             // Move past container
             if (reader.NodeType == XmlNodeType.EndElement) {
                 reader.ReadEndElement();
-            }
-            else {
+            } else {
                 throw new XmlException(String.Format(
                    CultureInfo.InvariantCulture,
                    Resources.ErrorInDeserializationOf,

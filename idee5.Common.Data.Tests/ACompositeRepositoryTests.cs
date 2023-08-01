@@ -76,8 +76,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanAdd()
-        {
+        public async Task CanAdd() {
             // Arrange
             var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
@@ -107,8 +106,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanAddMultiple()
-        {
+        public async Task CanAddMultiple() {
             // Arrange
             var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
@@ -126,8 +124,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanRemove()
-        {
+        public async Task CanRemove() {
             // Arrange
             var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             TestEntity itemToRemove = (await _testRepository.GetAllAsync().ConfigureAwait(false)).Last();
@@ -173,8 +170,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanRemoveByLambda()
-        {
+        public async Task CanRemoveByLambda() {
             // Arrange
             var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
@@ -188,8 +184,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanUpdate()
-        {
+        public async Task CanUpdate() {
             // Arrange
             var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             TestEntity itemToUpdate = await _testRepository.GetSingleAsync(r => r.Id == 2).ConfigureAwait(false);
@@ -231,12 +226,11 @@ namespace idee5.Common.Data.Tests {
             // Assert
             int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
             Assert.AreEqual(4, result);
-            Assert.AreEqual(2 , listOfItems.Count(i => i.ModifiedBy == "me"));
+            Assert.AreEqual(2, listOfItems.Count(i => i.ModifiedBy == "me"));
         }
 
         [UnitTest, TestMethod]
-        public async Task CanUpdateOrAdd()
-        {
+        public async Task CanUpdateOrAdd() {
             // Arrange
             var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             var itemToAdd = new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" };

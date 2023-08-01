@@ -14,7 +14,7 @@ public interface IRepositoryOfTWithSoftDelete<T, TPrimaryKey> : IRepository<T, T
     /// Marks an item as deleted.
     /// </summary>
     /// <param name="item">The item to soft delete.</param>
-     /// <returns>The modified item.</returns>
+    /// <returns>The modified item.</returns>
     T MarkAsDeleted(T item);
 
     /// <summary>

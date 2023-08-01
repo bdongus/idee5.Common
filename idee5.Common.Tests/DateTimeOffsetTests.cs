@@ -12,7 +12,7 @@ namespace idee5.Common.Tests {
 
         [UnitTest, TestMethod]
         public void CanAddWorkdayAndDetectWeekday() {
-            var date = new DateTimeOffset( new DateTime(year: 1970, month: 2, day: 21)); // was a saturday
+            var date = new DateTimeOffset(new DateTime(year: 1970, month: 2, day: 21)); // was a saturday
             date = date.AddWorkdays(days: 1);
             Assert.IsTrue(date.DayOfWeek.IsWeekday());
         }
@@ -21,7 +21,7 @@ namespace idee5.Common.Tests {
         public void CanCalculateEndOfMonth() {
             var date = new DateTimeOffset(new DateTime(year: 1970, month: 2, day: 21));
             date = date.EndOfTheMonth();
-            Assert.AreEqual(expected: new DateTimeOffset( new DateTime(year: 1970, month: 2, day: 28)), actual: date);
+            Assert.AreEqual(expected: new DateTimeOffset(new DateTime(year: 1970, month: 2, day: 28)), actual: date);
         }
 
         [UnitTest, TestMethod]

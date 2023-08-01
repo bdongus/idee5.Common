@@ -22,8 +22,9 @@ namespace idee5.Common.Tests {
     public class CommandHandlerAsyncTests {
         [UnitTest, TestMethod]
         public async Task CanUseCommandHandlerAsync() {
-            var cmd = new TestCommand();
-            cmd.Execute = false;
+            var cmd = new TestCommand {
+                Execute = false
+            };
             var command = new TestCommandHandlerAsync();
             for (int i = 0; i < 3; i++)
                 await command.HandleAsync(cmd, CancellationToken.None).ConfigureAwait(false);

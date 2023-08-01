@@ -8,8 +8,7 @@ namespace idee5.Common.Tests {
     public class EnumerableExtensionsTests {
         private class TestItem {
 
-            public TestItem()
-            {
+            public TestItem() {
                 Children = Enumerable.Empty<TestItem>();
             }
 
@@ -22,8 +21,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanFlattenComplexList()
-        {
+        public void CanFlattenComplexList() {
             var hierarchy = new TestItem() {
                 Children = new List<TestItem>() {
                 new TestItem() { Children = new List<TestItem>() { new TestItem() { Children = new List<TestItem>() { new TestItem() { Children = new List<TestItem>() {
@@ -43,8 +41,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanFlattenSimpleList()
-        {
+        public void CanFlattenSimpleList() {
             var hierarchy = new TestItem() {
                 Children = new List<TestItem>() {
                 new TestItem(),
@@ -59,8 +56,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void InGroupsOf_ReturnsAllElements()
-        {
+        public void InGroupsOf_ReturnsAllElements() {
             int[] integers = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
             IEnumerable<int>[] groupsOfTwo = integers.InGroupsOf(groupSize: 2).ToArray();
@@ -79,8 +75,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void DistinctBy_ReturnsDistinctElements_AndResetsIteratorCorrectly()
-        {
+        public void DistinctBy_ReturnsDistinctElements_AndResetsIteratorCorrectly() {
             // Arrange
             var tuple1 = new Tuple<string, string>(item1: "fruit", item2: "apple");
             var tuple2 = new Tuple<string, string>(item1: "fruit", item2: "orange");
@@ -105,15 +100,13 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanTransposeEmptyArray()
-        {
+        public void CanTransposeEmptyArray() {
             IEnumerable<IEnumerable<char>> result = Array.Empty<string>().Transpose();
             Assert.AreEqual(expected: 0, actual: result.Count());
         }
 
         [UnitTest, TestMethod]
-        public void CanTransposeIEnumerable()
-        {
+        public void CanTransposeIEnumerable() {
             IEnumerable<int[]> x = new[] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
             IEnumerable<IEnumerable<int>> y = x.Transpose();
             string xstr = x.Format(separator: "::", toString: s => s.Format(separator: ","));
@@ -123,8 +116,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanExecute()
-        {
+        public void CanExecute() {
             int[] ie = new[] { 1, 2, 3 };
             int outer = 0;
             string formatted = ie.Execute(x => outer += x).Format(separator: ",");
@@ -133,8 +125,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanCheckContainsAll()
-        {
+        public void CanCheckContainsAll() {
             var v1 = new string[] { "idee", "5", "St. Gallen", "Berlin" };
             var v2 = new string[] { "idee", "5" };
             Assert.IsTrue(v1.ContainsAll(v2));
@@ -142,8 +133,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanCheckContainsAny()
-        {
+        public void CanCheckContainsAny() {
             var v1 = new string[] { "idee", "5", "St. Gallen", "Berlin" };
             var v2 = new string[] { "idee", "5" };
             var v3 = new string[] { "idee", "6" };
@@ -152,48 +142,42 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanFormat()
-        {
+        public void CanFormat() {
             var v1 = new string[] { "idee", "5", "St. Gallen", "Berlin" };
 
             Assert.IsTrue(v1.Format(separator: ";") == "idee;5;St. Gallen;Berlin");
         }
 
         [UnitTest, TestMethod]
-        public void CanFormatWithFunction()
-        {
+        public void CanFormatWithFunction() {
             var v1 = new string[] { "idee", "5", "St. Gallen", "Berlin" };
 
             Assert.IsTrue(v1.Format(separator: ";", toString: s => String.Format(format: "\"{0}\"", arg0: s)) == "\"idee\";\"5\";\"St. Gallen\";\"Berlin\"");
         }
 
         [UnitTest, TestMethod]
-        public void CanExportIntsToCsv()
-        {
+        public void CanExportIntsToCsv() {
             var v1 = new int[] { 21, 2, 70, 45054 };
 
             Assert.AreEqual(expected: "\"21\",\"2\",\"70\",\"45054\"", actual: v1.ToCsv());
         }
 
         [UnitTest, TestMethod]
-        public void CanExportFloatsToCsv()
-        {
+        public void CanExportFloatsToCsv() {
             var v1 = new float[] { 21.2f, 70.45054f };
             string separator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
             Assert.AreEqual(expected: $"\"21{separator}2\",\"70{separator}45054\"", actual: v1.ToCsv());
         }
 
         [UnitTest, TestMethod]
-        public void CanExportDoublesToCsv()
-        {
+        public void CanExportDoublesToCsv() {
             var v1 = new double[] { 21.2d, 70.45054d };
             string separator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
             Assert.AreEqual(expected: $"\"21{separator}2\",\"70{separator}45054\"", actual: v1.ToCsv());
         }
 
         [UnitTest, TestMethod]
-        public void CantExportComplexObjectToCsv()
-        {
+        public void CantExportComplexObjectToCsv() {
             var list = new List<TestCsvItem>() {
                 new TestCsvItem {MyIntProperty = 21, MyStringProperty = "Half magic" },
                 new TestCsvItem {MyIntProperty = 2, MyStringProperty ="Month" },

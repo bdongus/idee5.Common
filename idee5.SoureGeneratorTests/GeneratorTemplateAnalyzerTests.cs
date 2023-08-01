@@ -120,11 +120,11 @@ namespace idee5.SoureGeneratorTests {
         /// </summary>
         /// <returns>A Task.</returns>
         [TestMethod]
-        public async Task MissingPropertyTemplateHasNoDiagnosic() {
+        public async Task MissingPropertyTemplateHasDiagnosic() {
             // Arrange
             const string sourceFileName = "../../../TestClass.cs";
             var testSource = File.ReadAllText(sourceFileName);
-            var expected = VerifyCS.Diagnostic(DiagnosticDescriptors.TemplateNotFound.Id).WithArguments("NoDocProperty.txt", "TestClass").WithSpan(8, 20, 8, 29);
+            var expected = VerifyCS.Diagnostic(DiagnosticDescriptors.TemplateNotFound.Id).WithArguments("NoDocProperty.txt", "TestClass").WithSpan(7, 20, 7, 29);
 
             // Act
             var analyzerTest = new VerifyCS.Test {

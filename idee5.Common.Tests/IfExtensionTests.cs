@@ -7,14 +7,12 @@ namespace idee5.Common.Tests {
         private bool _lambdaResult;
         private bool _actionResult;
 
-        public void IfNotNullAction(string item)
-        {
+        public void IfNotNullAction(string item) {
             _actionResult = true;
         }
 
         [UnitTest, TestMethod]
-        public void WontCallActionIfNull()
-        {
+        public void WontCallActionIfNull() {
             // Arrange
             const string testItem = null;
             _actionResult = false;
@@ -27,8 +25,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanCallLambdaIfNotNull()
-        {
+        public void CanCallLambdaIfNotNull() {
             // Arrange
             const string testItem = "test";
             _lambdaResult = false;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -88,8 +87,7 @@ namespace idee5.Common.Data {
                     return q.Skip(startIndex)
                             .Take(pageSize)
                             .GroupBy(
-                                _ => new
-                                {
+                                _ => new {
                                     Total = q.Count()
                                 });
                 },
@@ -134,8 +132,7 @@ namespace idee5.Common.Data {
                                     return query.Skip(startIndex)
                                                 .Take(pageSize)
                                                 .GroupBy(
-                                                    _ => new
-                                                    {
+                                                    _ => new {
                                                         Total = query.Count()
                                                     });
                                 },

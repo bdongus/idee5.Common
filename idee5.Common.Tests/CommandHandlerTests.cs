@@ -20,8 +20,9 @@ namespace idee5.Common.Tests {
     public class CommandHandlerTests {
         [UnitTest, TestMethod]
         public void CanUseCommandHandler() {
-            var cmd = new TestCommand();
-            cmd.Execute = false;
+            var cmd = new TestCommand {
+                Execute = false
+            };
             var command = new TestCommandHandler();
             for (int i = 0; i < 3; i++)
                 command.Handle(cmd);

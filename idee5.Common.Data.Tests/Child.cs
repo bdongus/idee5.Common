@@ -3,8 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace idee5.Common.Data.Tests {
     // https://github.com/reustmd/DataAnnotationsValidatorRecursive
-    public class Child : IValidatableObject
-    {
+    public class Child : IValidatableObject {
         [Required(ErrorMessage = "Child Parent is required")]
         public Parent Parent { get; set; }
 
@@ -18,8 +17,7 @@ namespace idee5.Common.Data.Tests {
 
         public IEnumerable<GrandChild> GrandChildren { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
             if (PropertyA.HasValue && PropertyB.HasValue && (PropertyA + PropertyB > 10))
                 yield return new ValidationResult("Child PropertyA and PropertyB cannot add up to more than 10");
         }

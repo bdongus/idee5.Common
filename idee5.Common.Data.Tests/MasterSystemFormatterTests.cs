@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace idee5.Common.Data.Tests; 
+namespace idee5.Common.Data.Tests;
 [TestClass]
 public class MasterSystemFormatterTests {
     [TestMethod, UnitTest]

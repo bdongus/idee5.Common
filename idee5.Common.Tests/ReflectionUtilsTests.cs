@@ -3,13 +3,11 @@ using System;
 
 namespace idee5.Common.Tests {
     [TestClass]
-    public class ReflectionUtilsTests
-    {
-        public static int staticInt ;
+    public class ReflectionUtilsTests {
+        public static int staticInt;
 
         [UnitTest, TestMethod]
-        public void CanCreateInstanceFromString()
-        {
+        public void CanCreateInstanceFromString() {
             // Arrange
             var instance = ReflectionUtils.CreateInstanceFromString("System.DateTime");
 
@@ -20,8 +18,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanGetStaticProperty()
-        {
+        public void CanGetStaticProperty() {
             // Arrange
             staticInt = 12;
 

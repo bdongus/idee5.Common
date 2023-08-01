@@ -1,4 +1,4 @@
-﻿namespace idee5.Common.Data; 
+﻿namespace idee5.Common.Data;
 /// <summary>
 /// Interface for injecting an entity's <see cref="IMasterSystemReference"/> UI representation.
 /// </summary>

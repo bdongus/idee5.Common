@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace idee5.Common.Data.Tests {
     [TestClass]
     public class AuditingRepositoryTests {
-        private readonly AmbientTimeProvider _timeProvider = new AmbientTimeProvider();
-        private readonly AmbientUserProvider _userProvider = new AmbientUserProvider();
+        private readonly AmbientTimeProvider _timeProvider = new();
+        private readonly AmbientUserProvider _userProvider = new();
         internal class AuditedEntity : IAuditedEntity, IEntity {
             public DateTime DateCreatedUTC { get; set; }
             public string CreatedBy { get; set; }
@@ -73,8 +73,7 @@ namespace idee5.Common.Data.Tests {
         public void CanAuditOnUpdate() {
             // Arrange
             var repository = new TestRepository(_timeProvider, _userProvider);
-            var entity = new AuditedEntity
-            {
+            var entity = new AuditedEntity {
                 Id = 1
             };
             repository.Add(entity);

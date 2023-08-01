@@ -1,12 +1,11 @@
-﻿#nullable enable
-using idee5.Common;
+﻿using idee5.Common;
 using System;
 using System.Collections.Generic;
 
 namespace idee5.SoureGeneratorTests {
     [GenerateCommands("HandlerTemplate.txt", PropertyTemplate = "NoDocProperty.txt")]
     internal class TestClass {
-        private List<DateTime> _datetimes;
+        private readonly List<DateTime> _datetimes;
 
         public int Prop1 { get; }
         public int ProtectedProp { get; protected set; }
@@ -17,7 +16,7 @@ namespace idee5.SoureGeneratorTests {
         /// </summary>
         /// <param name="para1"></param>
         /// <param name="para2">42 <see cref="StackOverflowException"/></param>
-        public void TestMethod(int para1, DateTimeRange? para2) { }
+        public void TestMethod(int para1, DateTimeRange para2) { }
         public void ParamerlessMethod() { }
         protected void ProtectedMethod(string p1) { }
         private void PrivateMethod() { }

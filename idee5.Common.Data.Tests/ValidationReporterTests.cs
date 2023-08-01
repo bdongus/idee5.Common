@@ -26,7 +26,7 @@ namespace idee5.Common.Data.Tests {
             Console.SetOut(oldConsoleOut);
             Console.Write(result);
             // Assert
-            Assert.AreEqual(validationResult.ErrorMessage.Length + 23 + 2 * Environment.NewLine.Length, result.Length);
+            Assert.AreEqual(validationResult.ErrorMessage.Length + 23 + (2 * Environment.NewLine.Length), result.Length);
         }
 
         [TestMethod]

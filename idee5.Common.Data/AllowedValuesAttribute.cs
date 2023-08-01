@@ -7,7 +7,7 @@ namespace idee5.Common.Data {
     /// Base class for allowed values validation.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public abstract class AllowedValuesAttribute: ValidationAttribute {
+    public abstract class AllowedValuesAttribute : ValidationAttribute {
         /// <summary>
         /// Retrieve the list of allowed values.
         /// </summary>

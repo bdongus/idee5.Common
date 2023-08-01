@@ -2,8 +2,7 @@
 
 namespace idee5.Common {
     /// <inheritdoc />
-    public class DefaultTimeProvider : ITimeProvider
-    {
+    public class DefaultTimeProvider : ITimeProvider {
         /// <inheritdoc />
         public DateTime UtcNow => DateTime.UtcNow;
 

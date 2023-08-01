@@ -89,7 +89,7 @@ namespace idee5.Common {
             bool keyExists = keyedEntryCollection.Contains(key);
 
             // if identical key/value pair already exists, nothing to do
-            if (keyExists && value.Equals((TValue) keyedEntryCollection[key].Value))
+            if (keyExists && value.Equals((TValue)keyedEntryCollection[key].Value))
                 return false;
 
             // otherwise, remove the existing entry
@@ -112,7 +112,7 @@ namespace idee5.Common {
             if (last < first) {
                 return first;
             } else {
-                int mid = first + (int) ((last - first) / 2);
+                int mid = first + (int)((last - first) / 2);
                 int result = _comparer.Compare(keyedEntryCollection[mid], entry);
                 if (result == 0)
                     return mid;
@@ -150,7 +150,7 @@ namespace idee5.Common {
 
         public override void OnDeserialization(object sender) {
             if (_siInfo != null) {
-                _comparer = (IComparer<DictionaryEntry>) _siInfo.GetValue(name: "_comparer", type: typeof(IComparer<DictionaryEntry>));
+                _comparer = (IComparer<DictionaryEntry>)_siInfo.GetValue(name: "_comparer", type: typeof(IComparer<DictionaryEntry>));
             }
             base.OnDeserialization(sender);
         }

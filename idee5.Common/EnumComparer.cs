@@ -30,13 +30,13 @@ namespace idee5.Common {
     /// </example>
     /// <typeparam name="TEnum">The type of the Enum.</typeparam>
     public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
-        private static readonly Lazy<Func<TEnum, TEnum, bool>> _equals = new Lazy<Func<TEnum, TEnum, bool>>(GenerateEquals);
-        private static readonly Lazy<Func<TEnum, int>> _getHashCode = new Lazy<Func<TEnum, int>>(GenerateGetHashCode);
+        private static readonly Lazy<Func<TEnum, TEnum, bool>> _equals = new(GenerateEquals);
+        private static readonly Lazy<Func<TEnum, int>> _getHashCode = new(GenerateGetHashCode);
 
         /// <summary>
         /// The singleton accessor.
         /// </summary>
-        private static readonly Lazy<EnumComparer<TEnum>> _instance = new Lazy<EnumComparer<TEnum>>(() => new EnumComparer<TEnum>());
+        private static readonly Lazy<EnumComparer<TEnum>> _instance = new(() => new EnumComparer<TEnum>());
 
         /// <summary>
         /// Access to the comparer.

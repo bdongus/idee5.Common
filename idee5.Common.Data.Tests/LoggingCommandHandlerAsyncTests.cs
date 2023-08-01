@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using MELT;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using MELT;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace idee5.Common.Data.Tests {
     [TestClass]
@@ -17,7 +17,7 @@ namespace idee5.Common.Data.Tests {
 
             TestCommand testCommand = new TestCommand() {
                 DecimalNum = 0.815M,
-                DoubleNum =47.12,
+                DoubleNum = 47.12,
                 FloatNum = 47.11f,
                 Id = 42,
                 IsSomething = true,
@@ -44,7 +44,7 @@ namespace idee5.Common.Data.Tests {
 
             TestCommand testCommand = new TestCommand() {
                 DecimalNum = 0.815M,
-                DoubleNum =47.12,
+                DoubleNum = 47.12,
                 FloatNum = 47.11f,
                 Id = 42,
                 IsSomething = true,

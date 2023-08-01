@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 
 namespace idee5.Common.Data.Tests {
     [TestClass]
-    public class DataConverterTests
-    {
+    public class DataConverterTests {
         [UnitTest, TestMethod]
-        public async Task CanConvertSimpleListAsync()
-        {
+        public async Task CanConvertSimpleListAsync() {
             // Arrange
             var cancellationToken = new CancellationToken();
             var outputHandler = new TestEntityConsoleOutput();
@@ -20,8 +18,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [IntegrationTest, TestMethod]
-        public async Task CanFailValidateOutputHandler()
-        {
+        public async Task CanFailValidateOutputHandler() {
             // Arrange
             var cancellationToken = new CancellationToken();
             var command = new TestEntityConsoleOutput();

@@ -27,6 +27,6 @@ namespace idee5.Common.Data {
         /// Last one modifiying this instance.
         /// </summary>
         /// <remarks>Best set via a <see cref="ICurrentUserIdProvider"/>.</remarks>
-       string? ModifiedBy { get; set; }
+        string? ModifiedBy { get; set; }
     }
 }

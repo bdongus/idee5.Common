@@ -41,7 +41,7 @@ namespace idee5.Common {
         /// <param name="s"><see cref="String"/> to add.</param>
         public void AddCaseInsensitiveString(string s) {
             if (s != null)
-                AddInt((StringComparer.CurrentCultureIgnoreCase).GetHashCode(s));
+                AddInt(StringComparer.CurrentCultureIgnoreCase.GetHashCode(s));
         }
 
         /// <summary>

@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace idee5.Common.Data.Tests {
@@ -30,7 +29,7 @@ namespace idee5.Common.Data.Tests {
 
             // Assert
             Assert.AreEqual(3, result.Count());
-            Assert.AreEqual(1.23m, ((TestAggregateDidSomething) result.Last()).Price);
+            Assert.AreEqual(1.23m, ((TestAggregateDidSomething)result.Last()).Price);
             Assert.AreEqual(2.46m, aggregate.Price);
         }
     }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq.Expressions;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Json;
 
@@ -14,7 +14,7 @@ namespace idee5.Common.Data {
     public abstract class AbstractEventStore<TEvent> {
         protected readonly Dictionary<Type, Delegate> _registeredTypes = new();
 
-        protected object _locker = new object();
+        protected object _locker = new();
 
         /// <summary>
         /// Create event object from the stored event entry. an
@@ -63,11 +63,9 @@ namespace idee5.Common.Data {
                     if (jsonElement.ValueKind != JsonValueKind.Null) {
                         if (paramType == typeof(object)) {
                             p = jsonElement.GetRawText();
-                        }
-                        else if (paramType == typeof(DateTimeRange)) {
+                        } else if (paramType == typeof(DateTimeRange)) {
                             p = jsonElement.Deserialize(paramType);
-                        }
-                        else {
+                        } else {
                             p = TypeDescriptor.GetConverter(paramType).ConvertFromInvariantString(jsonElement.ToString());
                         }
                     }

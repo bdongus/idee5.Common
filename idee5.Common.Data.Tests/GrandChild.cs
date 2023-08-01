@@ -2,8 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace idee5.Common.Data.Tests {
-    public class GrandChild : IValidatableObject
-    {
+    public class GrandChild : IValidatableObject {
         [Required]
         [Range(0, 10, ErrorMessage = "GrandChild PropertyA not within range")]
         public int? PropertyA { get; set; }
@@ -12,8 +11,7 @@ namespace idee5.Common.Data.Tests {
         [Range(0, 10, ErrorMessage = "GrandChild PropertyB not within range")]
         public int? PropertyB { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
             if (PropertyA.HasValue && PropertyB.HasValue && (PropertyA + PropertyB > 10))
                 yield return new ValidationResult("GrandChild PropertyA and PropertyB cannot add up to more than 10");
         }

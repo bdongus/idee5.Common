@@ -14,7 +14,7 @@ namespace idee5.Common {
 
         private static readonly Type _enumType = typeof(TEnum);
         private static readonly bool _isSigned = new TypeCode[] { TypeCode.SByte, TypeCode.Int16, TypeCode.Int32, TypeCode.Int64 }.IndexOf(_typeCode) > -1;
-        private static readonly object _syncRoot = new object();
+        private static readonly object _syncRoot = new();
         private static readonly TypeCode _typeCode = Type.GetTypeCode(Enum.GetUnderlyingType(_enumType));
 
         // locks are used so that multiple threads may assign a field multiple times but it is still faster than locking fields even on non-null access
@@ -87,7 +87,7 @@ namespace idee5.Common {
                         // check again after the lock/wait
                         if (_valueNamePairs == null) {
                             IEqualityComparer<TEnum> comparer = _typeCode == TypeCode.Int32
-                                ? (IEqualityComparer<TEnum>) EqualityComparer<TEnum>.Default
+                                ? (IEqualityComparer<TEnum>)EqualityComparer<TEnum>.Default
                                 : EnumComparer<TEnum>.Instance;
                             _valueNamePairs = new Dictionary<TEnum, string>(Names.Length, comparer);
                             for (int i = 0; i < Values.Length; i++) {
@@ -106,7 +106,7 @@ namespace idee5.Common {
             get {
                 if (_values == null) {
                     lock (_syncRoot) {
-                        if (_values == null) _values = (TEnum[]) Enum.GetValues(_enumType);
+                        if (_values == null) _values = (TEnum[])Enum.GetValues(_enumType);
                     }
                 }
                 return _values;

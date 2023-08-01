@@ -13,8 +13,7 @@ namespace idee5.Common.Tests {
         /// </summary>
         /// <param name="query">The query.</param>
         /// <returns></returns>
-        public Task<string[]> HandleAsync(AsyncQueryParameters query, CancellationToken cancellationToken)
-        {
+        public Task<string[]> HandleAsync(AsyncQueryParameters query, CancellationToken cancellationToken) {
             return Task.Run(() => query.Searchtext.Split(separator: new char[] { ' ' }));
         }
     }
@@ -23,8 +22,7 @@ namespace idee5.Common.Tests {
     public class AsyncQueryHandlerTests {
 
         [UnitTest, TestMethod]
-        public async Task TestAsyncQueryHandler()
-        {
+        public async Task TestAsyncQueryHandler() {
             var q = new AsyncQueryParameters { Searchtext = "bli bla blubb" };
             var handler = new AsyncQueryHandler();
             string[] s = await handler.HandleAsync(q, new CancellationToken()).ConfigureAwait(false);

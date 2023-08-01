@@ -2,8 +2,7 @@
     /// <summary>
     /// Interface for connection string providers.
     /// </summary>
-    public interface IConnectionStringProvider
-    {
+    public interface IConnectionStringProvider {
         /// <summary>
         /// Create a database connection string.
         /// </summary>

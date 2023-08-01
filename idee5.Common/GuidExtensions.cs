@@ -22,7 +22,7 @@ namespace idee5.Common {
             } else if ((value & 0x40) == 0) {
                 return GuidVariant.RFC4122;
             } else {
-                return (GuidVariant) (value >> 5);
+                return (GuidVariant)(value >> 5);
             }
         }
 
@@ -34,7 +34,7 @@ namespace idee5.Common {
         [Pure]
         public static GuidVersion GetVersion(this Guid instance) {
             Contract.Requires(instance.GetVariant() == GuidVariant.RFC4122);
-            return (GuidVersion) (instance.ToByteArray()[7] >> 4);
+            return (GuidVersion)(instance.ToByteArray()[7] >> 4);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace idee5.Common {
         /// <returns>The Domain field of the security GUID.</returns>
         public static DCEDomain GetDomain(this Guid instance) {
             Contract.Requires(instance.GetVersion() == GuidVersion.DCESecurity);
-            return (DCEDomain) (instance.ToByteArray()[9]);
+            return (DCEDomain)instance.ToByteArray()[9];
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace idee5.Common {
             ret |= value[1];
             ret <<= 8;
             ret |= value[0];
-            return (int) ret;
+            return (int)ret;
         }
 
         /// <summary>
@@ -202,9 +202,9 @@ namespace idee5.Common {
             byte[] ret = instance.ToByteArray();
             int octet7 = ret[7] & 0x0F;
             int octet8 = ret[8] & 0x3F;
-            ret[7] = (byte) (octet7 | (octet8 << 4));
+            ret[7] = (byte)(octet7 | (octet8 << 4));
             ret[8] = ret[0];
-            ret[0] = (byte) (octet8 >> 4);
+            ret[0] = (byte)(octet8 >> 4);
             return ret;
         }
     }

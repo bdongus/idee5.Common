@@ -18,7 +18,7 @@ namespace idee5.Common {
 
             return type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
                 .Where(fi => fi.IsLiteral && !fi.IsInitOnly && fi.FieldType == typeof(T))
-                .Select(x => (T) x.GetValue(null));
+                .Select(x => (T)x.GetValue(null));
         }
 
         /// <summary>

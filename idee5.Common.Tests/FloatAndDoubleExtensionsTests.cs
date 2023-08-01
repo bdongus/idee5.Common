@@ -7,7 +7,7 @@ namespace idee5.Common.Tests {
         public void FloatsThatDontMatch() {
             // Arrange
             const float f1 = 0.33333f;
-            const float f2 = (float) 1/3;
+            const float f2 = (float)1 / 3;
             // Act
 
             // Assert
@@ -18,7 +18,7 @@ namespace idee5.Common.Tests {
         public void FloatsNearyEqual() {
             // Arrange
             const float f1 = 0.33333f;
-            const float f2 = (float) 1/3;
+            const float f2 = (float)1 / 3;
 
             // Act
             bool result = f1.NearyEquals(f2, 0.0001f);
@@ -29,7 +29,7 @@ namespace idee5.Common.Tests {
         public void DoublesThatDontMatch() {
             // Arrange
             const double d1 = 0.33333d;
-            const double d2 = (double) 1/3;
+            const double d2 = (double)1 / 3;
             // Act
 
             // Assert
@@ -40,7 +40,7 @@ namespace idee5.Common.Tests {
         public void DoublesNearyEqual() {
             // Arrange
             const double d1 = 0.33333f;
-            const double d2 = (double) 1/3;
+            const double d2 = (double)1 / 3;
 
             // Act
             bool result = d1.NearyEquals(d2, 0.0001f);

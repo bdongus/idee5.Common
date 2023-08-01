@@ -1,12 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using idee5.Common.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using MELT;
-using Microsoft.Extensions.Logging;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using System.Threading;
 
 namespace idee5.Common.Data.Tests {
 

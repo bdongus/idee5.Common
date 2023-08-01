@@ -10,7 +10,7 @@ namespace idee5.Common {
         /// <summary>
         /// Base value to convert between <see cref="TimeSpan"/> and <see cref="DateTime"/>
         /// </summary>
-        public static readonly DateTimeOffset TimeSpanBaseValue = new DateTimeOffset(DateTimeExtensions.TimeSpanBaseValue);
+        public static readonly DateTimeOffset TimeSpanBaseValue = new(DateTimeExtensions.TimeSpanBaseValue);
 
         /// <summary>
         /// Adds workdays to date. Simple version without working calendar or holidays.
@@ -105,11 +105,11 @@ namespace idee5.Common {
             if (date == 0)
                 return DateTimeOffset.MinValue;
             int year = 1900 + (100 * (date / 1000000)) + (date % 1000000 / 10000);
-            int month = (date % 10000) / 100;
+            int month = date % 10000 / 100;
             int day = date % 100;
 
             int hour = time / 10000;
-            int minute = (time % 10000) / 100;
+            int minute = time % 10000 / 100;
             int second = time % 100;
 
             return new DateTime(year, month, day, hour, minute, second);

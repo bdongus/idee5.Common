@@ -8,9 +8,8 @@ namespace idee5.Common {
         /// <param name="spanToRound">The time span to be rounded.</param>
         /// <param name="roundTo">The time span to round to.</param>
         /// <returns>The new <see cref="TimeSpan"/>.</returns>
-        public static TimeSpan RoundToNearest(this TimeSpan spanToRound, TimeSpan roundTo)
-        {
-            var ticks = (long) (Math.Round(spanToRound.Ticks / (double) roundTo.Ticks) * roundTo.Ticks);
+        public static TimeSpan RoundToNearest(this TimeSpan spanToRound, TimeSpan roundTo) {
+            var ticks = (long)(Math.Round(spanToRound.Ticks / (double)roundTo.Ticks) * roundTo.Ticks);
             return new TimeSpan(ticks);
         }
 
@@ -28,7 +27,7 @@ namespace idee5.Common {
         /// <param name="timeSpan">The time span.</param>
         /// <param name="multiplier">The multiplier.</param>
         /// <returns>The new <see cref="TimeSpan"/>.</returns>
-        public static TimeSpan Multiply(this TimeSpan timeSpan, float multiplier) => TimeSpan.FromTicks((long) (timeSpan.Ticks * multiplier));
+        public static TimeSpan Multiply(this TimeSpan timeSpan, float multiplier) => TimeSpan.FromTicks((long)(timeSpan.Ticks * multiplier));
 
         /// <summary>
         /// Multiplies the specified time span.
@@ -44,7 +43,7 @@ namespace idee5.Common {
         /// <param name="timeSpan">The time span.</param>
         /// <param name="multiplier">The multiplier.</param>
         /// <returns>The new <see cref="TimeSpan"/>.</returns>
-        public static TimeSpan Multiply(this TimeSpan timeSpan, double multiplier) => TimeSpan.FromTicks((long) (timeSpan.Ticks * multiplier));
+        public static TimeSpan Multiply(this TimeSpan timeSpan, double multiplier) => TimeSpan.FromTicks((long)(timeSpan.Ticks * multiplier));
 
         /// <summary>
         /// Divides the specified time span.
@@ -60,7 +59,7 @@ namespace idee5.Common {
         /// <param name="timeSpan">The time span.</param>
         /// <param name="divisor">The divisor.</param>
         /// <returns>The new <see cref="TimeSpan"/>.</returns>
-        public static TimeSpan Divide(this TimeSpan timeSpan, float divisor) => TimeSpan.FromTicks((long) (timeSpan.Ticks / divisor));
+        public static TimeSpan Divide(this TimeSpan timeSpan, float divisor) => TimeSpan.FromTicks((long)(timeSpan.Ticks / divisor));
 
         /// <summary>
         /// Divides the specified time span.
@@ -76,7 +75,7 @@ namespace idee5.Common {
         /// <param name="timeSpan">The time span.</param>
         /// <param name="divisor">The divisor.</param>
         /// <returns>The new <see cref="TimeSpan"/>.</returns>
-        public static TimeSpan Divide(this TimeSpan timeSpan, double divisor) => TimeSpan.FromTicks((long) (timeSpan.Ticks / divisor));
+        public static TimeSpan Divide(this TimeSpan timeSpan, double divisor) => TimeSpan.FromTicks((long)(timeSpan.Ticks / divisor));
 
         /// <summary>
         /// Convert an <see cref="int"/> value of minutes to a <see cref="TimeSpan"/>

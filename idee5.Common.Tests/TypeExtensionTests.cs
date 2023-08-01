@@ -4,18 +4,15 @@ using System.Linq;
 
 namespace idee5.Common.Tests {
     [TestClass]
-    public class TypeExtensionTests
-    {
-        public static class AppMessages
-        {
+    public class TypeExtensionTests {
+        public static class AppMessages {
             public const string DateOutOfRange = "DateOOR";
         }
 
         public int TestIntProperty { get; set; }
 
         [UnitTest, TestMethod]
-        public void CanGetConstantValue()
-        {
+        public void CanGetConstantValue() {
             // Arrange
             // Act
             IEnumerable<string> constValues = typeof(AppMessages).GetAllPublicConstantValues<string>();
@@ -24,8 +21,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanDetectClrType()
-        {
+        public void CanDetectClrType() {
             // Arrange
             var propertyType = TestIntProperty.GetType();
             // Act
@@ -37,8 +33,7 @@ namespace idee5.Common.Tests {
         }
 
         [TestMethod]
-        public void CanDetectNonClrType()
-        {
+        public void CanDetectNonClrType() {
             // Arrange
             var propertyType = typeof(AppMessages);
             // Act

@@ -38,7 +38,7 @@ namespace idee5.Common {
             if (expando == null)
                 throw new ArgumentNullException(nameof(expando));
 
-            var dict = (IDictionary<string, object>) expando;
+            var dict = (IDictionary<string, object>)expando;
             if (dict.ContainsKey(propertyName))
                 return dict[propertyName];
             else return null;

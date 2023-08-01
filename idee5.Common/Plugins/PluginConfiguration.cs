@@ -8,8 +8,7 @@ namespace idee5.Common.Plugins {
         /// <summary>
         /// Initializes a new instance of the <see cref="PluginConfiguration"/> class.
         /// </summary>
-        public PluginConfiguration()
-        {
+        public PluginConfiguration() {
             PluginsPath = @".\Plugins";
             SearchRecursive = false;
             PluginsEnabled = new SerializableDictionary<string, bool>();
@@ -30,12 +29,11 @@ namespace idee5.Common.Plugins {
             stream.Flush();
         }
 
-        public static PluginConfiguration Deserialize(StreamReader stream)
-        {
+        public static PluginConfiguration Deserialize(StreamReader stream) {
             var xs = new XmlSerializer(typeof(PluginConfiguration));
             PluginConfiguration pluginConfiguration = default;
             using (var xmlReader = XmlReader.Create(stream)) {
-                pluginConfiguration = (PluginConfiguration) xs.Deserialize(xmlReader);
+                pluginConfiguration = (PluginConfiguration)xs.Deserialize(xmlReader);
             }
             return pluginConfiguration;
         }

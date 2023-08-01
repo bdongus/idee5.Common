@@ -4,11 +4,9 @@ using System.IO;
 
 namespace idee5.Common.Data.Tests {
     [TestClass]
-    public class ConnectionStringProviderTests
-    {
+    public class ConnectionStringProviderTests {
         [TestMethod]
-        public void CanCreateValidDB3ConnectionString()
-        {
+        public void CanCreateValidDB3ConnectionString() {
             // Arrange
             var provider = new SimpleDB3ConnectionStringProvider();
             const string connectionId = "idee5";

@@ -86,13 +86,15 @@ namespace idee5.Common {
             if (property == null)
                 throw new ArgumentNullException(nameof(property));
             object result;
-            try { result = type.InvokeMember(
+            try {
+                result = type.InvokeMember(
                 property,
                 BindingFlags.Static | BindingFlags.Public | BindingFlags.GetField | BindingFlags.GetProperty,
                 binder: null,
                 target: type,
                 args: null,
-                CultureInfo.CurrentCulture); }
+                CultureInfo.CurrentCulture);
+            }
             catch { return null; }
 
             return result;

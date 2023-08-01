@@ -10,7 +10,7 @@ namespace idee5.Common.Data.Tests {
     public class InMemoryEventStore : AbstractEventStore<IEvent>, IEventStore {
         #region Private Fields
 
-        private readonly Dictionary<Guid, List<EventEntry>> _inMemoryDb = new Dictionary<Guid, List<EventEntry>>();
+        private readonly Dictionary<Guid, List<EventEntry>> _inMemoryDb = new();
         private readonly IEventPublisher _publisher;
 
         #endregion Private Fields
@@ -28,7 +28,7 @@ namespace idee5.Common.Data.Tests {
         public Task<IEnumerable<IEvent>> Get(Guid aggregateId, int fromVersion, CancellationToken cancellationToken = default) {
             List<IEvent> result = new List<IEvent>();
             if (aggregateId != default) {
-            _inMemoryDb.TryGetValue(aggregateId, out List<EventEntry> eventEntries);
+                _inMemoryDb.TryGetValue(aggregateId, out List<EventEntry> eventEntries);
                 foreach (var item in eventEntries ?? Enumerable.Empty<EventEntry>()) {
                     result.Add(CreateEvent(item));
                 }
@@ -46,13 +46,14 @@ namespace idee5.Common.Data.Tests {
                     _inMemoryDb.Add(source.Id, list);
                 }
                 Type eventType = source.GetType();
-                var destination = new EventEntry();
-                destination.Data = JsonSerializer.Serialize(source, eventType);
-                destination.Id = source.Id;
-                // destination.Index is database generated
-                destination.EventName = eventType.AssemblyQualifiedName;
-                destination.TimeStamp = source.TimeStamp;
-                destination.Version = source.Version;
+                var destination = new EventEntry {
+                    Data = JsonSerializer.Serialize(source, eventType),
+                    Id = source.Id,
+                    // destination.Index is database generated
+                    EventName = eventType.AssemblyQualifiedName,
+                    TimeStamp = source.TimeStamp,
+                    Version = source.Version
+                };
 
                 list.Add(destination);
                 await _publisher.Publish(source, cancellationToken).ConfigureAwait(false);

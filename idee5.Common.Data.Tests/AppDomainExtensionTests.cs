@@ -3,11 +3,9 @@ using System;
 
 namespace idee5.Common.Data.Tests {
     [TestClass]
-    public class AppDomainExtensionTests
-    {
+    public class AppDomainExtensionTests {
         [TestMethod, UnitTest]
-        public void CanGetDataDirectory()
-        {
+        public void CanGetDataDirectory() {
             // Arrange
             AppDomain.CurrentDomain.SetData("DataDirectory", "App_Data");
             const string expected = "App_Data";
@@ -20,8 +18,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [TestMethod, UnitTest]
-        public void CanGetBaseDirectory()
-        {
+        public void CanGetBaseDirectory() {
             // Arrange
             AppDomain.CurrentDomain.SetData("DataDirectory", null);
 

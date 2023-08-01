@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 
 namespace idee5.Common.Data.Tests {
     [TestClass]
-    public class RepositoryTests
-    {
-        internal class TestRepository : IRepository<TestEntity, int>
-        {
+    public class RepositoryTests {
+        internal class TestRepository : IRepository<TestEntity, int> {
             private readonly ITimeProvider _timeProvider;
             private readonly ICurrentUserIdProvider _currentUserIdProvider;
             private readonly IList<TestEntity> _testEntities;
 
-            public TestRepository()
-            {
+            public TestRepository() {
                 _timeProvider = new DefaultTimeProvider();
                 _currentUserIdProvider = new DefaultCurrentUserIdProvider();
                 _testEntities = new List<TestEntity> {
@@ -30,18 +27,15 @@ namespace idee5.Common.Data.Tests {
 
             public void Add(TestEntity item) => _testEntities.Add(item);
 
-            public void Add(IEnumerable<TestEntity> items)
-            {
+            public void Add(IEnumerable<TestEntity> items) {
                 throw new NotImplementedException();
             }
 
-            public Task<IEnumerable<TestEntity>> GetAsync(Func<IQueryable<TestEntity>, IQueryable<TestEntity>> func, CancellationToken cancellationToken = default)
-            {
+            public Task<IEnumerable<TestEntity>> GetAsync(Func<IQueryable<TestEntity>, IQueryable<TestEntity>> func, CancellationToken cancellationToken = default) {
                 return Task.Run(() => func(_testEntities.AsQueryable()).AsEnumerable(), cancellationToken);
             }
 
-            public Task<TResult> GetAsync<TResult>(Func<IQueryable<TestEntity>, TResult> func, CancellationToken cancellationToken = default)
-            {
+            public Task<TResult> GetAsync<TResult>(Func<IQueryable<TestEntity>, TResult> func, CancellationToken cancellationToken = default) {
                 return Task<TResult>.Run(() => func(_testEntities.AsQueryable()), cancellationToken);
             }
 
@@ -49,40 +43,33 @@ namespace idee5.Common.Data.Tests {
 
             public void Remove(TestEntity item) => _testEntities.Remove(item);
 
-            public void Remove(IEnumerable<TestEntity> items)
-            {
+            public void Remove(IEnumerable<TestEntity> items) {
                 throw new NotImplementedException();
             }
 
-            public void Update(TestEntity item)
-            {
+            public void Update(TestEntity item) {
                 TestEntity listItem = _testEntities.SingleOrDefault(te => te == item);
                 if (listItem != null) listItem = item;
                 listItem.ModifiedBy = "me";
             }
 
-            public void Update(Expression<Func<TestEntity, bool>> predicate, Action<TestEntity> action)
-            {
+            public void Update(Expression<Func<TestEntity, bool>> predicate, Action<TestEntity> action) {
                 throw new NotImplementedException();
             }
 
-            public void Update(IEnumerable<TestEntity> items)
-            {
+            public void Update(IEnumerable<TestEntity> items) {
                 throw new NotImplementedException();
             }
 
-            public Task ExecuteAsync(Expression<Func<TestEntity, bool>> predicate, Action<TestEntity> action, CancellationToken cancellationToken = default)
-            {
+            public Task ExecuteAsync(Expression<Func<TestEntity, bool>> predicate, Action<TestEntity> action, CancellationToken cancellationToken = default) {
                 throw new NotImplementedException();
             }
 
-            public Task UpdateOrAddAsync(TestEntity item, CancellationToken cancellationToken = default)
-            {
+            public Task UpdateOrAddAsync(TestEntity item, CancellationToken cancellationToken = default) {
                 throw new NotImplementedException();
             }
 
-            public Task UpdateOrAddAsync(IEnumerable<TestEntity> items, CancellationToken cancellationToken = default)
-            {
+            public Task UpdateOrAddAsync(IEnumerable<TestEntity> items, CancellationToken cancellationToken = default) {
                 throw new NotImplementedException();
             }
         }
@@ -90,17 +77,15 @@ namespace idee5.Common.Data.Tests {
         private readonly AmbientTimeProvider _timeProvider;
         private readonly AmbientUserProvider _currentUserIdProvider;
 
-        public RepositoryTests()
-        {
+        public RepositoryTests() {
             _timeProvider = new AmbientTimeProvider();
             _currentUserIdProvider = new AmbientUserProvider();
         }
 
         [UnitTest, TestMethod]
-        public async Task CanAdd()
-        {
+        public async Task CanAdd() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository();
+            IRepository<TestEntity, int> _testRepository = new TestRepository();
 
             var itemToAdd = new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" };
 
@@ -113,10 +98,9 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanRemove()
-        {
+        public async Task CanRemove() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository();
+            IRepository<TestEntity, int> _testRepository = new TestRepository();
             var itemToRemove = (await _testRepository.GetAllAsync().ConfigureAwait(false)).Last();
 
             // Act
@@ -128,10 +112,9 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanRemoveByLambda()
-        {
+        public async Task CanRemoveByLambda() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository();
+            IRepository<TestEntity, int> _testRepository = new TestRepository();
 
             // Act
             // Delete the to "Atari" rows
@@ -143,10 +126,9 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanUpdate()
-        {
+        public async Task CanUpdate() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository();
+            IRepository<TestEntity, int> _testRepository = new TestRepository();
             var itemToUpdate = await _testRepository.GetSingleAsync(r => r.Id == 2).ConfigureAwait(false);
 
             // Act
@@ -157,10 +139,9 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanUpdateOrAdd()
-        {
+        public async Task CanUpdateOrAdd() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository();
+            IRepository<TestEntity, int> _testRepository = new TestRepository();
             var itemToAdd = new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" };
             var itemToUpdate = await _testRepository.GetSingleAsync(r => r.Id == 2).ConfigureAwait(false);
 

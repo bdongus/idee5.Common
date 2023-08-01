@@ -176,13 +176,13 @@ namespace idee5.Common {
         /// <param name="projection"></param>
         /// <returns></returns>
         public static IEnumerable<TBase> ForAllThatAre<TBase, TActual>(this IEnumerable<TBase> source, Action<TActual> projection) where TActual : class => source.Select(x => {
-                // use GetTypeInfo because IsAssignableFrom in CPL projects is only available on TypeInfo
-                if (typeof(TActual).GetTypeInfo().IsAssignableFrom(x.GetType().GetTypeInfo())) {
-                    var casted = x as TActual;
-                    projection.Invoke(casted);
-                }
-                return x;
-            });
+            // use GetTypeInfo because IsAssignableFrom in CPL projects is only available on TypeInfo
+            if (typeof(TActual).GetTypeInfo().IsAssignableFrom(x.GetType().GetTypeInfo())) {
+                var casted = x as TActual;
+                projection.Invoke(casted);
+            }
+            return x;
+        });
 
         /// <summary>
         /// Execute an operation for each element.
@@ -447,8 +447,7 @@ namespace idee5.Common {
                             yield return current;
 
                             stack.Push(recursiveSelector(current).GetEnumerator());
-                        }
-                        else { stack.Pop().Dispose(); }
+                        } else { stack.Pop().Dispose(); }
                     }
                 }
                 finally {
@@ -490,7 +489,7 @@ namespace idee5.Common {
                         for (int i2 = 0; i2 < oProps.Length; i2++) {
                             Type colType = oProps[i2].PropertyType;
 
-                            if ((colType.IsGenericType) && (colType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                            if (colType.IsGenericType && (colType.GetGenericTypeDefinition() == typeof(Nullable<>)))
                                 colType = colType.GetGenericArguments()[0];
 
                             dtReturn.Columns.Add(new DataColumn(oProps[i2].Name, colType));

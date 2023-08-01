@@ -3,11 +3,9 @@ using System.Dynamic;
 
 namespace idee5.Common.Tests {
     [TestClass]
-    public class ExpandoExtensionTests
-    {
+    public class ExpandoExtensionTests {
         [UnitTest, TestMethod]
-        public void CanAddPropertyByName()
-        {
+        public void CanAddPropertyByName() {
             // Arrange
             var sut = new ExpandoObject();
 
@@ -19,8 +17,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanGetPropertyByName()
-        {
+        public void CanGetPropertyByName() {
             // Arrange
             var sut = new ExpandoObject();
             sut.AddProperty("idee5", "Swiss");

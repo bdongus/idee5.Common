@@ -102,7 +102,7 @@ public class CommandGenerator : IIncrementalGenerator {
             // TODO: Add a configuration option instead of using Environment
 #pragma warning disable RS1035 // Verwenden Sie keine für Analysetools gesperrte APIs
             if (parameter.Description != null) pDoc += $"\t\t/// <param name=\"{parameter.Name}\">{parameter.Description}</param>" + Environment.NewLine;
-                              // add the property initialization
+            // add the property initialization
             constructorBody += $"\t\t\t{propName} = {parameter.Name};" + Environment.NewLine;
 #pragma warning restore RS1035 // Verwenden Sie keine für Analysetools gesperrte APIs
         }
@@ -137,7 +137,7 @@ public class CommandGenerator : IIncrementalGenerator {
     private static ClassInfo GetClassInfoOrNull(GeneratorAttributeSyntaxContext context, CancellationToken token) {
         // we know it is a class declaration
         INamedTypeSymbol symbol = (INamedTypeSymbol)context.TargetSymbol;
-        string? ns = (symbol.ContainingNamespace.IsGlobalNamespace ? null : symbol.ContainingNamespace.ToString());
+        string? ns = symbol.ContainingNamespace.IsGlobalNamespace ? null : symbol.ContainingNamespace.ToString();
         AttributeData atr = context.Attributes.First(a => a.AttributeClass?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat).EndsWith(CommandGeneratorHelpers.AttributeMetaName) ?? false);
         // something is wrong with the attribute, create a dummy record and skip
         if (atr == null) return new ClassInfo(symbol.Name, ImmutableArray<MethodInfo>.Empty, ImmutableArray<Location>.Empty, "", null, null, ns, null);

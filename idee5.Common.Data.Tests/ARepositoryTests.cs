@@ -76,8 +76,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanAdd()
-        {
+        public async Task CanAdd() {
             // Arrange
             IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
@@ -107,8 +106,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanAddMultiple()
-        {
+        public async Task CanAddMultiple() {
             // Arrange
             IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
@@ -126,10 +124,9 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanRemove()
-        {
+        public async Task CanRemove() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             TestEntity itemToRemove = (await _testRepository.GetAllAsync().ConfigureAwait(false)).Last();
 
             // Act
@@ -143,7 +140,7 @@ namespace idee5.Common.Data.Tests {
         [UnitTest, TestMethod]
         public async Task CanIgnoreNullListOnRemove() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             IEnumerable<TestEntity> items = null;
             int expectedCount = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
 
@@ -158,7 +155,7 @@ namespace idee5.Common.Data.Tests {
         [UnitTest, TestMethod]
         public async Task CanRemoveMultiple() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
             var listOfItems = new List<TestEntity> {
                 (await _testRepository.GetAllAsync().ConfigureAwait(false)).Last(),
@@ -173,10 +170,9 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanRemoveByLambda()
-        {
+        public async Task CanRemoveByLambda() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
             // Act
             // Delete the to "Atari" rows
@@ -188,10 +184,9 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanUpdate()
-        {
+        public async Task CanUpdate() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             TestEntity itemToUpdate = await _testRepository.GetSingleAsync(r => r.Id == 2).ConfigureAwait(false);
 
             // Act
@@ -204,7 +199,7 @@ namespace idee5.Common.Data.Tests {
         [UnitTest, TestMethod]
         public async Task CanIgnoreNullListOnUpdate() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             IEnumerable<TestEntity> items = null;
             int expectedCount = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
 
@@ -219,7 +214,7 @@ namespace idee5.Common.Data.Tests {
         [UnitTest, TestMethod]
         public async Task CanUpdateMultiple() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
             var listOfItems = new List<TestEntity> {
                 (await _testRepository.GetAllAsync().ConfigureAwait(false)).Last(),
@@ -231,14 +226,13 @@ namespace idee5.Common.Data.Tests {
             // Assert
             int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
             Assert.AreEqual(4, result);
-            Assert.AreEqual(2 , listOfItems.Count(i => i.ModifiedBy == "me"));
+            Assert.AreEqual(2, listOfItems.Count(i => i.ModifiedBy == "me"));
         }
 
         [UnitTest, TestMethod]
-        public async Task CanUpdateOrAdd()
-        {
+        public async Task CanUpdateOrAdd() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             var itemToAdd = new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" };
             TestEntity itemToUpdate = await _testRepository.GetSingleAsync(r => r.Id == 2).ConfigureAwait(false);
 
@@ -255,7 +249,7 @@ namespace idee5.Common.Data.Tests {
         [UnitTest, TestMethod]
         public async Task CanIgnoreNullListOnUpdateOrAddAsync() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             IEnumerable<TestEntity> items = null;
             int expectedCount = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
 
@@ -270,7 +264,7 @@ namespace idee5.Common.Data.Tests {
         [UnitTest, TestMethod]
         public async Task CanUpdateOrAddAsyncMultiple() {
             // Arrange
-            IRepository<TestEntity , int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+            IRepository<TestEntity, int> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
             var listOfItems = new List<TestEntity> {
                 new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" },
                 await _testRepository.GetSingleAsync(r => r.Id == 2).ConfigureAwait(false)

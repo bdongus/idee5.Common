@@ -15,7 +15,7 @@ public class ServiceCollectionTests {
     [TestMethod]
     public void CanAddAsyncCommandHandlers() {
         // Arrange
-        List<ServiceDescriptor> serviceDescriptors= new List<ServiceDescriptor>();
+        List<ServiceDescriptor> serviceDescriptors = new List<ServiceDescriptor>();
         var services = Mock.Create<IServiceCollection>();
         Mock.Arrange(() => services.Add(Arg.IsAny<ServiceDescriptor>())).DoInstead((ServiceDescriptor sd) => serviceDescriptors.Add(sd));
         // Act
@@ -31,7 +31,7 @@ public class ServiceCollectionTests {
     [TestMethod]
     public void CanAddAsyncQueryHandlers() {
         // Arrange
-        List<ServiceDescriptor> serviceDescriptors= new List<ServiceDescriptor>();
+        List<ServiceDescriptor> serviceDescriptors = new List<ServiceDescriptor>();
         var services = Mock.Create<IServiceCollection>();
         Mock.Arrange(() => services.Add(Arg.IsAny<ServiceDescriptor>())).DoInstead((ServiceDescriptor sd) => serviceDescriptors.Add(sd));
         // Act

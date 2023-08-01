@@ -5,8 +5,7 @@ namespace idee5.Common.Tests {
     [TestClass]
     public class TimeSpanTests {
         [UnitTest, TestMethod]
-        public void CanRoundUp()
-        {
+        public void CanRoundUp() {
             // Arrange
             var start = TimeSpan.FromMinutes(value: 23);
             // Act
@@ -16,8 +15,7 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanRoundDown()
-        {
+        public void CanRoundDown() {
             // Arrange
             var start = TimeSpan.FromMinutes(value: 36);
             // Act

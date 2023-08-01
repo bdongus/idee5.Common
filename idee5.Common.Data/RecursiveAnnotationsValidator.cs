@@ -46,8 +46,7 @@ namespace idee5.Common.Data {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     var nestedResults = new List<ValidationResult>();
                     if (!TryValidateObjectRecursive(value, nestedResults, validatedObjects, validationContextItems)) {
                         result = false;

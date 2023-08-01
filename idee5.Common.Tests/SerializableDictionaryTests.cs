@@ -4,11 +4,9 @@ using System.Xml.Serialization;
 
 namespace idee5.Common.Tests {
     [TestClass]
-    public class SerializableDictionaryTests
-    {
+    public class SerializableDictionaryTests {
         [UnitTest, TestMethod]
-        public void CanSerializeDictionary()
-        {
+        public void CanSerializeDictionary() {
             var dict = new SerializableDictionary<string, string>();
 
             dict.Add(key: "p1", value: "t1");

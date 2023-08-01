@@ -532,16 +532,16 @@ namespace idee5.Common {
                 char ch = input[i];
                 switch (ch) {
                     case '-':
-                    inArray[i] = '+';
-                    break;
+                        inArray[i] = '+';
+                        break;
 
                     case '_':
-                    inArray[i] = '/';
-                    break;
+                        inArray[i] = '/';
+                        break;
 
                     default:
-                    inArray[i] = ch;
-                    break;
+                        inArray[i] = ch;
+                        break;
                 }
             }
             // pad with '='
@@ -573,16 +573,16 @@ namespace idee5.Common {
                 char ch = str[i];
                 switch (ch) {
                     case '+':
-                    chArray[i] = '-';
-                    break;
+                        chArray[i] = '-';
+                        break;
 
                     case '/':
-                    chArray[i] = '_';
-                    break;
+                        chArray[i] = '_';
+                        break;
 
                     default:
-                    chArray[i] = ch;
-                    break;
+                        chArray[i] = ch;
+                        break;
                 }
             }
 
@@ -722,14 +722,14 @@ namespace idee5.Common {
         public static bool IsValidGS1Id(this string number) {
             if (number.IsNullOrEmpty())
                 return true;
-                int sumOfDigits = 0;
-                int index = 0;
-                foreach (int digit in number.Where(e => e >= '0' && e <= '9').Reverse()) {
-                    int temp = (digit - 48) * ((index % 2 == 0) ? 1 : 3);
-                    sumOfDigits += temp;
-                    index++;
-                }
-                return sumOfDigits % 10 == 0;
+            int sumOfDigits = 0;
+            int index = 0;
+            foreach (int digit in number.Where(e => e >= '0' && e <= '9').Reverse()) {
+                int temp = (digit - 48) * ((index % 2 == 0) ? 1 : 3);
+                sumOfDigits += temp;
+                index++;
+            }
+            return sumOfDigits % 10 == 0;
         }
 
         /// <summary>
@@ -743,7 +743,7 @@ namespace idee5.Common {
             if (String.IsNullOrEmpty(value)) return defaultValue;
 
             try {
-                return (T) Enum.Parse(typeof(T), value, ignoreCase: true);
+                return (T)Enum.Parse(typeof(T), value, ignoreCase: true);
             }
             catch (ArgumentException) {
                 return defaultValue;
@@ -763,7 +763,7 @@ namespace idee5.Common {
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns><c>Null</c> if <paramref name="value"/> could not be parsed into <typeparamref name="T"/>.</returns>
-        public static T ParseInto<T>(this string value) { return (T) value.ParseInto(typeof(T)); }
+        public static T ParseInto<T>(this string value) { return (T)value.ParseInto(typeof(T)); }
 
         /// <summary>
         /// Tries to parse a string into the supplied type by finding and using the type's <see cref="TypeConverter"/>.

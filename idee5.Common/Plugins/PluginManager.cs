@@ -10,7 +10,7 @@ namespace idee5.Common.Plugins {
     public class PluginManager<TContract> : IDisposable, IPluginManager<TContract> where TContract : IPluginContract {
         #region Private Fields
 
-        private readonly object _syncLock = new object();
+        private readonly object _syncLock = new();
 
         #endregion Private Fields
 

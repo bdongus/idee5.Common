@@ -10,10 +10,8 @@ namespace idee5.Common.Data.Tests {
     /// Unit test the query repository and the querying repository extensions
     /// </summary>
     [TestClass]
-    public class QueryRepositoryTests
-    {
-        internal class TransientEntity : IEntity
-        {
+    public class QueryRepositoryTests {
+        internal class TransientEntity : IEntity {
             public int Id { get; set; }
             public string Workload { get; set; }
         }
@@ -25,22 +23,18 @@ namespace idee5.Common.Data.Tests {
             new TransientEntity() { Id = 3, Workload = "wl3" },
         };
 
-        internal class TransientQueryRepository : IQueryRepository<TransientEntity>
-        {
-            public Task<IEnumerable<TransientEntity>> GetAsync(Func<IQueryable<TransientEntity>, IQueryable<TransientEntity>> func, CancellationToken cancellationToken)
-            {
+        internal class TransientQueryRepository : IQueryRepository<TransientEntity> {
+            public Task<IEnumerable<TransientEntity>> GetAsync(Func<IQueryable<TransientEntity>, IQueryable<TransientEntity>> func, CancellationToken cancellationToken) {
                 return Task.Run(() => func(_transientEntities.AsQueryable()).AsEnumerable(), cancellationToken);
             }
 
-            public Task<TResult> GetAsync<TResult>(Func<IQueryable<TransientEntity>, TResult> func, CancellationToken cancellationToken)
-            {
+            public Task<TResult> GetAsync<TResult>(Func<IQueryable<TransientEntity>, TResult> func, CancellationToken cancellationToken) {
                 return Task<TResult>.Factory.StartNew(() => func(_transientEntities.AsQueryable()), cancellationToken);
             }
         }
 
         [UnitTest, TestMethod]
-        public async Task CanCountAsync()
-        {
+        public async Task CanCountAsync() {
             // Arrange
             var repo = new TransientQueryRepository();
 
@@ -52,8 +46,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanGetSingleAsync()
-        {
+        public async Task CanGetSingleAsync() {
             // Arrange
             var repo = new TransientQueryRepository();
 
@@ -65,8 +58,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanGetAsync()
-        {
+        public async Task CanGetAsync() {
             // Arrange
             var repo = new TransientQueryRepository();
 
@@ -79,8 +71,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanGetAllAsync()
-        {
+        public async Task CanGetAllAsync() {
             // Arrange
             var repo = new TransientQueryRepository();
 
@@ -92,8 +83,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanFindAsync()
-        {
+        public async Task CanFindAsync() {
             // Arrange
             var repo = new TransientQueryRepository();
 
@@ -105,8 +95,7 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        public async Task CanPaginateAsync()
-        {
+        public async Task CanPaginateAsync() {
             // Arrange
             var repo = new TransientQueryRepository();
 

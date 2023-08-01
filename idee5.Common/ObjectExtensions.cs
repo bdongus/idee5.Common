@@ -86,7 +86,7 @@ namespace idee5.Common {
             if (set == null || (length = set.Length) == 0)
                 return false;
             // special case enum comparison
-            IEqualityComparer<T> comparer = item is Enum ? (IEqualityComparer<T>) EnumComparer<T>.Instance : EqualityComparer<T>.Default;
+            IEqualityComparer<T> comparer = item is Enum ? (IEqualityComparer<T>)EnumComparer<T>.Instance : EqualityComparer<T>.Default;
             for (int i = 0; i < length; i++) {
                 if (comparer.Equals(item, set[i]))
                     return true;
@@ -110,7 +110,7 @@ namespace idee5.Common {
 
             // if source and destination type is the same, just use it
             if (typeof(T) == value.GetType()) {
-                result = (T) value;
+                result = (T)value;
                 return true;
             }
 
@@ -121,8 +121,8 @@ namespace idee5.Common {
                 if (typeName.IndexOf(typeof(Nullable).Name, StringComparison.Ordinal) > -1 ||
                     typeof(T).BaseType.Name.IndexOf(typeof(Enum).Name, StringComparison.Ordinal) > -1) {
                     TypeConverter tc = TypeDescriptor.GetConverter(typeof(T));
-                    result = (T) tc.ConvertFrom(value);
-                } else { result = (T) Convert.ChangeType(value, typeof(T)); }
+                    result = (T)tc.ConvertFrom(value);
+                } else { result = (T)Convert.ChangeType(value, typeof(T)); }
             }
             catch { return false; }
 

@@ -5,8 +5,7 @@ namespace idee5.Common {
     /// <summary>
     /// Extension methods for Collections.
     /// </summary>
-    public static class CollectionExtensions
-    {
+    public static class CollectionExtensions {
         /// <summary>
         /// Adds an item to the <see cref="ICollection{T}"/> if it's not already in the collection.
         /// </summary>
@@ -15,8 +14,7 @@ namespace idee5.Common {
         /// <typeparam name="T">Type of the items in the collection.</typeparam>
         /// <returns>Returns true if added, returns false if not.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="source"/> is <c>null</c>.</exception>
-        public static bool AddIfNotContains<T>(this ICollection<T> source, T item)
-        {
+        public static bool AddIfNotContains<T>(this ICollection<T> source, T item) {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace idee5.Common.Data; 
+namespace idee5.Common.Data;
 /// <summary>
 /// Defines the behavior of a repository of items. Used for simple CRUD operations.
 /// Use <see cref="ICommandHandlerAsync{TCommand}"/> or <see cref="IQueryHandler{TQuery, TResult}"/> for complex scenarios.
