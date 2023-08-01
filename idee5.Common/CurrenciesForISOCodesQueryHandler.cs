@@ -17,12 +17,7 @@ public class CurrenciesForISOCodesQueryHandler : IQueryHandler<CurrenciesForISOC
                 .Where(ri => query.AllowedISOCodes.Contains(ri.ISOCurrencySymbol))
                 .GroupBy(ri => ri.ISOCurrencySymbol)
                 .Select(g => g.First())
-                .Select(ri => new CurrencyInfo() {
-                    IsoCode = ri.ISOCurrencySymbol,
-                    EnglishName = ri.CurrencyEnglishName,
-                    NativeName = ri.CurrencyNativeName,
-                    Symbol = ri.CurrencySymbol
-                }).ToImmutableArray();
+                .Select(ri => new CurrencyInfo(ri.ISOCurrencySymbol, ri.CurrencyEnglishName,ri.CurrencyNativeName, ri.CurrencySymbol)).ToImmutableArray();
         }
         return result;
     }
