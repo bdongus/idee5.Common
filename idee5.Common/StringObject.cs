@@ -1,19 +1,18 @@
-﻿namespace idee5.Common {
+﻿namespace idee5.Common;
+/// <summary>
+/// Ermöglicht das Binden von Zeichenketten an WPF-Elemente
+/// </summary>
+public class StringObject {
     /// <summary>
-    /// Ermöglicht das Binden von Zeichenketten an WPF-Elemente
+    /// Erstellt eine neue Instanz der <see cref="StringObject"/>-Klasse.
     /// </summary>
-    public class StringObject {
-        /// <summary>
-        /// Erstellt eine neue Instanz der <see cref="StringObject"/>-Klasse.
-        /// </summary>
-        public StringObject() { }
+    public StringObject() { }
 
-        /// <summary>
-        /// Erstellt eine neue Instanz der <see cref="StringObject"/>-Klasse.
-        /// </summary>
-        /// <param name="value">Die Zeichenkette</param>
-        public StringObject(string value) { Value = value; }
+    /// <summary>
+    /// Erstellt eine neue Instanz der <see cref="StringObject"/>-Klasse.
+    /// </summary>
+    /// <param name="value">Die Zeichenkette</param>
+    public StringObject(string value) { Value = value; }
 
-        public string Value { get; set; }
-    }
+    public string Value { get; set; }
 }

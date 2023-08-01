@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
 
-namespace idee5.Common {
+namespace idee5.Common;
+/// <summary>
+/// Marks a type as requiring asynchronous initialization and provides the result of that initialization.
+/// </summary>
+public interface IAsyncInitialization {
     /// <summary>
-    /// Marks a type as requiring asynchronous initialization and provides the result of that initialization.
+    /// The result of the asynchronous initialization of this instance.
     /// </summary>
-    public interface IAsyncInitialization {
-        /// <summary>
-        /// The result of the asynchronous initialization of this instance.
-        /// </summary>
-        Task Initialization { get; }
-    }
+    Task Initialization { get; }
 }
