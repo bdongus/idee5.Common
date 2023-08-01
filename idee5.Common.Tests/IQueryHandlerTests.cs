@@ -71,7 +71,7 @@ namespace idee5.Common.Tests {
         public void NoAllowedCurrenciesGiveEmptyResult() {
             // Arrange
             var q = new CurrenciesForISOCodesQuery();
-            var handler = new CurrencyForISOCodesQueryHandler();
+            var handler = new CurrenciesForISOCodesQueryHandler();
 
             // Act
             var result = handler.Handle(q);
@@ -85,7 +85,7 @@ namespace idee5.Common.Tests {
             var q = new CurrenciesForISOCodesQuery() {
                 AllowedISOCodes = ImmutableArray.Create("CHF", "EUR", "x")
             };
-            var handler = new CurrencyForISOCodesQueryHandler();
+            var handler = new CurrenciesForISOCodesQueryHandler();
 
             // Act
             var result = handler.Handle(q);
