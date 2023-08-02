@@ -36,9 +36,9 @@ public class HashCodeCombiner {
     public void AddDateTime(DateTime d) => AddInt(d.GetHashCode());
 
     /// <summary>
-    /// Add a case insensitive <see cref="String"/> to the hash.
+    /// Add a case insensitive <see cref="string"/> to the hash.
     /// </summary>
-    /// <param name="s"><see cref="String"/> to add.</param>
+    /// <param name="s"><see cref="string"/> to add.</param>
     public void AddCaseInsensitiveString(string s) {
         if (s != null)
             AddInt(StringComparer.CurrentCultureIgnoreCase.GetHashCode(s));

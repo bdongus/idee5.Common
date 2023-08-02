@@ -53,7 +53,7 @@ public static class ObjectExtensions {
             throw new ArgumentNullException(nameof(o));
 
         PropertyInfo propertyInfo = o.GetType().GetProperty(propertyName);
-        return propertyInfo?.GetValue(o, null) ?? String.Empty;
+        return propertyInfo?.GetValue(o, null) ?? string.Empty;
     }
 
     /// <summary>

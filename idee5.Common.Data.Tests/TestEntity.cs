@@ -29,7 +29,6 @@ namespace idee5.Common.Data.Tests {
         public DateTime? DateModifiedUTC { get; set; }
         public string ModifiedBy { get; set; }
 
-
         public override bool Equals(object obj) {
             var entity = obj as TestEntity;
             return entity != null &&

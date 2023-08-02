@@ -10,7 +10,6 @@ namespace idee5.Common.Tests {
         /// Handles the specified command.
         /// </summary>
         /// <param name="command">The command.</param>
-
         public Task HandleAsync(TestCommand command, CancellationToken cancellationToken) {
             if (command.Execute)
                 command.Counter++;
@@ -42,7 +41,6 @@ namespace idee5.Common.Tests {
             var command = new RecordCommandHandlerAsync();
 
             await command.HandleAsync(cmd, CancellationToken.None).ConfigureAwait(false);
-
         }
     }
 }

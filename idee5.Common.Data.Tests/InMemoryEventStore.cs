@@ -67,5 +67,4 @@ namespace idee5.Common.Data.Tests {
 
         #endregion Public Methods
     }
-
 }

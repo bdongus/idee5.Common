@@ -5,7 +5,6 @@ using System.Collections.Immutable;
 
 namespace idee5.SoureGeneratorTests.Verifiers {
     internal static class CSharpVerifierHelper {
-
         /// <summary>
         /// By default, the compiler reports diagnostics for nullable reference types at
         /// <see cref="DiagnosticSeverity.Warning"/>, and the analyzer test framework defaults to only validating

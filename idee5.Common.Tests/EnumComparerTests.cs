@@ -5,7 +5,6 @@ using System.Collections.Generic;
 namespace idee5.Common.Tests {
     [TestClass]
     public class EnumComparerTests {
-
         protected IEqualityComparer<TEnum> getEnumComparer<TEnum>() where TEnum : struct, IComparable, IConvertible, IFormattable {
             return EnumComparer.For<TEnum>();
         }

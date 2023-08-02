@@ -18,7 +18,6 @@ namespace idee5.SoureGeneratorTests {
         public override SourceText GetText(CancellationToken cancellationToken = default) => _content;
 
         internal class BinaryText : InMemoryAdditionalText {
-
             public BinaryText(string path) : base(path, string.Empty) {
             }
 

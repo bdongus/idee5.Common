@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace idee5.Common;
 /// <summary>
-/// <see cref="String"/> extension methods.
+/// <see cref="string"/> extension methods
 /// </summary>
 public static class StringExtensions {
     private const string _nonAscii = @"[^\u0020-\u007F]";
@@ -63,13 +63,13 @@ public static class StringExtensions {
             throw new ArgumentNullException(nameof(endDelim));
         int at1, at2;
 
-        if (String.IsNullOrEmpty(source))
-            return String.Empty;
+        if (string.IsNullOrEmpty(source))
+            return string.Empty;
 
         if (caseSensitive) {
             at1 = source.IndexOf(beginDelim, StringComparison.CurrentCulture);
             if (at1 == -1)
-                return String.Empty;
+                return string.Empty;
 
             if (!returnDelimiters)
                 at2 = source.IndexOf(endDelim, at1 + beginDelim.Length, StringComparison.CurrentCulture);
@@ -78,7 +78,7 @@ public static class StringExtensions {
         } else {
             at1 = source.IndexOf(beginDelim, startIndex: 0, count: source.Length, StringComparison.CurrentCultureIgnoreCase);
             if (at1 == -1)
-                return String.Empty;
+                return string.Empty;
 
             if (!returnDelimiters)
                 at2 = source.IndexOf(endDelim, at1 + beginDelim.Length, StringComparison.CurrentCultureIgnoreCase);
@@ -96,7 +96,7 @@ public static class StringExtensions {
                 return source.Substring(at1, at2 - at1 + endDelim.Length);
         }
 
-        return String.Empty;
+        return string.Empty;
     }
 
     /// <summary>
@@ -105,16 +105,13 @@ public static class StringExtensions {
     /// <param name="origString">Original input string</param>
     /// <param name="findString">The string that is to be replaced</param>
     /// <param name="replaceWith">The replacement string</param>
-    /// <param name="instance">
-    /// Instance of the FindString that is to be found. if Instance = -1 all are replaced
-    /// </param>
+    /// <param name="instance">Instance of the <paramref name="findString"/> that is to be found.
+    /// If Instance = -1 all are replaced</param>
     /// <param name="caseInsensitive">Case insensitivity flag</param>
     /// <returns>updated string or original string if no matches</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="findString"/> is <c>null</c>.</exception>
-    public static string ReplaceStringInstance(this string origString, string findString,
-                                               string replaceWith, int instance,
-                                               bool caseInsensitive) {
-        if (origString != null && findString != null) {
+    public static string ReplaceStringInstance(this string origString, string findString, string replaceWith,
+        int instance, bool caseInsensitive) {
+        if (findString != null) {
             if (instance == -1)
                 return ReplaceString(origString, findString, replaceWith, caseInsensitive);
 
@@ -179,7 +176,7 @@ public static class StringExtensions {
     /// <param name="phrase">Text to convert to camelCase</param>
     public static string ToCamelCase(this string phrase) {
         if (phrase == null)
-            return String.Empty;
+            return string.Empty;
 
         return ConvertCase(phrase, firstUpper: false);
     }
@@ -191,7 +188,7 @@ public static class StringExtensions {
     /// <param name="phrase">Text to convert to PascalCase</param>
     public static string ToPascalCase(this string phrase) {
         if (phrase == null)
-            return String.Empty;
+            return string.Empty;
 
         return ConvertCase(phrase, firstUpper: true);
     }
@@ -204,25 +201,25 @@ public static class StringExtensions {
     /// <returns>The converted string</returns>
     private static string ConvertCase(string phrase, bool firstUpper) {
         // ignore leading special characters
-        int start = phrase.FindIndex(ch => Char.IsLetterOrDigit(ch) && !Char.IsWhiteSpace(ch));
+        int start = phrase.FindIndex(ch => char.IsLetterOrDigit(ch) && !char.IsWhiteSpace(ch));
         var sb = new StringBuilder(phrase.Length - start);
         bool nextUpper = firstUpper;
 
         foreach (char ch in phrase.Substring(start)) {
-            if (Char.IsWhiteSpace(ch) || Char.IsPunctuation(ch) || Char.IsSeparator(ch) || !Char.IsLetterOrDigit(ch)) {
+            if (char.IsWhiteSpace(ch) || char.IsPunctuation(ch) || char.IsSeparator(ch) || !char.IsLetterOrDigit(ch)) {
                 nextUpper = true;
                 continue;
             }
-            if (Char.IsDigit(ch)) {
+            if (char.IsDigit(ch)) {
                 sb.Append(ch);
                 nextUpper = true;
                 continue;
             }
 
             if (nextUpper)
-                sb.Append(Char.ToUpper(ch, CultureInfo.CurrentCulture));
+                sb.Append(char.ToUpper(ch, CultureInfo.CurrentCulture));
             else
-                sb.Append(Char.ToLower(ch, CultureInfo.CurrentCulture));
+                sb.Append(char.ToLower(ch, CultureInfo.CurrentCulture));
 
             nextUpper = false;
         }
@@ -239,7 +236,7 @@ public static class StringExtensions {
     public static string PascalToCamelCase(this string word) {
         if (word == null)
             throw new ArgumentNullException(nameof(word));
-        return Char.ToLowerInvariant(word[0]) + word.Substring(startIndex: 1);
+        return char.ToLowerInvariant(word[0]) + word.Substring(startIndex: 1);
     }
 
     /// <summary>
@@ -252,7 +249,7 @@ public static class StringExtensions {
         if (word == null)
             throw new ArgumentNullException(nameof(word));
 
-        return Char.ToUpperInvariant(word[0]) + word.Substring(startIndex: 1);
+        return char.ToUpperInvariant(word[0]) + word.Substring(startIndex: 1);
     }
 
     /// <summary>
@@ -261,9 +258,9 @@ public static class StringExtensions {
     /// <param name="input">The string to parse.</param>
     /// <param name="defaultValue">Default value to return.</param>
     /// <param name="numberFormat">the <see cref="IFormatProvider"/> to use.</param>
-    /// <returns>The <paramref name="defaultValue"/> or the parsed <see cref="Int32"/>.</returns>
+    /// <returns>The <paramref name="defaultValue"/> or the parsed <see cref="int"/>.</returns>
     public static int ParseInt(this string input, int defaultValue, IFormatProvider numberFormat) {
-        if (Int32.TryParse(input, NumberStyles.Any, numberFormat, out int val))
+        if (int.TryParse(input, NumberStyles.Any, numberFormat, out int val))
             return val;
         else
             return defaultValue;
@@ -274,7 +271,7 @@ public static class StringExtensions {
     /// </summary>
     /// <param name="input">The string to parse.</param>
     /// <param name="defaultValue">Default value to return.</param>
-    /// <returns>The <paramref name="defaultValue"/> or the parsed <see cref="Int32"/>.</returns>
+    /// <returns>The <paramref name="defaultValue"/> or the parsed <see cref="int"/>.</returns>
     public static int ParseInt(this string input, int defaultValue) => ParseInt(input, defaultValue, CultureInfo.CurrentCulture.NumberFormat);
 
     /// <summary>
@@ -283,9 +280,9 @@ public static class StringExtensions {
     /// </summary>
     /// <param name="defaultValue">Default value to return.</param>
     /// <param name="numberFormat">the <see cref="IFormatProvider"/> to use.</param>
-    /// <returns>The <paramref name="defaultValue"/> or the parsed <see cref="Decimal"/>.</returns>
+    /// <returns>The <paramref name="defaultValue"/> or the parsed <see cref="decimal"/>.</returns>
     public static decimal ParseDecimal(this string input, decimal defaultValue, IFormatProvider numberFormat) {
-        if (Decimal.TryParse(input, NumberStyles.Any, numberFormat, out decimal val))
+        if (decimal.TryParse(input, NumberStyles.Any, numberFormat, out decimal val))
             return val;
         else
             return defaultValue;
@@ -304,7 +301,7 @@ public static class StringExtensions {
         char[] chars = input.ToCharArray();
         var sb = new StringBuilder();
         for (int i = 0; i < chars.Length; i++) {
-            if (Char.IsDigit(chars[i]))
+            if (char.IsDigit(chars[i]))
                 sb.Append(chars[i]);
         }
 
@@ -326,7 +323,7 @@ public static class StringExtensions {
         if (value != null)
             return Regex.Replace(value, pattern, repChar);
         else
-            return String.Empty;
+            return string.Empty;
     }
 
     /// <summary>
@@ -337,7 +334,7 @@ public static class StringExtensions {
     /// Regex pattern defining the range of characters to be replaced. Default are all non ASCIII.
     /// </param>
     /// <returns>Changed string.</returns>
-    public static string RemoveSpecialCharacters(this string value, string pattern = _nonAscii) => ReplaceSpecialCharacters(value, repChar: String.Empty, pattern: pattern);
+    public static string RemoveSpecialCharacters(this string value, string pattern = _nonAscii) => ReplaceSpecialCharacters(value, repChar: string.Empty, pattern: pattern);
 
     /// <summary>
     /// Removes HTML/XML tags from a string.
@@ -370,7 +367,7 @@ public static class StringExtensions {
     /// <param name="forRemoving">String to remove.</param>
     /// <returns>A new, trimmed string.</returns>
     public static string TrimEnd(this string value, string forRemoving) {
-        if (String.IsNullOrEmpty(value))
+        if (string.IsNullOrEmpty(value))
             return value;
         while (value.EndsWith(forRemoving, StringComparison.OrdinalIgnoreCase)) { value = value.Remove(value.LastIndexOf(forRemoving, StringComparison.OrdinalIgnoreCase)); }
         return value;
@@ -387,16 +384,16 @@ public static class StringExtensions {
         if (forRemoving == null)
             throw new ArgumentNullException(nameof(forRemoving));
 
-        if (String.IsNullOrEmpty(value))
+        if (string.IsNullOrEmpty(value))
             return value;
         while (value.StartsWith(forRemoving, StringComparison.OrdinalIgnoreCase)) { value = value.Substring(forRemoving.Length); }
         return value;
     }
 
     /// <summary>
-    /// Add a prefix to the <see cref="String"/> if it dosn't hav it yet.
+    /// Add a prefix to the <see cref="string"/> if it dosn't hav it yet.
     /// </summary>
-    /// <param name="value">The current <see cref="String"/>.</param>
+    /// <param name="value">The current <see cref="string"/>.</param>
     /// <param name="toStartWith">The prefix to check for/add.</param>
     /// <returns>A new, prefixed string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="value"/> or <paramref name="toStartWith"/> is <c>null</c>.</exception>
@@ -414,11 +411,11 @@ public static class StringExtensions {
     }
 
     /// <summary>
-    /// Check if a single <see cref="Char"/> is lower case.
+    /// Check if a single <see cref="char"/> is lower case.
     /// </summary>
     /// <param name="ch"></param>
     /// <returns>True if the character is a lower case character</returns>
-    public static bool IsLowerCase(this char ch) => ch == Char.ToLower(ch, CultureInfo.CurrentCulture);
+    public static bool IsLowerCase(this char ch) => ch == char.ToLower(ch, CultureInfo.CurrentCulture);
 
     /// <summary>
     /// Is null or white space.
@@ -453,8 +450,8 @@ public static class StringExtensions {
     /// <param name="value">The value.</param>
     /// <returns>The hex string.</returns>
     public static string ToHex(this string value) {
-        if (String.IsNullOrEmpty(value))
-            return String.Empty;
+        if (string.IsNullOrEmpty(value))
+            return string.Empty;
         var sb = new StringBuilder(value.Length);
         foreach (char c in value) {
             sb.AppendFormat(CultureInfo.CurrentCulture, "{0:x2}", new object[] { Convert.ToUInt32(c) });
@@ -469,8 +466,8 @@ public static class StringExtensions {
     ///<param name="value"></param>
     ///<returns>The encoded strin.</returns>
     public static string ToUrlBase64(this string value) {
-        if (String.IsNullOrEmpty(value))
-            return String.Empty;
+        if (string.IsNullOrEmpty(value))
+            return string.Empty;
 
         byte[] bytes = Encoding.UTF8.GetBytes(value);
         return bytes.UrlTokenEncode();
@@ -480,8 +477,8 @@ public static class StringExtensions {
     /// Decodes a URL safe base64 string back
     /// </summary>
     /// <param name="value"></param>
-    /// <returns>The decoded string.</returns>
-    public static string FromUrlBase64(this string value) {
+    /// <returns>The decoded string. <c>NULL</c> if decoding failed</returns>
+    public static string? FromUrlBase64(this string value) {
         try {
             byte[] decodedBytes = value.UrlTokenDecode();
             return decodedBytes != null ? Encoding.UTF8.GetString(decodedBytes) : null;
@@ -494,7 +491,7 @@ public static class StringExtensions {
     /// </summary>
     /// <param name="compare">The compare.</param>
     /// <param name="compareTo">The compare to.</param>
-    public static bool InvariantEquals(this string compare, string compareTo) { return String.Equals(compare, compareTo, StringComparison.OrdinalIgnoreCase); }
+    public static bool InvariantEquals(this string compare, string compareTo) { return string.Equals(compare, compareTo, StringComparison.OrdinalIgnoreCase); }
 
     /// <summary>
     /// Determines if the string is a Guid
@@ -530,19 +527,11 @@ public static class StringExtensions {
         var inArray = new char[length];
         for (int i = 0; i < input.Length; i++) {
             char ch = input[i];
-            switch (ch) {
-                case '-':
-                    inArray[i] = '+';
-                    break;
-
-                case '_':
-                    inArray[i] = '/';
-                    break;
-
-                default:
-                    inArray[i] = ch;
-                    break;
-            }
+            inArray[i] = ch switch {
+                '-' => '+',
+                '_' => '/',
+                _ => ch,
+            };
         }
         // pad with '='
         for (int j = input.Length; j < inArray.Length; j++) { inArray[j] = '='; }
@@ -554,14 +543,10 @@ public static class StringExtensions {
     /// </summary>
     /// <param name="input"></param>
     /// <returns>The encoded string.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="input"/> is <c>null</c>.</exception>
     internal static string UrlTokenEncode(this byte[] input) {
-        if (input == null)
-            throw new ArgumentNullException(nameof(input));
-        if (input.Length < 1) { return String.Empty; }
+        if (input == null || input.Length < 1) { return ""; }
 
         string str = Convert.ToBase64String(input);
-        if (str == null) { return null; }
         // if there is a trailing '=', keep it
         int index = str.IndexOf('=');
         if (index < 0) {
@@ -571,19 +556,11 @@ public static class StringExtensions {
         // replace problematic URL characters
         for (int i = 0; i < index; i++) {
             char ch = str[i];
-            switch (ch) {
-                case '+':
-                    chArray[i] = '-';
-                    break;
-
-                case '/':
-                    chArray[i] = '_';
-                    break;
-
-                default:
-                    chArray[i] = ch;
-                    break;
-            }
+            chArray[i] = ch switch {
+                '+' => '-',
+                '/' => '_',
+                _ => ch,
+            };
         }
 
         return new string(chArray);
@@ -607,14 +584,15 @@ public static class StringExtensions {
     /// </summary>
     /// <param name="s">String to check for lines</param>
     /// <returns>array of strings, or null if the string passed was a null</returns>
-    public static string[] GetLines(this string s) => s?.Replace(oldValue: "\r\n", newValue: "\n").Split(new char[] { '\n' });
+    public static string[] GetLines(this string s)
+        => s?.Replace(oldValue: "\r\n", newValue: "\n").Split(new char[] { '\n' }) ?? Array.Empty<string>();
 
     /// <summary>
     /// Returns a line count for a string
     /// </summary>
     /// <param name="s">string to count lines for</param>
     /// <returns></returns>
-    public static int CountLines(this string s) => String.IsNullOrEmpty(s) ? 0 : s.Split(Environment.NewLine.ToCharArray()).Length;
+    public static int CountLines(this string s) => string.IsNullOrEmpty(s) ? 0 : s.Split(Environment.NewLine.ToCharArray()).Length;
 
     /// <summary>
     /// Converts a string into bytes for storage in any byte[] types buffer or stream format
@@ -623,13 +601,10 @@ public static class StringExtensions {
     /// <param name="text"></param>
     /// <param name="encoding">The character encoding to use. Defaults to Unicode</param>
     /// <returns></returns>
-    public static byte[] StringToBytes(this string text, Encoding encoding = null) {
-        if (text == null)
-            return null;
+    public static byte[] StringToBytes(this string text, Encoding? encoding = null) {
+        encoding ??= Encoding.Unicode;
 
-        encoding = encoding ?? Encoding.Unicode;
-
-        return encoding.GetBytes(text);
+        return encoding.GetBytes(text ?? "");
     }
 
     /// <summary>
@@ -638,11 +613,11 @@ public static class StringExtensions {
     /// <param name="buffer">raw string byte data</param>
     /// <param name="encoding">Character encoding to use. Defaults to Unicode</param>
     /// <returns></returns>
-    public static string BytesToString(this byte[] buffer, Encoding encoding = null) {
+    public static string BytesToString(this byte[] buffer, Encoding? encoding = null) {
         if (buffer == null)
-            return null;
+            return "";
 
-        encoding = encoding ?? Encoding.Unicode;
+        encoding ??= Encoding.Unicode;
 
         return encoding.GetString(buffer, index: 0, count: buffer.Length);
     }
@@ -653,17 +628,16 @@ public static class StringExtensions {
     /// </summary>
     /// <param name="text">Text to abstract</param>
     /// <param name="length">Number of characters to abstract to</param>
-    /// <returns>string</returns>
     public static string TextAbstract(this string text, int length) => text.Truncate(length, suffix: "...");
 
     /// <summary>
     /// Converts a byte array into a BinHex string
     /// </summary>
     /// <param name="data">Raw data to send</param>
-    /// <returns>string or null if input is null</returns>
+    /// <returns>string or empty string if input is null</returns>
     public static string BinaryToBinHex(this byte[] data) {
         if (data == null)
-            return null;
+            return "";
         var sb = new StringBuilder(data.Length * 2);
         foreach (byte val in data)
             sb.AppendFormat(CultureInfo.CurrentCulture, "{0:x2}", new object[] { val });
@@ -673,10 +647,10 @@ public static class StringExtensions {
     /// <summary>
     /// Retrieves a value from an XML-like string
     /// </summary>
-    /// <param name="propertyString">The tagges string.</param>
-    /// <param name="tag">The tag name.</param>
-    /// <returns></returns>
-    public static string GetProperty(this string propertyString, string tag) => propertyString?.ExtractString($"<{tag}>", $"</{tag}>");
+    /// <param name="propertyString">The tagged string</param>
+    /// <param name="tag">The tag name without brackets</param>
+    public static string GetProperty(this string propertyString, string tag)
+        => propertyString?.ExtractString($"<{tag}>", $"</{tag}>") ?? "";
 
     /// <summary>
     /// Determines whether the given string has a valid mod 10 check sum. Non numeric characters
@@ -689,7 +663,7 @@ public static class StringExtensions {
         // http://www.codeproject.com/Tips/515367/Validate-credit-card-number-with-Mod-algorithm
         // check whether input string is null or empty
         string numOnly = number.StripNonNumber();
-        if (String.IsNullOrEmpty(numOnly)) return false;
+        if (string.IsNullOrEmpty(numOnly)) return false;
         int sumOfDigits = 0;
         int length = numOnly.Length;
         for (int i = 0; i < length; i++) {
@@ -697,20 +671,21 @@ public static class StringExtensions {
             sumOfDigits += (i % 2 != 0) ? GetDouble(digit) : digit;
         }
         return sumOfDigits % 10 == 0;
-        int GetDouble(long i) {
-            switch (i) {
-                case 0: return 0;
-                case 1: return 2;
-                case 2: return 4;
-                case 3: return 6;
-                case 4: return 8;
-                case 5: return 1;
-                case 6: return 3;
-                case 7: return 5;
-                case 8: return 7;
-                case 9: return 9;
-                default: return 0;
-            }
+
+        static int GetDouble(long i) {
+            return i switch {
+                0 => 0,
+                1 => 2,
+                2 => 4,
+                3 => 6,
+                4 => 8,
+                5 => 1,
+                6 => 3,
+                7 => 5,
+                8 => 7,
+                9 => 9,
+                _ => 0,
+            };
         }
     }
 
@@ -718,7 +693,7 @@ public static class StringExtensions {
     /// Determines if the given string is a valid GS1 identifier.
     /// </summary>
     /// <param name="number"></param>
-    /// <returns><see langword="true"/> if the given <see cref="String"/> is a valid GS1 identifier.</returns>
+    /// <returns><see langword="true"/> if the given <see cref="string"/> is a valid GS1 identifier.</returns>
     public static bool IsValidGS1Id(this string number) {
         if (number.IsNullOrEmpty())
             return true;
@@ -740,7 +715,7 @@ public static class StringExtensions {
     /// <param name="defaultValue">The default value, if the string cannot be converted.</param>
     /// <returns>The converted enum value.</returns>
     public static T ToEnum<T>(this string value, T defaultValue) {
-        if (String.IsNullOrEmpty(value)) return defaultValue;
+        if (string.IsNullOrEmpty(value)) return defaultValue;
 
         try {
             return (T)Enum.Parse(typeof(T), value, ignoreCase: true);
@@ -751,11 +726,11 @@ public static class StringExtensions {
     }
 
     /// <summary>
-    /// Shortcut for !<see cref="String.IsNullOrEmpty(String)"/>
+    /// Shortcut for !<see cref="string.IsNullOrEmpty(string)"/>
     /// </summary>
     /// <param name="value"></param>
     /// <returns><c>True</c> if <paramref name="value"/> is not <c>null</c> or emtpy.</returns>
-    public static bool HasValue(this string value) => !String.IsNullOrEmpty(value);
+    public static bool HasValue(this string? value) => !string.IsNullOrEmpty(value);
 
     /// <summary>
     /// Tries to parse a string into the supplied type by finding and using the Type's "Parse" method

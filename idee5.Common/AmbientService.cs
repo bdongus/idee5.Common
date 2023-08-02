@@ -13,23 +13,23 @@ public abstract class AmbientService<T> where T : class {
     /// <returns>A new instance to <typeparamref name="T"/>.</returns>
     public delegate T CreateDelegate();
 
-    private T _instance;
+    private T? _instance;
 
     /// <summary>
     /// Alternative instance creator.
     /// </summary>
-    public CreateDelegate Create { get; set; }
+    public CreateDelegate? Create { get; set; }
 
     /// <summary>
     /// Default instance creator.
     /// </summary>
     /// <returns>The default implementation.</returns>
-    protected virtual T DefaultCreate() => null;
+    protected virtual T? DefaultCreate() => null;
 
     /// <summary>
     /// Instance within the ambient context.
     /// </summary>
-    public T Instance {
+    public T? Instance {
         get {
             if (_instance == null) {
                 if (Create != null) _instance = Create();
@@ -52,7 +52,7 @@ public abstract class AmbientService<T> where T : class {
     /// </summary>
     /// <exception cref="Exception"></exception>
     private static T NoCreate() {
-        string message = String.Format(CultureInfo.InvariantCulture, Properties.Resources.AmbientServiceNotConfigured, typeof(T).Name);
+        string message = string.Format(CultureInfo.InvariantCulture, Properties.Resources.AmbientServiceNotConfigured, typeof(T).Name);
         throw new Exception(message);
     }
 }

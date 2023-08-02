@@ -273,7 +273,6 @@ namespace idee5.Common.Tests {
             var raw = "Überall";
             // Act
 
-
             // Assert
             Assert.AreEqual(encoded, raw.ToUrlBase64());
         }
@@ -285,7 +284,6 @@ namespace idee5.Common.Tests {
             var raw = "Überall";
 
             // Act
-
 
             // Assert
             Assert.AreEqual(raw, encoded.FromUrlBase64());

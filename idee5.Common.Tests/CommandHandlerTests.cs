@@ -2,9 +2,7 @@
 using System;
 
 namespace idee5.Common.Tests {
-
     public class TestCommandHandler : ICommandHandler<TestCommand> {
-
         // In real life create a constructor to inject dependencies https://www.cuttingedge.it/blogs/steven/pivot/entry.php?id=91
         /// <summary>
         /// Handles the specified command.

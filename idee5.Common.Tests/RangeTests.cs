@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace idee5.Common.Tests {
-
     [TestClass]
     public class RangeTests {
-
         [UnitTest, TestMethod]
         public void CanDetectDateInRange() {
             var start = new DateTime(year: 1970, month: 2, day: 21);

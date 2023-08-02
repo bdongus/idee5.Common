@@ -458,7 +458,7 @@ public static class EnumerableExtensions {
 
     /// <summary>
     /// Converts an enumerable to a RFC4180 CSV string.
-    /// Uses the <see cref="Object.ToString"/> method to support custom types.
+    /// Uses the <see cref="object.ToString"/> method to support custom types.
     /// </summary>
     /// <typeparam name="T">The type being enumerated.</typeparam>
     /// <param name="source">The source.</param>

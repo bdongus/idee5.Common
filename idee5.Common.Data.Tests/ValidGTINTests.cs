@@ -51,7 +51,6 @@ namespace idee5.Common.Data.Tests {
             Assert.IsFalse(result);
         }
 
-
         [TestMethod]
         public void CanValidateGTIN8() {
             // Arrange

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace idee5.SoureGeneratorTests.Verifiers {
     public static partial class CSharpAnalyzerVerifier<TAnalyzer>
     where TAnalyzer : DiagnosticAnalyzer, new() {
-
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer, TTest, TVerifier}.Diagnostic()"/>
         public static DiagnosticResult Diagnostic()
             => CSharpAnalyzerVerifier<TAnalyzer, MSTestVerifier>.Diagnostic();

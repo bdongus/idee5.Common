@@ -20,7 +20,6 @@ namespace idee5.Common.Tests {
 
     [TestClass]
     public class AsyncQueryHandlerTests {
-
         [UnitTest, TestMethod]
         public async Task TestAsyncQueryHandler() {
             var q = new AsyncQueryParameters { Searchtext = "bli bla blubb" };

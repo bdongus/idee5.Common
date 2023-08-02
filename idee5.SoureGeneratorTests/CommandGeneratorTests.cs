@@ -14,7 +14,6 @@ namespace idee5.SoureGeneratorTests;
 /// </summary>
 [TestClass]
 public class CommandGeneratorTests : VerifyBase {
-
     /// <summary>
     /// Can generate sources.
     /// </summary>

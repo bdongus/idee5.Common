@@ -7,7 +7,6 @@ namespace idee5.Common.Tests {
     [TestClass]
     public class EnumerableExtensionsTests {
         private class TestItem {
-
             public TestItem() {
                 Children = Enumerable.Empty<TestItem>();
             }

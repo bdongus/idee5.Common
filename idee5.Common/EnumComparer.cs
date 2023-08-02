@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-
 namespace idee5.Common;
 /// <summary>
 /// Generic generator for enum comparers.
@@ -67,7 +66,7 @@ public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
     /// <summary>
     /// Returns a hash code for the specified object.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> for which a hash code is to be returned.</param>
+    /// <param name="obj">The <see cref="object"/> for which a hash code is to be returned.</param>
     /// <returns>A hash code for the specified object.</returns>
     /// <exception cref="ArgumentNullException">
     /// The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.

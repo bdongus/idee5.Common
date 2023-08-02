@@ -11,5 +11,4 @@ namespace idee5.Common.Data.Tests {
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
     }
-
 }

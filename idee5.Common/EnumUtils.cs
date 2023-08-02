@@ -19,10 +19,10 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
 
     // locks are used so that multiple threads may assign a field multiple times but it is still faster than locking fields even on non-null access
 
-    private static Dictionary<int, string> _intNamePairs;
-    private static string[] _names;
-    private static Dictionary<TEnum, string> _valueNamePairs;
-    private static TEnum[] _values;
+    private static Dictionary<int, string>? _intNamePairs;
+    private static string[]? _names;
+    private static Dictionary<TEnum, string>? _valueNamePairs;
+    private static TEnum[]? _values;
 
     #endregion Private Fields
 
@@ -71,7 +71,7 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
         get {
             if (_names == null) {
                 lock (_syncRoot) {
-                    if (_names == null) _names = Enum.GetNames(_enumType);
+                    _names ??= Enum.GetNames(_enumType);
                 }
             }
             return _names;
@@ -87,7 +87,7 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
                     // check again after the lock/wait
                     if (_valueNamePairs == null) {
                         IEqualityComparer<TEnum> comparer = _typeCode == TypeCode.Int32
-                            ? (IEqualityComparer<TEnum>)EqualityComparer<TEnum>.Default
+                            ? EqualityComparer<TEnum>.Default
                             : EnumComparer<TEnum>.Instance;
                         _valueNamePairs = new Dictionary<TEnum, string>(Names.Length, comparer);
                         for (int i = 0; i < Values.Length; i++) {
@@ -106,7 +106,7 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
         get {
             if (_values == null) {
                 lock (_syncRoot) {
-                    if (_values == null) _values = (TEnum[])Enum.GetValues(_enumType);
+                    _values ??= (TEnum[])Enum.GetValues(_enumType);
                 }
             }
             return _values;

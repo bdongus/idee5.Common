@@ -5,7 +5,6 @@ namespace idee5.Common;
 /// <see cref="DateTime"/> range.
 /// </summary>
 public class DateTimeRange : IRange<DateTime>, IEquatable<DateTimeRange> {
-
     /// <summary>
     /// Create a new <see cref="DateTime"/> range.
     /// </summary>
@@ -23,13 +22,13 @@ public class DateTimeRange : IRange<DateTime>, IEquatable<DateTimeRange> {
     public DateTime End { get; }
 
     /// <inheritdoc/>
-    public bool Equals(DateTimeRange other) => !(other is null) && Start.Equals(other.Start) && End.Equals(other.End);
+    public bool Equals(DateTimeRange other) => other is not null && Start.Equals(other.Start) && End.Equals(other.End);
 
     /// <inheritdoc/>
     public override bool Equals(object obj) => obj is DateTimeRange timeSlot && Equals(timeSlot);
 
     /// <inheritdoc/>
-    public static bool operator ==(DateTimeRange left, DateTimeRange right) => (left is null && right is null) || (!(left is null) && left.Equals(right));
+    public static bool operator ==(DateTimeRange left, DateTimeRange right) => (left is null && right is null) || (left?.Equals(right) == true);
 
     /// <inheritdoc/>
     public static bool operator !=(DateTimeRange left, DateTimeRange right) => !(left == right);

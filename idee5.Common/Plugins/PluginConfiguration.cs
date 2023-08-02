@@ -31,7 +31,7 @@ public class PluginConfiguration {
 
     public static PluginConfiguration Deserialize(StreamReader stream) {
         var xs = new XmlSerializer(typeof(PluginConfiguration));
-        PluginConfiguration pluginConfiguration = default;
+        PluginConfiguration pluginConfiguration;
         using (var xmlReader = XmlReader.Create(stream)) {
             pluginConfiguration = (PluginConfiguration)xs.Deserialize(xmlReader);
         }

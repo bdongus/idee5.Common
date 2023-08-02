@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace idee5.Common;
@@ -27,19 +28,19 @@ public class SerializableDictionary<TKey, TVal> : Dictionary<TKey, TVal>, IXmlSe
     /// Serialize the entry's value.
     /// </summary>
     protected XmlSerializer ValueSerializer {
-        get { return _valueSerializer ?? (_valueSerializer = new XmlSerializer(typeof(TVal))); }
+        get { return _valueSerializer ??= new XmlSerializer(typeof(TVal)); }
     }
 
     private XmlSerializer KeySerializer {
-        get { return _keySerializer ?? (_keySerializer = new XmlSerializer(typeof(TKey))); }
+        get { return _keySerializer ??= new XmlSerializer(typeof(TKey)); }
     }
 
     #endregion Private Properties
 
     #region Private Members
 
-    private XmlSerializer _keySerializer;
-    private XmlSerializer _valueSerializer;
+    private XmlSerializer _keySerializer = null!;
+    private XmlSerializer _valueSerializer = null!;
 
     #endregion Private Members
 
@@ -94,7 +95,7 @@ public class SerializableDictionary<TKey, TVal> : Dictionary<TKey, TVal>, IXmlSe
 
         int itemCount = info.GetInt32(name: "itemsCount");
         for (int i = 0; i < itemCount; i++) {
-            var kvp = (KeyValuePair<TKey, TVal>)info.GetValue(String.Format(CultureInfo.InvariantCulture, format: "Item{0}", args: new object[] { i }), typeof(KeyValuePair<TKey, TVal>));
+            var kvp = (KeyValuePair<TKey, TVal>)info.GetValue(string.Format(CultureInfo.InvariantCulture, format: "Item{0}", args: new object[] { i }), typeof(KeyValuePair<TKey, TVal>));
             Add(kvp.Key, kvp.Value);
         }
     }
@@ -104,7 +105,7 @@ public class SerializableDictionary<TKey, TVal> : Dictionary<TKey, TVal>, IXmlSe
         info.AddValue(name: "itemsCount", value: Count);
         int itemIdx = 0;
         foreach (KeyValuePair<TKey, TVal> kvp in this) {
-            info.AddValue(String.Format(CultureInfo.InvariantCulture, format: "Item{0}", args: new object[] { itemIdx }), kvp, typeof(KeyValuePair<TKey, TVal>));
+            info.AddValue(string.Format(CultureInfo.InvariantCulture, format: "Item{0}", args: new object[] { itemIdx }), kvp, typeof(KeyValuePair<TKey, TVal>));
             itemIdx++;
         }
     }
@@ -131,7 +132,7 @@ public class SerializableDictionary<TKey, TVal> : Dictionary<TKey, TVal>, IXmlSe
             return;
         // Move past container
         if (reader.NodeType == XmlNodeType.Element && !reader.Read())
-            throw new XmlException(String.Format(CultureInfo.InvariantCulture, Resources.ErrorInDeserializationOf, typeof(SerializableDictionary<,>).Name));
+            throw new XmlException(string.Format(CultureInfo.InvariantCulture, Resources.ErrorInDeserializationOf, typeof(SerializableDictionary<,>).Name));
         while (reader.NodeType != XmlNodeType.EndElement) {
             reader.ReadStartElement(name: "item");
             reader.ReadStartElement(name: "key");
@@ -148,15 +149,15 @@ public class SerializableDictionary<TKey, TVal> : Dictionary<TKey, TVal>, IXmlSe
         if (reader.NodeType == XmlNodeType.EndElement) {
             reader.ReadEndElement();
         } else {
-            throw new XmlException(String.Format(
+            throw new XmlException(string.Format(
                CultureInfo.InvariantCulture,
                Resources.ErrorInDeserializationOf,
                typeof(SerializableDictionary<,>).Name));
         }
     }
 
-    System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() {
-        return null;
+    public XmlSchema GetSchema() {
+        throw new NotImplementedException();
     }
 
     #endregion IXmlSerializable Members

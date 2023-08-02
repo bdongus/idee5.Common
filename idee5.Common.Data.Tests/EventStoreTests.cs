@@ -36,7 +36,6 @@ namespace idee5.Common.Data.Tests {
 
     public class TestAggregate : AggregateRoot {
         private TestAggregate() {
-
         }
         public decimal Price { get; private set; }
         public TestAggregate(Guid id) {

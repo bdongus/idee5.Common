@@ -23,6 +23,5 @@ namespace idee5.SoureGeneratorTests {
         public TestClass(List<DateTime> datetimes) {
             _datetimes = datetimes;
         }
-
     }
 }

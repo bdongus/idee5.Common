@@ -6,7 +6,6 @@ namespace idee5.Common.Data;
 /// SQLite db3 connection string provider.
 /// </summary>
 public class SimpleDB3ConnectionStringProvider : IConnectionStringProvider {
-
     /// <summary>
     /// Create a SQLite db3 connection string from the given id.
     /// </summary>

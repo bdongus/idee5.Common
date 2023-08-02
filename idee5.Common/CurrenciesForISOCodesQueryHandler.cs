@@ -9,8 +9,8 @@ namespace idee5.Common;
 public class CurrenciesForISOCodesQueryHandler : IQueryHandler<CurrenciesForISOCodesQuery, ImmutableArray<CurrencyInfo>> {
     /// <inheritdoc/>
     public ImmutableArray<CurrencyInfo> Handle(CurrenciesForISOCodesQuery query) {
-        var result = ImmutableArray<CurrencyInfo>.Empty;
-        if (query != default && !query.AllowedISOCodes.IsDefaultOrEmpty) {
+        ImmutableArray<CurrencyInfo> result = ImmutableArray<CurrencyInfo>.Empty;
+        if (query?.AllowedISOCodes.IsDefaultOrEmpty == false) {
             result = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
                 .Select(ci => ci.LCID).Distinct()
                 .Select(lcid => new RegionInfo(lcid))
