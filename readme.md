@@ -83,6 +83,8 @@ Moved localizable strings to internal resource file.
 * Ambient providers marked as obsolete to give a compiler hint on maybe wrong usage outside test scenarios.
 ### 3.5
 * Added ProblemDetailsWithErrors
+### 3.6
+* Detect interface implementations added. Used to find command and query handlers.
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
