@@ -9,14 +9,14 @@ using System.Reflection;
 namespace idee5.Common.Data;
 public class RecursiveAnnotationsValidator : IRecursiveAnnotationsValidator {
     /// <inheritdoc />
-    public bool TryValidateObject(object obj, ICollection<ValidationResult> results, IDictionary<object, object>? validationContextItems = null)
+    public bool TryValidateObject(object obj, ICollection<ValidationResult> results, IDictionary<object, object?>? validationContextItems = null)
         => Validator.TryValidateObject(obj, new ValidationContext(obj, null, validationContextItems), results, true);
 
     /// <inheritdoc />
-    public bool TryValidateObjectRecursive<T>(T obj, IList<ValidationResult> results, IDictionary<object, object>? validationContextItems = null)
+    public bool TryValidateObjectRecursive<T>(T obj, IList<ValidationResult> results, IDictionary<object, object?>? validationContextItems = null)
         => TryValidateObjectRecursive(obj, results ?? throw new ArgumentNullException(nameof(results)), new HashSet<object>(), validationContextItems);
 
-    private bool TryValidateObjectRecursive<T>(T obj, IList<ValidationResult> results, ISet<object> validatedObjects, IDictionary<object, object>? validationContextItems = null) {
+    private bool TryValidateObjectRecursive<T>(T obj, IList<ValidationResult> results, ISet<object> validatedObjects, IDictionary<object, object?>? validationContextItems = null) {
         if (obj == null) return false;
         // avoid infinite loops on cyclical object graphs
         if (validatedObjects.Contains(obj)) {

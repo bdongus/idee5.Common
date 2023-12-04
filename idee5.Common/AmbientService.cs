@@ -29,14 +29,16 @@ public abstract class AmbientService<T> where T : class {
     /// <summary>
     /// Instance within the ambient context.
     /// </summary>
-    public T? Instance {
+    public T Instance {
         get {
             if (_instance == null) {
                 if (Create != null) _instance = Create();
                 if (_instance == null) {
                     _instance = DefaultCreate();
                     if (_instance == null) {
-                        NoCreate();
+                        string message = string.Format(CultureInfo.InvariantCulture,
+                            Properties.Resources.AmbientServiceNotConfigured, typeof(T).Name);
+                        throw new Exception(message);
                     }
                 }
             }
@@ -45,14 +47,5 @@ public abstract class AmbientService<T> where T : class {
         set {
             _instance = value ?? throw new ArgumentNullException(nameof(value));
         }
-    }
-
-    /// <summary>
-    /// Throws an exception to inform the developer that no instance creator was configured.
-    /// </summary>
-    /// <exception cref="Exception"></exception>
-    private static T NoCreate() {
-        string message = string.Format(CultureInfo.InvariantCulture, Properties.Resources.AmbientServiceNotConfigured, typeof(T).Name);
-        throw new Exception(message);
     }
 }

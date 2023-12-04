@@ -29,6 +29,11 @@ public class LoggingCommandHandlerAsync<TCommand> : ICommandHandlerAsync<TComman
 
     /// <inheritdoc/>
     public async Task HandleAsync(TCommand command, CancellationToken cancellationToken = default) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (command == null) throw new ArgumentNullException(nameof(command));
+#else
+        ArgumentNullException.ThrowIfNull(command);
+#endif
         _logger.LogTrace(Resources.InvokingComand, typeof(TCommand).Name);
         _logger.LogInformation(Resources.CommandParametersAre, Environment.NewLine + command.AsString());
         await _handler.HandleAsync(command, cancellationToken).ConfigureAwait(false);

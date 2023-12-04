@@ -36,8 +36,11 @@ public static class StringExtensions {
     /// <returns>The new, truncated and sufficed string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="suffix"/> is <c>null</c>.</exception>
     public static string Truncate(this string value, int maxLength, string suffix) {
-        if (suffix == null)
-            throw new ArgumentNullException(nameof(suffix));
+#if NETSTANDARD2_0_OR_GREATER
+        if (suffix == null) throw new ArgumentNullException(nameof(suffix));
+#else
+        ArgumentNullException.ThrowIfNull(suffix);
+#endif
         int strLength = maxLength - suffix.Length;
         if (value.HasValue() && suffix.Length < value.Length && value.Length > maxLength)
             return value.Substring(startIndex: 0, length: strLength).TrimEnd(" ") + suffix;
@@ -57,10 +60,13 @@ public static class StringExtensions {
     /// <returns>Extracted string or ""</returns>
     /// <exception cref="ArgumentNullException"><paramref name="beginDelim"/> or <paramref name="endDelim"/> is <c>null</c>.</exception>
     public static string ExtractString(this string source, string beginDelim, string endDelim, bool caseSensitive = false, bool allowMissingEndDelimiter = false, bool returnDelimiters = false) {
-        if (beginDelim == null)
-            throw new ArgumentNullException(nameof(beginDelim));
-        if (endDelim == null)
-            throw new ArgumentNullException(nameof(endDelim));
+#if NETSTANDARD2_0_OR_GREATER
+        if (beginDelim == null) throw new ArgumentNullException(nameof(beginDelim));
+        if (endDelim == null) throw new ArgumentNullException(nameof(endDelim));
+#else
+        ArgumentNullException.ThrowIfNull(beginDelim);
+        ArgumentNullException.ThrowIfNull(endDelim);
+#endif
         int at1, at2;
 
         if (string.IsNullOrEmpty(source))
@@ -145,12 +151,15 @@ public static class StringExtensions {
     /// <exception cref="ArgumentNullException"><paramref name="origString"/>, <paramref name="findString"/> or <paramref name="replaceString"/> is <c>null</c>.</exception>
     public static string ReplaceString(this string origString, string findString,
                                        string replaceString, bool caseInsensitive) {
-        if (origString == null)
-            throw new ArgumentNullException(nameof(origString));
-        if (findString == null)
-            throw new ArgumentNullException(nameof(findString));
-        if (replaceString == null)
-            throw new ArgumentNullException(nameof(replaceString));
+#if NETSTANDARD2_0_OR_GREATER
+        if (origString == null) throw new ArgumentNullException(nameof(origString));
+        if (findString == null) throw new ArgumentNullException(nameof(findString));
+        if (replaceString == null) throw new ArgumentNullException(nameof(replaceString)); 
+#else
+        ArgumentNullException.ThrowIfNull(origString);
+        ArgumentNullException.ThrowIfNull(findString);
+        ArgumentNullException.ThrowIfNull(replaceString); 
+#endif
         int at1 = 0;
         while (true) {
             if (caseInsensitive)
@@ -175,8 +184,7 @@ public static class StringExtensions {
     /// </summary>
     /// <param name="phrase">Text to convert to camelCase</param>
     public static string ToCamelCase(this string phrase) {
-        if (phrase == null)
-            return string.Empty;
+        if (phrase == null) return string.Empty;
 
         return ConvertCase(phrase, firstUpper: false);
     }
@@ -187,8 +195,7 @@ public static class StringExtensions {
     /// </summary>
     /// <param name="phrase">Text to convert to PascalCase</param>
     public static string ToPascalCase(this string phrase) {
-        if (phrase == null)
-            return string.Empty;
+        if (phrase == null) return string.Empty;
 
         return ConvertCase(phrase, firstUpper: true);
     }
@@ -234,8 +241,11 @@ public static class StringExtensions {
     /// <returns>The converted string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="word"/> is <c>null</c>.</exception>
     public static string PascalToCamelCase(this string word) {
-        if (word == null)
-            throw new ArgumentNullException(nameof(word));
+#if NETSTANDARD2_0_OR_GREATER
+        if (word == null) throw new ArgumentNullException(nameof(word)); 
+#else
+        ArgumentNullException.ThrowIfNull(word);
+#endif
         return char.ToLowerInvariant(word[0]) + word.Substring(startIndex: 1);
     }
 
@@ -246,9 +256,11 @@ public static class StringExtensions {
     /// <returns>The converted string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="word"/> is <c>null</c>.</exception>
     public static string CamelToPascalCase(this string word) {
-        if (word == null)
-            throw new ArgumentNullException(nameof(word));
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (word == null) throw new ArgumentNullException(nameof(word)); 
+#else
+        ArgumentNullException.ThrowIfNull(word);
+#endif
         return char.ToUpperInvariant(word[0]) + word.Substring(startIndex: 1);
     }
 
@@ -295,8 +307,11 @@ public static class StringExtensions {
     /// <returns>A new stripped string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="input"/> is <c>null</c>.</exception>
     public static string StripNonNumber(this string input) {
-        if (input == null)
-            throw new ArgumentNullException(nameof(input));
+#if NETSTANDARD2_0_OR_GREATER
+        if (input == null) throw new ArgumentNullException(nameof(input));
+#else
+        ArgumentNullException.ThrowIfNull(input);
+#endif
 
         char[] chars = input.ToCharArray();
         var sb = new StringBuilder();
@@ -381,9 +396,11 @@ public static class StringExtensions {
     /// <returns>A new, trimmed string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="forRemoving"/> is <c>null</c>.</exception>
     public static string TrimStart(this string value, string forRemoving) {
-        if (forRemoving == null)
-            throw new ArgumentNullException(nameof(forRemoving));
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (forRemoving == null) throw new ArgumentNullException(nameof(forRemoving));
+#else
+        ArgumentNullException.ThrowIfNull(forRemoving);
+#endif
         if (string.IsNullOrEmpty(value))
             return value;
         while (value.StartsWith(forRemoving, StringComparison.OrdinalIgnoreCase)) { value = value.Substring(forRemoving.Length); }
@@ -398,12 +415,13 @@ public static class StringExtensions {
     /// <returns>A new, prefixed string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="value"/> or <paramref name="toStartWith"/> is <c>null</c>.</exception>
     public static string EnsureStartsWith(this string value, string toStartWith) {
-        if (value == null)
-            throw new ArgumentNullException(nameof(value));
-
-        if (toStartWith == null)
-            throw new ArgumentNullException(nameof(toStartWith));
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (value == null) throw new ArgumentNullException(nameof(value));
+        if (toStartWith == null) throw new ArgumentNullException(nameof(toStartWith));
+#else
+        ArgumentNullException.ThrowIfNull(value);
+        ArgumentNullException.ThrowIfNull(toStartWith);
+#endif
         if (value.StartsWith(toStartWith, StringComparison.CurrentCulture))
             return value;
         // Ensure each char is removed first from input, e.g. ~/ plus /Path will equal ~/Path not ~//Path
@@ -515,8 +533,11 @@ public static class StringExtensions {
     /// <param name="input"></param>
     /// <returns>The decoded string as byte array.</returns>
     internal static byte[] UrlTokenDecode(this string input) {
-        if (input == null)
-            throw new ArgumentNullException(nameof(input));
+#if NETSTANDARD2_0_OR_GREATER
+        if (input == null) throw new ArgumentNullException(nameof(input));
+#else
+        ArgumentNullException.ThrowIfNull(input);
+#endif
         int length = input.Length;
         if (length < 1) { return Array.Empty<byte>(); }
 
@@ -573,9 +594,11 @@ public static class StringExtensions {
     /// <returns>The string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="input"/> is <c>null</c>.</exception>
     public static string StripNewLines(this string input) {
-        if (input == null)
-            throw new ArgumentNullException(nameof(input));
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (input == null) throw new ArgumentNullException(nameof(input));
+#else
+        ArgumentNullException.ThrowIfNull(input);
+#endif
         return input.Replace(oldValue: _carriageReturnValue, newValue: "").Replace(oldValue: Environment.NewLine, newValue: "");
     }
 
@@ -738,7 +761,7 @@ public static class StringExtensions {
     /// <typeparam name="T"></typeparam>
     /// <param name="value"></param>
     /// <returns><c>Null</c> if <paramref name="value"/> could not be parsed into <typeparamref name="T"/>.</returns>
-    public static T ParseInto<T>(this string value) { return (T)value.ParseInto(typeof(T)); }
+    public static T? ParseInto<T>(this string value) { return (T?)value.ParseInto(typeof(T)); }
 
     /// <summary>
     /// Tries to parse a string into the supplied type by finding and using the type's <see cref="TypeConverter"/>.
@@ -746,7 +769,7 @@ public static class StringExtensions {
     /// <param name="value">Value to be parsed.</param>
     /// <param name="type">Type to parse <paramref name="value"/> into.</param>
     /// <returns>The parsed type.</returns>
-    public static object ParseInto(this string value, Type type) {
+    public static object? ParseInto(this string value, Type type) {
         TypeConverter tc = TypeDescriptor.GetConverter(type);
         return tc.ConvertFrom(value);
     }

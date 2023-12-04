@@ -17,8 +17,11 @@ public static class ExpandoExtensions {
     /// <param name="propertyValue">Value of the property.</param>
     /// <exception cref="ArgumentNullException"><paramref name="expando"/> is <c>null</c>.</exception>
     public static void AddProperty(this ExpandoObject expando, string propertyName, object propertyValue) {
-        if (expando == null)
-            throw new ArgumentNullException(nameof(expando));
+#if NETSTANDARD2_0_OR_GREATER
+        if (expando == null) throw new ArgumentNullException(nameof(expando));
+#else
+        ArgumentNullException.ThrowIfNull(expando);
+#endif
         // ExpandoObject supports IDictionary so we can extend it like this
         var expandoDict = expando as IDictionary<string, object>;
         if (!expandoDict.ContainsKey(propertyName)) {
@@ -34,11 +37,14 @@ public static class ExpandoExtensions {
     /// <param name="propertyName">The name of the property.</param>
     /// <returns>The property's value as <see cref="object"/>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="expando"/> is <c>null</c>.</exception>
-    public static object GetPropertyByName(this ExpandoObject expando, string propertyName) {
-        if (expando == null)
-            throw new ArgumentNullException(nameof(expando));
+    public static object? GetPropertyByName(this ExpandoObject expando, string propertyName) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (expando == null) throw new ArgumentNullException(nameof(expando));
+#else
+        ArgumentNullException.ThrowIfNull(expando);
+#endif
 
-        var dict = (IDictionary<string, object>)expando;
+        var dict = expando as IDictionary<string, object>;
         if (dict.ContainsKey(propertyName))
             return dict[propertyName];
         else return null;

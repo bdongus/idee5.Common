@@ -20,9 +20,12 @@ public static class RepositoryExtensions {
     /// <returns>A <see cref="Task{T}">task</see> containing the <see cref="IEnumerable{T}">sequence</see>
     /// of all <typeparamref name="T">items</typeparamref> in the repository.</returns>
     public static Task<IEnumerable<T>> GetAllAsync<T>(this IQueryRepository<T> queryRepository, CancellationToken cancellationToken = default) where T : class {
-        if (queryRepository == null)
-            throw new ArgumentNullException(nameof(queryRepository));
-        return queryRepository.GetAsync<IEnumerable<T>>(q => q, cancellationToken);
+#if NETSTANDARD2_0_OR_GREATER
+        if (queryRepository == null) throw new ArgumentNullException(nameof(queryRepository));
+#else
+        ArgumentNullException.ThrowIfNull(queryRepository);
+#endif
+        return queryRepository.GetAsync(q => q, cancellationToken);
     }
 
     /// <summary>
@@ -36,12 +39,14 @@ public static class RepositoryExtensions {
     /// <returns>A <see cref="Task{T}">task</see> containing the matched <see cref="IEnumerable{T}">sequence</see>
     /// of <typeparamref name="T">items</typeparamref>.</returns>
     public static Task<IEnumerable<T>> FindByAsync<T>(this IQueryRepository<T> queryRepository, Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default) where T : class {
-        if (expression == null)
-            throw new ArgumentNullException(nameof(expression));
-
-        if (queryRepository == null)
-            throw new ArgumentNullException(nameof(queryRepository));
-        return queryRepository.GetAsync<IEnumerable<T>>(q => q.Where(expression), cancellationToken);
+#if NETSTANDARD2_0_OR_GREATER
+        if (queryRepository == null) throw new ArgumentNullException(nameof(queryRepository));
+        if (expression == null) throw new ArgumentNullException(nameof(expression));
+#else
+        ArgumentNullException.ThrowIfNull(queryRepository);
+        ArgumentNullException.ThrowIfNull(expression);
+#endif
+        return queryRepository.GetAsync(q => q.Where(expression), cancellationToken);
     }
 
     /// <summary>
@@ -54,12 +59,14 @@ public static class RepositoryExtensions {
     /// <param name="cancellationToken">The <see cref="CancellationToken">cancellation token</see> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task{T}">task</see> containing the matched <typeparamref name="T">item</typeparamref>
     /// or null if no match was found.</returns>
-    public static Task<T> GetSingleAsync<T>(this IQueryRepository<T> queryRepository, Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default) where T : class {
-        if (queryRepository == null)
-            throw new ArgumentNullException(nameof(queryRepository));
-
-        if (expression == null)
-            throw new ArgumentNullException(nameof(expression));
+    public static Task<T?> GetSingleAsync<T>(this IQueryRepository<T> queryRepository, Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default) where T : class {
+#if NETSTANDARD2_0_OR_GREATER
+        if (queryRepository == null) throw new ArgumentNullException(nameof(queryRepository));
+        if (expression == null) throw new ArgumentNullException(nameof(expression));
+#else
+        ArgumentNullException.ThrowIfNull(queryRepository);
+        ArgumentNullException.ThrowIfNull(expression);
+#endif
         return queryRepository.GetAsync(q => q.SingleOrDefault(expression), cancellationToken);
     }
 
@@ -74,12 +81,15 @@ public static class RepositoryExtensions {
     /// <returns>A <see cref="Task{T}">task</see> containing the <see cref="PagedCollection{T}">paged collection</see>
     /// of <typeparamref name="T">items</typeparamref>.</returns>
     public static async Task<PagedCollection<T>> PaginateAsync<T>(this IQueryRepository<T> queryRepository, int pageIndex, int pageSize, CancellationToken cancellationToken = default) where T : class {
-        if (queryRepository == null)
-            throw new ArgumentNullException(nameof(queryRepository));
-        if (pageIndex < 0)
-            throw new ArgumentOutOfRangeException(nameof(pageIndex));
-        if (pageSize < 1)
-            throw new ArgumentOutOfRangeException(nameof(pageSize));
+#if NETSTANDARD2_0_OR_GREATER
+        if (queryRepository == null) throw new ArgumentNullException(nameof(queryRepository));
+        if (pageIndex < 0) throw new ArgumentOutOfRangeException(nameof(pageIndex));
+        if (pageSize < 1) throw new ArgumentOutOfRangeException(nameof(pageSize));
+#else
+        ArgumentNullException.ThrowIfNull(queryRepository);
+        ArgumentOutOfRangeException.ThrowIfNegative(pageIndex);
+        ArgumentOutOfRangeException.ThrowIfLessThan(pageSize, 1);
+#endif
 
         var groups = await queryRepository.GetAsync(
             q => {
@@ -94,7 +104,7 @@ public static class RepositoryExtensions {
             cancellationToken).ConfigureAwait(false);
 
         // return first group
-        var result = groups.FirstOrDefault();
+        var result = groups?.FirstOrDefault();
 
         if (result == null)
             return new PagedCollection<T>(Enumerable.Empty<T>(), 0L);
@@ -114,16 +124,17 @@ public static class RepositoryExtensions {
     /// <returns>A <see cref="Task{T}">task</see> containing the <see cref="PagedCollection{T}">paged collection</see>
     /// of <typeparamref name="T">items</typeparamref>.</returns>
     public static async Task<PagedCollection<T>> PaginateAsync<T>(this IQueryRepository<T> queryRepository, Func<IQueryable<T>, IQueryable<T>> queryShaper, int pageIndex, int pageSize, CancellationToken cancellationToken = default) where T : class {
-        if (queryRepository == null)
-            throw new ArgumentNullException(nameof(queryRepository));
-
-        if (queryShaper == null)
-            throw new ArgumentNullException(nameof(queryShaper));
-
-        if (pageIndex < 0)
-            throw new ArgumentOutOfRangeException(nameof(pageIndex));
-        if (pageSize < 1)
-            throw new ArgumentOutOfRangeException(nameof(pageSize));
+#if NETSTANDARD2_0_OR_GREATER
+        if (queryRepository == null) throw new ArgumentNullException(nameof(queryRepository));
+        if (pageIndex < 0) throw new ArgumentOutOfRangeException(nameof(pageIndex));
+        if (pageSize < 1) throw new ArgumentOutOfRangeException(nameof(pageSize));
+        if (queryShaper == null) throw new ArgumentNullException(nameof(queryShaper));
+#else
+        ArgumentNullException.ThrowIfNull(queryRepository);
+        ArgumentOutOfRangeException.ThrowIfNegative(pageIndex);
+        ArgumentOutOfRangeException.ThrowIfLessThan(pageSize, 1);
+        ArgumentNullException.ThrowIfNull(queryShaper);
+#endif
 
         var groups = await queryRepository.GetAsync(
                             q => {
@@ -139,7 +150,7 @@ public static class RepositoryExtensions {
                             cancellationToken).ConfigureAwait(false);
 
         // return first group
-        var result = groups.FirstOrDefault();
+        var result = groups?.FirstOrDefault();
 
         if (result == null)
             return new PagedCollection<T>(Enumerable.Empty<T>(), 0L);

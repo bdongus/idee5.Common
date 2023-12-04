@@ -85,6 +85,10 @@ Moved localizable strings to internal resource file.
 * Added ProblemDetailsWithErrors
 ### 3.6
 * Detect interface implementations added. Used to find command and query handlers.
+### 3.7
+* Multitargetting enabled
+* IsNotNull helper for .NET8+ added
+* Nullable cleanups
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -168,3 +172,6 @@ Nullable support in IAuditedEntity
 * Added the MasterSystemReference type.
 ### 1.8
 * Configurable master system formatter
+### 1.9
+* Multitargetting enabled
+* Nullable cleanups

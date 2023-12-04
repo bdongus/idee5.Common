@@ -15,9 +15,13 @@ public static class ServiceCollectionExtensions {
     /// <param name="serviceLifetime">The service lifetime.</param>
     /// <exception cref="ArgumentNullException">Thrown if a parameter is null.</exception>
     public static void RegisterHandlers(this IServiceCollection services, Type handlerType, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped) {
+#if NETSTANDARD2_0_OR_GREATER
         if (services is null) throw new ArgumentNullException(nameof(services));
         if (handlerType is null) throw new ArgumentNullException(nameof(handlerType));
-
+#else
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(handlerType);
+#endif
         var implementations = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a => a.DefinedTypes.Where(t => !t.IsAbstract && t.IsClass && !t.IsGenericType && !t.Name.Contains("Validat")
             && t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerType)));

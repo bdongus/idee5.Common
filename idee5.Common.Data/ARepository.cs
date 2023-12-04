@@ -26,7 +26,7 @@ public abstract class ARepository<T, TPrimaryKey> : IRepository<T, TPrimaryKey>
     public abstract Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> func, CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
-    public abstract Task<TResult> GetAsync<TResult>(Func<IQueryable<T>, TResult> func, CancellationToken cancellationToken = default);
+    public abstract Task<TResult?> GetAsync<TResult>(Func<IQueryable<T>, TResult> func, CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
     public abstract void Remove(T item);

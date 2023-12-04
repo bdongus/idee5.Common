@@ -136,7 +136,7 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
     /// <returns>The string representation of <paramref name="value"/>.</returns>
     public static string ToString(TEnum value) {
         // defined value exists
-        if (ValueNamePairs.TryGetValue(value, out string name))
+        if (ValueNamePairs.TryGetValue(value, out string? name))
             return name;
         else return _isSigned ? value.ToInt64(null).ToString(CultureInfo.InvariantCulture) : value.ToUInt64(null).ToString(CultureInfo.InvariantCulture);
     }

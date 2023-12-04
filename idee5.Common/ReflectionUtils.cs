@@ -14,12 +14,15 @@ public static class ReflectionUtils {
     /// <param name="args">Optional constructor parameters.</param>
     /// <returns>The created instance or null.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="typeName"/> is <c>null</c>.</exception>
-    public static object CreateInstanceFromString(string typeName, params object[] args) {
-        if (typeName == null)
-            throw new ArgumentNullException(nameof(typeName));
-        object instance = null;
+    public static object? CreateInstanceFromString(string typeName, params object[] args) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (typeName == null) throw new ArgumentNullException(nameof(typeName));
+#else
+        ArgumentNullException.ThrowIfNull(typeName);
+#endif
+        object? instance = null;
         try {
-            Type type = GetTypeFromName(typeName);
+            Type? type = GetTypeFromName(typeName);
             if (type != null)
                 instance = Activator.CreateInstance(type, args);
         }
@@ -35,9 +38,12 @@ public static class ReflectionUtils {
     /// <param name="typeName"></param>
     /// <returns>The found <see cref="Type"/> or <c>null</c>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="typeName"/> is <c>null</c>.</exception>
-    public static Type GetTypeFromName(string typeName) {
-        if (typeName == null)
-            throw new ArgumentNullException(nameof(typeName));
+    public static Type? GetTypeFromName(string typeName) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (typeName == null) throw new ArgumentNullException(nameof(typeName));
+#else
+        ArgumentNullException.ThrowIfNull(typeName);
+#endif
         var type = Type.GetType(typeName, throwOnError: false);
         if (type != null)
             return type;
@@ -59,13 +65,16 @@ public static class ReflectionUtils {
     /// <param name="property">Property to get value from</param>
     /// <returns>The property value.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="typeName"/> or <paramref name="property"/> is <c>null</c>.</exception>
-    public static object GetStaticProperty(string typeName, string property) {
-        if (typeName == null)
-            throw new ArgumentNullException(nameof(typeName));
+    public static object? GetStaticProperty(string typeName, string property) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (typeName == null) throw new ArgumentNullException(nameof(typeName));
+        if (property == null) throw new ArgumentNullException(nameof(property));
+#else
+        ArgumentNullException.ThrowIfNull(typeName);
+        ArgumentNullException.ThrowIfNull(property);
+#endif
 
-        if (property == null)
-            throw new ArgumentNullException(nameof(property));
-        Type type = GetTypeFromName(typeName);
+        Type? type = GetTypeFromName(typeName);
         if (type == null)
             return null;
 
@@ -79,13 +88,15 @@ public static class ReflectionUtils {
     /// <param name="property">Property name as a string</param>
     /// <returns>The property value.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="type"/> or <paramref name="property"/> is <c>null</c>.</exception>
-    public static object GetStaticProperty(Type type, string property) {
-        if (type == null)
-            throw new ArgumentNullException(nameof(type));
-
-        if (property == null)
-            throw new ArgumentNullException(nameof(property));
-        object result;
+    public static object? GetStaticProperty(Type type, string property) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (property == null) throw new ArgumentNullException(nameof(property));
+#else
+        ArgumentNullException.ThrowIfNull(type);
+        ArgumentNullException.ThrowIfNull(property);
+#endif
+        object? result;
         try {
             result = type.InvokeMember(
             property,

@@ -12,8 +12,8 @@ public class CurrenciesForISOCodesQueryHandler : IQueryHandler<CurrenciesForISOC
         ImmutableArray<CurrencyInfo> result = ImmutableArray<CurrencyInfo>.Empty;
         if (query?.AllowedISOCodes.IsDefaultOrEmpty == false) {
             result = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-                .Select(ci => ci.LCID).Distinct()
-                .Select(lcid => new RegionInfo(lcid))
+                .Select(ci => ci.Name).Distinct()
+                .Select(cname => new RegionInfo(cname))
                 .Where(ri => query.AllowedISOCodes.Contains(ri.ISOCurrencySymbol))
                 .GroupBy(ri => ri.ISOCurrencySymbol)
                 .Select(g => g.First())

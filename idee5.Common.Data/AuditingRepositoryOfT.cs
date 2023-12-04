@@ -45,9 +45,11 @@ public abstract class AuditingRepository<T, TKey> : ARepository<T, TKey>
     /// <param name="item">The new item to add.</param>
     /// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.</exception>
     public override void Add(T item) {
-        if (item == null)
-            throw new ArgumentNullException(nameof(item));
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (item == null) throw new ArgumentNullException(nameof(item));
+#else
+        ArgumentNullException.ThrowIfNull(item);
+#endif
         item.DateCreatedUTC = TimeProvider.UtcNow;
         item.CreatedBy = CurrentUserProvider.GetCurrentUserId();
     }
@@ -59,9 +61,11 @@ public abstract class AuditingRepository<T, TKey> : ARepository<T, TKey>
     /// <param name="item">The item to update.</param>
     /// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.</exception>
     public override void Update(T item) {
-        if (item == null)
-            throw new ArgumentNullException(nameof(item));
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (item == null) throw new ArgumentNullException(nameof(item));
+#else
+        ArgumentNullException.ThrowIfNull(item);
+#endif
         item.DateModifiedUTC = TimeProvider.UtcNow;
         item.ModifiedBy = CurrentUserProvider.GetCurrentUserId();
     }

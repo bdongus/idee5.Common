@@ -15,10 +15,11 @@ public static class CollectionExtensions {
     /// <returns>Returns true if added, returns false if not.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> is <c>null</c>.</exception>
     public static bool AddIfNotContains<T>(this ICollection<T> source, T item) {
-        if (source == null) {
-            throw new ArgumentNullException(nameof(source));
-        }
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (source == null) throw new ArgumentNullException(nameof(source));
+#else
+        ArgumentNullException.ThrowIfNull(source);
+#endif
         if (source.Contains(item)) {
             return false;
         }

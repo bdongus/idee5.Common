@@ -6,7 +6,7 @@ namespace idee5.Common.Data.Tests {
         [TestMethod]
         public void EmptyStringIsValid() {
             // Arrange
-            var attribute = new ValidGLNAttribute();
+            var attribute = new IsValidGLNAttribute();
 
             // Act
             bool result = attribute.IsValid(string.Empty);
@@ -18,7 +18,7 @@ namespace idee5.Common.Data.Tests {
         [TestMethod]
         public void NullIsValid() {
             // Arrange
-            var attribute = new ValidGLNAttribute();
+            var attribute = new IsValidGLNAttribute();
 
             // Act
             bool result = attribute.IsValid(null);
@@ -30,7 +30,7 @@ namespace idee5.Common.Data.Tests {
         [TestMethod]
         public void CanValidateGLN() {
             // Arrange
-            var attribute = new ValidGLNAttribute();
+            var attribute = new IsValidGLNAttribute();
 
             // Act
             bool result = attribute.IsValid("4025692000004");
@@ -42,7 +42,7 @@ namespace idee5.Common.Data.Tests {
         [TestMethod]
         public void CanDetectInvalidateGLN() {
             // Arrange
-            var attribute = new ValidGLNAttribute();
+            var attribute = new IsValidGLNAttribute();
 
             // Act
             bool result = attribute.IsValid("4025692000014");
@@ -54,7 +54,7 @@ namespace idee5.Common.Data.Tests {
         [TestMethod]
         public void FailsOnNonString() {
             // Arrange
-            var attribute = new ValidGLNAttribute();
+            var attribute = new IsValidGLNAttribute();
 
             // Act
             bool result = attribute.IsValid(42);

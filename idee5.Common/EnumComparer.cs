@@ -136,7 +136,7 @@ public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
         ParameterExpression objParam = Expression.Parameter(typeof(TEnum), "obj");
         Type underlyingType = Enum.GetUnderlyingType(typeof(TEnum));
         UnaryExpression convertExpression = Expression.Convert(objParam, underlyingType);
-        System.Reflection.MethodInfo getHashCodeMethod = underlyingType.GetMethod("GetHashCode");
+        System.Reflection.MethodInfo getHashCodeMethod = underlyingType.GetMethod(nameof(Object.GetHashCode))!;
         MethodCallExpression getHashCodeExpression = Expression.Call(convertExpression, getHashCodeMethod);
         return Expression.Lambda<Func<TEnum, int>>(getHashCodeExpression, new[] { objParam }).Compile();
     }

@@ -14,10 +14,12 @@ public class PagedCollection<T> : ReadOnlyObservableCollection<T> {
     /// Initializes a new instance of the <see cref="PagedCollection{T}"/> class.
     /// </summary>
     /// <param name="sequence">The <see cref="IEnumerable{T}"/> containing the current data page of items.</param>
-    protected PagedCollection(IEnumerable<T> sequence)
-        : this(new ObservableCollection<T>(sequence)) {
-        if (sequence == null)
-            throw new ArgumentNullException(nameof(sequence));
+    protected PagedCollection(IEnumerable<T> sequence) : this(new ObservableCollection<T>(sequence)) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (sequence == null) throw new ArgumentNullException(nameof(sequence));
+#else
+        ArgumentNullException.ThrowIfNull(sequence);
+#endif
     }
 
     /// <summary>
@@ -35,8 +37,11 @@ public class PagedCollection<T> : ReadOnlyObservableCollection<T> {
     /// <param name="totalCount">The total number of items.</param>
     public PagedCollection(IEnumerable<T> sequence, long totalCount)
         : this(new ObservableCollection<T>(sequence), totalCount) {
-        if (sequence == null)
-            throw new ArgumentNullException(nameof(sequence));
+#if NETSTANDARD2_0_OR_GREATER
+        if (sequence == null) throw new ArgumentNullException(nameof(sequence));
+#else
+        ArgumentNullException.ThrowIfNull(sequence);
+#endif
     }
 
     /// <summary>
@@ -46,11 +51,13 @@ public class PagedCollection<T> : ReadOnlyObservableCollection<T> {
     /// <param name="totalCount">The total number of items.</param>
     public PagedCollection(ObservableCollection<T> collection, long totalCount)
         : base(collection) {
-        if (collection == null)
-            throw new ArgumentNullException(nameof(collection));
-        if (totalCount < collection.Count)
-            throw new ArgumentOutOfRangeException(nameof(totalCount));
-
+ #if NETSTANDARD2_0_OR_GREATER
+        if (collection == null) throw new ArgumentNullException(nameof(collection));
+        if (totalCount < collection.Count) throw new ArgumentOutOfRangeException(nameof(totalCount));
+#else
+        ArgumentNullException.ThrowIfNull(collection);
+        ArgumentOutOfRangeException.ThrowIfLessThan(totalCount, collection.Count);
+#endif
         _totalCount = totalCount;
     }
 
@@ -61,8 +68,11 @@ public class PagedCollection<T> : ReadOnlyObservableCollection<T> {
     public long TotalCount {
         get => _totalCount;
         protected set {
-            if (value < 0)
-                throw new ArgumentOutOfRangeException(nameof(TotalCount));
+#if NETSTANDARD2_0_OR_GREATER
+            if (value < 0) throw new ArgumentOutOfRangeException(nameof(TotalCount));
+#else
+            ArgumentOutOfRangeException.ThrowIfNegative(value);
+#endif
             _totalCount = value;
         }
     }

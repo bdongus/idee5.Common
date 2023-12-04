@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Immutable;
+using System.Globalization;
 
 namespace idee5.Common.Tests {
     public class QueryParameters : IQuery<string[]> {
@@ -43,7 +44,7 @@ namespace idee5.Common.Tests {
         public void CanFilterNativeCountryQuery() {
             var q = new CountryQuery { NameFilter = "Suisse" };
             var handler = new CountryQueryHandler();
-            System.Collections.Generic.IDictionary<string, System.Globalization.CultureInfo> result = handler.Handle(q);
+            System.Collections.Generic.IDictionary<string, CultureInfo> result = handler.Handle(q);
             Assert.AreEqual(expected: 1, actual: result.Count);
         }
 
@@ -51,7 +52,7 @@ namespace idee5.Common.Tests {
         public void CanFilterCountryQuery() {
             var q = new CountryQuery { NameFilter = "Swi" };
             var handler = new CountryQueryHandler();
-            System.Collections.Generic.IDictionary<string, System.Globalization.CultureInfo> result = handler.Handle(q);
+            System.Collections.Generic.IDictionary<string, CultureInfo> result = handler.Handle(q);
             // Djbouti and Switzerland under Windows 10 ???? Da seit 8.1 die gelieferte OS-Version
             // immer 6.2 ist, ist der Test sinnlos !!!! if (Environment.OSVersion.Version.Major==6 &&
             // Environment.OSVersion.Version.Minor==2) Assert.AreEqual(expected: 2, actual: result.Count);
@@ -63,7 +64,7 @@ namespace idee5.Common.Tests {
         public void CanGetAllCountryQuery() {
             var q = new CountryQuery();
             var handler = new CountryQueryHandler();
-            System.Collections.Generic.IDictionary<string, System.Globalization.CultureInfo> result = handler.Handle(q);
+            System.Collections.Generic.IDictionary<string, CultureInfo> result = handler.Handle(q);
             Assert.AreNotEqual(notExpected: 1, actual: result.Count);
         }
 

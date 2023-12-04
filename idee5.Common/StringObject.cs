@@ -6,7 +6,9 @@ public class StringObject {
     /// <summary>
     /// Erstellt eine neue Instanz der <see cref="StringObject"/>-Klasse.
     /// </summary>
-    public StringObject() { }
+    public StringObject() {
+        Value = "";
+    }
 
     /// <summary>
     /// Erstellt eine neue Instanz der <see cref="StringObject"/>-Klasse.

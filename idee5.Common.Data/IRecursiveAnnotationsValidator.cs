@@ -10,7 +10,7 @@ public interface IRecursiveAnnotationsValidator {
     /// <param name="instance">The object to be validated.</param>
     /// <param name="results">The validation results.</param>
     /// <param name="validationContextItems">Validation context items.</param>
-    bool TryValidateObject(object instance, ICollection<ValidationResult> results, IDictionary<object, object> validationContextItems = null);
+    bool TryValidateObject(object instance, ICollection<ValidationResult> results, IDictionary<object, object?>? validationContextItems = null);
 
     /// <summary>
     /// Tries the validate this object recursively.
@@ -20,5 +20,5 @@ public interface IRecursiveAnnotationsValidator {
     /// <param name="results">The validation results.</param>
     /// <param name="validationContextItems">Validation context items.</param>
     /// <typeparam name="T">The 1st type parameter.</typeparam>
-    bool TryValidateObjectRecursive<T>(T instance, IList<ValidationResult> results, IDictionary<object, object> validationContextItems = null);
+    bool TryValidateObjectRecursive<T>(T instance, IList<ValidationResult> results, IDictionary<object, object?>? validationContextItems = null);
 }

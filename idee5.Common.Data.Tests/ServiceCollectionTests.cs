@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿#if !NETSTANDARD
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Telerik.JustMock;
@@ -41,3 +42,5 @@ public class ServiceCollectionTests {
         Assert.AreEqual(1, serviceDescriptors.Count);
     }
 }
+
+#endif

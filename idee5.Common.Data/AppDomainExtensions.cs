@@ -9,9 +9,11 @@ public static class AppDomainExtensions {
     /// <returns>Data directory path.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="appDomain"/> is <c>null</c>.</exception>
     public static string GetDataDirectory(this AppDomain appDomain) {
-        if (appDomain == null)
-            throw new ArgumentNullException(nameof(appDomain));
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (appDomain == null) throw new ArgumentNullException(nameof(appDomain));
+#else
+        ArgumentNullException.ThrowIfNull(appDomain);
+#endif
         var dataDirectory = appDomain.GetData("DataDirectory") as string;
         if (!dataDirectory.HasValue()) {
             dataDirectory = appDomain.BaseDirectory;

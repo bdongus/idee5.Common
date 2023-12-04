@@ -13,9 +13,11 @@ public class SimpleDB3ConnectionStringProvider : IConnectionStringProvider {
     /// <returns><paramref name="connectionId"/>.db3 in the <see cref="AppDomain"/>s data directory as connection string.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="connectionId"/> is NULL.</exception>
     public string GetConnectionString(string connectionId) {
-        if (connectionId == null)
-            throw new ArgumentNullException(nameof(connectionId));
-
+#if NETSTANDARD2_0_OR_GREATER
+        if (connectionId == null) throw new ArgumentNullException(nameof(connectionId));
+#else
+        ArgumentNullException.ThrowIfNull(connectionId);
+#endif
         string path = "";
         if (connectionId.HasValue()) {
             // ConfigurationManager is not available in netstandard, thus we can't lookup a connectionstring

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace idee5.Common;
 /// <summary>
@@ -23,7 +25,7 @@ public static class ObjectExtensions {
     /// <typeparam name="T">Generic type parameter. The specified type.</typeparam>
     /// <param name="obj">The object to cast.</param>
     /// <returns>The object as the specified type.</returns>
-    public static T AsOrDefault<T>(this object obj) {
+    public static T? AsOrDefault<T>(this object obj) {
         try {
             return (T)obj;
         }
@@ -44,16 +46,18 @@ public static class ObjectExtensions {
     /// <summary>
     /// Gets an object's property value.
     /// </summary>
-    /// <param name="o">This instance.</param>
+    /// <param name="obj">This instance.</param>
     /// <param name="propertyName">NativeName of the property to read.</param>
     /// <returns>The property's value as object</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="o"/> is <c>null</c>.</exception>
-    public static object GetPropertyValue(this object o, string propertyName) {
-        if (o == null)
-            throw new ArgumentNullException(nameof(o));
-
-        PropertyInfo propertyInfo = o.GetType().GetProperty(propertyName);
-        return propertyInfo?.GetValue(o, null) ?? string.Empty;
+    /// <exception cref="ArgumentNullException"><paramref name="obj"/> is <c>null</c>.</exception>
+    public static object GetPropertyValue(this object obj, string propertyName) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (obj == null) throw new ArgumentNullException(nameof(obj));
+#else
+        ArgumentNullException.ThrowIfNull(obj);
+#endif
+        PropertyInfo? propertyInfo = obj.GetType().GetProperty(propertyName);
+        return propertyInfo?.GetValue(obj, null) ?? string.Empty;
     }
 
     /// <summary>
@@ -102,7 +106,7 @@ public static class ObjectExtensions {
     /// <param name="value">Value to convert.</param>
     /// <param name="result">Converted value. Destination default value if the conversion failed.</param>
     /// <returns><c>True</c> if the conversion succeeded.</returns>
-    public static bool TryConvert<T>(this object value, out T result) {
+    public static bool TryConvert<T>(this object value, out T? result) {
         // default output value
         result = default;
 
@@ -119,9 +123,9 @@ public static class ObjectExtensions {
         try {
             // if the type is nullable or an Enum, use the TypeDescriptor and TypeConverter
             if (typeName.IndexOf(typeof(Nullable).Name, StringComparison.Ordinal) > -1 ||
-                typeof(T).BaseType.Name.IndexOf(typeof(Enum).Name, StringComparison.Ordinal) > -1) {
+                typeof(T).BaseType?.Name.IndexOf(nameof(Enum), StringComparison.Ordinal) > -1) {
                 TypeConverter tc = TypeDescriptor.GetConverter(typeof(T));
-                result = (T)tc.ConvertFrom(value);
+                result = (T?)tc.ConvertFrom(value);
             } else { result = (T)Convert.ChangeType(value, typeof(T)); }
         }
         catch { return false; }
@@ -135,4 +139,29 @@ public static class ObjectExtensions {
     /// <param name="value">Object to convert.</param>
     /// <returns>The object properties and their values in a <see cref="string"/></returns>
     public static string AsString(this object value) => string.Join(Environment.NewLine, value.GetType().GetProperties().Select(prop => $"{prop.Name}: {prop.GetValue(value, null)}"));
+
+#if NET8_0_OR_GREATER
+    /// <summary>
+    /// <c>NULL</c> check helper
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="obj">Object to check</param>
+    /// <param name="paramName"></param>
+    /// <returns>The object</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="obj"/> is <c>NULL</c>.</exception>
+    /// <remarks>
+    /// <example>
+    /// <code lang="C#"><![CDATA[
+    ///     public class Service(IService svc) : IService {
+    ///         private readonly IService svc = svc.IsNotNull();
+    ///     }
+    /// ]]></code>
+    /// </example>
+    /// </remarks>
+[return: NotNull]
+    public static T IsNotNull<T>(this T obj, [CallerArgumentExpression(nameof(obj))] string? paramName = null) where T : class {
+        ArgumentNullException.ThrowIfNull(obj, paramName);
+        return obj;
+    }
+#endif
 }

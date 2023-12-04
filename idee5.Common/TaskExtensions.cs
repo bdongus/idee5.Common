@@ -16,10 +16,12 @@ public static class TaskExtensions {
     /// <param name="continueOnCapturedContext">If set to <c>true</c> continue on captured context; this will ensure that the Synchronization Context returns to the calling thread. If set to <c>false</c> continue on a different context; this will allow the Synchronization Context to continue on a different thread</param>
     /// <param name="onException">If an exception is thrown in the Task, <c>onException</c> will execute. If onException is null, the exception will be re-thrown</param>
     /// <exception cref="ArgumentNullException"><paramref name="task"/> is <c>null</c>.</exception>
-    public static async void SafeFireAndForget(this Task task, bool continueOnCapturedContext = true, Action<Exception> onException = null) {
-        if (task == null)
-            throw new ArgumentNullException(nameof(task));
-
+    public static async void SafeFireAndForget(this Task task, bool continueOnCapturedContext = true, Action<Exception>? onException = null) {
+#if NETSTANDARD2_0_OR_GREATER
+        if (task == null) throw new ArgumentNullException(nameof(task));
+#else
+        ArgumentNullException.ThrowIfNull(task);
+#endif
         try {
             await task.ConfigureAwait(continueOnCapturedContext);
         }

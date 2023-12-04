@@ -8,7 +8,7 @@ namespace idee5.Common.Data;
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class ValidGTINAttribute : ValidationAttribute {
     /// <inheritdoc/>
-    public override bool IsValid(object value) {
+    public override bool IsValid(object? value) {
         if (value == null) {
             return true;
         }

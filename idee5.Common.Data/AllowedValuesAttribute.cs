@@ -21,12 +21,10 @@ public abstract class AllowedValuesAttribute : ValidationAttribute {
     /// <param name="invalidValue">The invalid value.</param>
     /// <param name="validValues">The list of valid values.</param>
     /// <returns>The validation info/message.</returns>
-    protected abstract string GetInvalidValueMessage(object invalidValue, object[] validValues);
+    protected abstract string GetInvalidValueMessage(object? invalidValue, object[] validValues);
 
     /// <inheritdoc/>
-    protected override ValidationResult IsValid(
-        object value,
-        ValidationContext validationContext) {
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext) {
         var values = GetValues(validationContext);
         var exists = values.Contains(value);
 

@@ -23,7 +23,7 @@ public static class IfExtensions {
     /// <param name="item">The item to be checked for <see langword="null"/>.</param>
     /// <param name="func">The <see cref="Func{T, TResult}"/> to be executed on the item.</param>
     /// <param name="defaultValue">The default value to return if the <paramref name="item"/> is <see langword="null"/>.</param>
-    public static TResult IfNotNull<TResult, TItem>(this TItem item, Func<TItem, TResult> func, TResult defaultValue = default)
+    public static TResult IfNotNull<TResult, TItem>(this TItem item, Func<TItem, TResult> func, TResult defaultValue)
     where TItem : class {
         return item != null && func != null ? func(item) : defaultValue;
     }

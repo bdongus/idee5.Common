@@ -27,5 +27,5 @@ public interface IQueryRepository<T> where T : class {
     /// <param name="func">The <see cref="Func{T,TResult}"> function</see> that shapes the <see cref="IQueryable{T}">query</see> to execute.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken">cancellation token</see> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task{T}">task</see> containing the <typeparamref name="TResult">result</typeparamref> of the operation.</returns>
-    Task<TResult> GetAsync<TResult>(Func<IQueryable<T>, TResult> func, CancellationToken cancellationToken = default);
+    Task<TResult?> GetAsync<TResult>(Func<IQueryable<T>, TResult> func, CancellationToken cancellationToken = default);
 }

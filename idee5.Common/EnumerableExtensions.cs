@@ -43,8 +43,11 @@ public static class EnumerableExtensions {
     /// <returns><c>true</c> if all items in the other collection exist in this collection</returns>
     /// <exception cref="ArgumentNullException"><paramref name="other"/> is <c>null</c>.</exception>
     public static bool ContainsAll<TSource>(this IEnumerable<TSource> source, IEnumerable<TSource> other) {
-        if (other == null)
-            throw new ArgumentNullException(nameof(other));
+#if NETSTANDARD2_0_OR_GREATER
+        if (other == null) throw new ArgumentNullException(nameof(other));
+#else
+        ArgumentNullException.ThrowIfNull(other);
+#endif
 
         bool matches = true;
         foreach (TSource i in other) {
@@ -77,11 +80,14 @@ public static class EnumerableExtensions {
     /// <returns>List of results.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="keySelector"/> is <c>null</c>.</exception>
     public static IEnumerable<T> Distinct<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector) {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
+#if NETSTANDARD2_0_OR_GREATER
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+#else
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(keySelector);
+#endif
 
-        if (keySelector == null)
-            throw new ArgumentNullException(nameof(keySelector));
         return source.GroupBy(keySelector).Select(grps => grps).Select(e => e.First());
     }
 
@@ -105,10 +111,13 @@ public static class EnumerableExtensions {
     /// </code>
     /// </remarks>
     public static IEnumerable<T> Execute<T>(this IEnumerable<T> source, Action<T> func) {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
-        if (func == null)
-            throw new ArgumentNullException(nameof(func));
+#if NETSTANDARD2_0_OR_GREATER
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        if (func == null) throw new ArgumentNullException(nameof(func));
+#else
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(func);
+#endif
 
         return TiggertImmediateValidation();
 
@@ -138,12 +147,15 @@ public static class EnumerableExtensions {
     /// <param name="predicate">The expression to test the items against.</param>
     /// <returns>The index of the first matching item, or -1.</returns>
     public static int FindIndex<T>(this IEnumerable<T> items, int startIndex, Func<T, bool> predicate) {
-        if (items == null)
-            throw new ArgumentNullException(nameof(items));
-        if (predicate == null)
-            throw new ArgumentNullException(nameof(predicate));
-        if (startIndex < 0)
-            throw new ArgumentOutOfRangeException(nameof(startIndex));
+#if NETSTANDARD2_0_OR_GREATER
+        if (items == null) throw new ArgumentNullException(nameof(items));
+        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+        if (startIndex < 0) throw new ArgumentOutOfRangeException(nameof(startIndex));
+#else
+        ArgumentNullException.ThrowIfNull(items);
+        ArgumentNullException.ThrowIfNull(predicate);
+        ArgumentOutOfRangeException.ThrowIfNegative(startIndex);
+#endif
 
         int index = startIndex;
         if (index > 0)
@@ -175,14 +187,15 @@ public static class EnumerableExtensions {
     /// <param name="source"></param>
     /// <param name="projection"></param>
     /// <returns></returns>
-    public static IEnumerable<TBase> ForAllThatAre<TBase, TActual>(this IEnumerable<TBase> source, Action<TActual> projection) where TActual : class => source.Select(x => {
-        // use GetTypeInfo because IsAssignableFrom in CPL projects is only available on TypeInfo
-        if (typeof(TActual).GetTypeInfo().IsAssignableFrom(x.GetType().GetTypeInfo())) {
-            var casted = x as TActual;
-            projection.Invoke(casted);
-        }
-        return x;
-    });
+    public static IEnumerable<TBase> ForAllThatAre<TBase, TActual>(this IEnumerable<TBase> source, Action<TActual> projection) where TActual : class {
+        return source.Select(x => {
+            // use GetTypeInfo because IsAssignableFrom in CPL projects is only available on TypeInfo
+            if (typeof(TActual).GetTypeInfo().IsAssignableFrom(x?.GetType().GetTypeInfo()) && x is TActual casted) {
+                projection.Invoke(casted);
+            }
+            return x;
+        });
+    }
 
     /// <summary>
     /// Execute an operation for each element.
@@ -191,7 +204,6 @@ public static class EnumerableExtensions {
     /// <param name="func">The func.</param>
     /// <typeparam name="TItem">item type</typeparam>
     /// <typeparam name="TResult">Result type</typeparam>
-    /// <returns>the Results</returns>
     public static TResult[] ForEach<TItem, TResult>(this IEnumerable<TItem> items, Func<TItem, TResult> func) => items.Select(func).ToArray();
 
     /// <summary>
@@ -200,8 +212,8 @@ public static class EnumerableExtensions {
     /// <param name="items">The items.</param>
     /// <param name="action">The action.</param>
     /// <typeparam name="TItem">Item type</typeparam>
-    /// <returns>list of TItem</returns>
-    public static IEnumerable<TItem> ForEach<TItem>(this IEnumerable<TItem> items, Action<TItem> action) {
+    /// <returns>List of TItem</returns>
+    public static IEnumerable<TItem>? ForEach<TItem>(this IEnumerable<TItem>? items, Action<TItem> action) {
         if (items != null && action != null) {
             foreach (TItem item in items) { action(item); }
         }
@@ -244,7 +256,8 @@ public static class EnumerableExtensions {
     /// <param name="separator">The element separating each element of the stream.</param>
     /// <param name="toString">The function used to convert each element to a string.</param>
     /// <returns>A formatted string.</returns>
-    /// <exception cref="ArgumentNullException">Thrown if argument is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown if an argument is null.</exception>
+    /// <exception cref="ArgumentException">Thrown if <paramref name="separator"/> is <c>NULL</c> or empty.</exception>
     /// <remarks>
     /// Format is a set of extension method overloads on <see cref="IEnumerable{T}"/> that make
     /// it easy to construct a string from a sequence. Basically, you provide a sequence and a
@@ -259,12 +272,18 @@ public static class EnumerableExtensions {
     /// </code>
     /// </remarks>
     public static string Format<T>(this IEnumerable<T> source, string separator, Func<T, string> toString) {
+#if NETSTANDARD2_0_OR_GREATER
         if (source == null)
             throw new ArgumentNullException(nameof(source));
         if (separator == null)
             throw new ArgumentNullException(nameof(separator));
         if (toString == null)
             throw new ArgumentNullException(nameof(toString));
+#else
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentException.ThrowIfNullOrEmpty(separator);
+        ArgumentNullException.ThrowIfNull(toString);
+#endif
         var sb = new StringBuilder();
         Format(source, separator, sb, toString);
         return sb.Length == 0 ? string.Empty : sb.ToString(startIndex: 0, length: sb.Length - separator.Length);
@@ -278,6 +297,7 @@ public static class EnumerableExtensions {
     /// <param name="separator">The element separating each element of the stream.</param>
     /// <param name="output">The StringBuilder to which the output is written.</param>
     /// <exception cref="ArgumentNullException">Thrown if argument is null.</exception>
+    /// <exception cref="ArgumentException">Thrown if <paramref name="separator"/> is <c>NULL</c> or empty.</exception>
     /// <remarks>
     /// Format is a set of extension method overloads on <see cref="IEnumerable{T}"/> that make
     /// it easy to construct a string from a sequence. Basically, you provide a sequence and a
@@ -292,13 +312,19 @@ public static class EnumerableExtensions {
     /// </code>
     /// </remarks>
     public static void Format<T>(this IEnumerable<T> source, string separator, StringBuilder output) {
+#if NETSTANDARD2_0_OR_GREATER
         if (source == null)
             throw new ArgumentNullException(nameof(source));
         if (separator == null)
             throw new ArgumentNullException(nameof(separator));
         if (output == null)
             throw new ArgumentNullException(nameof(output));
-        Format(source, separator, output, s => s.ToString());
+#else
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentException.ThrowIfNullOrEmpty(separator);
+        ArgumentNullException.ThrowIfNull(output);
+#endif
+        Format(source, separator, output, s => s?.ToString() ?? "");
     }
 
     /// <summary>
@@ -325,12 +351,18 @@ public static class EnumerableExtensions {
     /// </code>
     /// </remarks>
     public static void Format<T>(this IEnumerable<T> source, string separator, StringBuilder output, Func<T, string> toString) {
+#if NETSTANDARD2_0_OR_GREATER
         if (source == null)
             throw new ArgumentNullException(nameof(source));
-        if (output == null)
-            throw new ArgumentNullException(nameof(output));
+        if (separator == null)
+            throw new ArgumentNullException(nameof(separator));
         if (toString == null)
             throw new ArgumentNullException(nameof(toString));
+#else
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentException.ThrowIfNullOrEmpty(separator);
+        ArgumentNullException.ThrowIfNull(toString);
+#endif
         foreach (T t in source) {
             string value = t is ValueType || t != null ? toString(t) : string.Empty;
             output.Append(value);
@@ -366,8 +398,12 @@ public static class EnumerableExtensions {
     /// <exception cref="ArgumentNullException"><paramref name="source"/> is <c>null</c>.</exception>
     /// <exception cref="ArgumentException"><paramref name="groupSize"/> is less or equal 0.</exception>
     public static IEnumerable<IEnumerable<T>> InGroupsOf<T>(this IEnumerable<T> source, int groupSize) {
+#if NETSTANDARD2_0_OR_GREATER
         if (source == null)
             throw new ArgumentNullException(nameof(source));
+#else
+        ArgumentNullException.ThrowIfNull(source);
+#endif
         if (groupSize <= 0)
             throw new ArgumentException(Resources.MustBeGreaterThanZero, nameof(groupSize));
         return source.Select((x, i) => Tuple.Create(i / groupSize, x))
@@ -409,8 +445,11 @@ public static class EnumerableExtensions {
     /// <param name="list">The list.</param>
     /// <param name="predicate">The predicate.</param>
     public static void RemoveAll<T>(this ICollection<T> list, Func<T, bool> predicate) {
-        if (list == null)
-            throw new ArgumentNullException(nameof(list));
+#if NETSTANDARD2_0_OR_GREATER
+        if (list == null) throw new ArgumentNullException(nameof(list));
+#else
+        ArgumentNullException.ThrowIfNull(list);
+#endif
 
         foreach (T match in list.Where(predicate).ToArray()) { list.Remove(match); }
     }
@@ -430,7 +469,7 @@ public static class EnumerableExtensions {
         Func<T, IEnumerable<T>> recursiveSelector, int maxRecusionDepth = 100) {
         if (enumerables != null && recursiveSelector != null)
             return TriggerImmediateValidation();
-        return enumerables;
+        return enumerables!;
 
         IEnumerable<T> TriggerImmediateValidation() {
             var stack = new Stack<IEnumerator<T>>();
@@ -466,7 +505,7 @@ public static class EnumerableExtensions {
     /// <param name="quotationMark">The quotation mark.</param>
     /// <returns>The formatted string.</returns>
     public static string ToCsv<T>(this IEnumerable<T> source, string separator = ",", string quotationMark = "\"")
-        => source.Format(separator, s => quotationMark + s.ToString() + quotationMark);
+        => source.Format(separator, s => quotationMark + s + quotationMark);
 
     /// <summary>
     /// Converts an IEnumerable to DataTable (supports nullable types)
@@ -480,11 +519,11 @@ public static class EnumerableExtensions {
 
         if (varlist != null) {
             // column names
-            PropertyInfo[] oProps = null;
+            PropertyInfo[]? oProps = null;
 
             foreach (T rec in varlist) {
                 // Use reflection to get property names, to create table, Only first time, others will follow
-                if (oProps == null) {
+                if (oProps == null && rec != null) {
                     oProps = rec.GetType().GetProperties();
                     for (int i2 = 0; i2 < oProps.Length; i2++) {
                         Type colType = oProps[i2].PropertyType;
@@ -498,8 +537,11 @@ public static class EnumerableExtensions {
 
                 DataRow dr = dtReturn.NewRow();
 
-                for (int i3 = 0; i3 < oProps.Length; i3++)
-                    dr[oProps[i3].Name] = oProps[i3].GetValue(rec, index: null) ?? DBNull.Value;
+                if (oProps != null) {
+                    for (int i3 = 0; i3 < oProps.Length; i3++) {
+                        dr[oProps[i3].Name] = oProps[i3].GetValue(rec, index: null) ?? DBNull.Value;
+                    }
+                }
 
                 dtReturn.Rows.Add(dr);
             }
@@ -517,7 +559,8 @@ public static class EnumerableExtensions {
     /// A dictionary of groupings such that the key of the dictionary is TKey type and the value
     /// is List of TValue type.
     /// </returns>
-    public static Dictionary<TKey, List<TValue>> ToDictionary<TKey, TValue>(this IEnumerable<IGrouping<TKey, TValue>> groupings) => groupings.ToDictionary(group => group.Key, group => group.ToList());
+    public static Dictionary<TKey, List<TValue>> ToDictionary<TKey, TValue>(this IEnumerable<IGrouping<TKey, TValue>> groupings) where TKey : notnull
+        => groupings.ToDictionary(group => group.Key, group => group.ToList());
 
     /// <summary>
     /// Transposes the rows and columns of its argument
@@ -526,8 +569,11 @@ public static class EnumerableExtensions {
     /// <param name="source">The source array.</param>
     /// <returns>Transposed two-dimensional matrix.</returns>
     public static IEnumerable<IEnumerable<T>> Transpose<T>(this IEnumerable<IEnumerable<T>> source) {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
+#if NETSTANDARD2_0_OR_GREATER
+        if (source == null) throw new ArgumentNullException(nameof(source));
+#else
+        ArgumentNullException.ThrowIfNull(source);
+#endif
         return source.Select(a => a.Select(b => Enumerable.Repeat(b, count: 1))).DefaultIfEmpty(Enumerable.Empty<IEnumerable<T>>())
                    .Aggregate((a, b) => a.Zip(b, (f, g) => f.Concat(g)));
     }

@@ -14,7 +14,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: | 
+            8.0.x
+            6.0.x
     - name: Restore dependencies
       run: |
           dotnet nuget add source https://nuget.telerik.com/v3/index.json -n MyTelerikFeed -u api-key -p ${{secrets.TELERIK_API_KEY}} --store-password-in-clear-text

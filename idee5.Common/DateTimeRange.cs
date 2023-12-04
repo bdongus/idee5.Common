@@ -4,22 +4,18 @@ namespace idee5.Common;
 /// <summary>
 /// <see cref="DateTime"/> range.
 /// </summary>
-public class DateTimeRange : IRange<DateTime>, IEquatable<DateTimeRange> {
-    /// <summary>
-    /// Create a new <see cref="DateTime"/> range.
-    /// </summary>
-    /// <param name="start">Start of the range.</param>
-    /// <param name="end">End of the range.</param>
-    public DateTimeRange(DateTime start, DateTime end) {
-        Start = start;
-        End = end;
-    }
+/// <remarks>
+/// Create a new <see cref="DateTime"/> range.
+/// </remarks>
+/// <param name="start">Start of the range.</param>
+/// <param name="end">End of the range.</param>
+public class DateTimeRange(DateTime start, DateTime end) : IRange<DateTime>, IEquatable<DateTimeRange> {
 
     /// <inheritdoc/>
-    public DateTime Start { get; }
+    public DateTime Start { get; } = start;
 
     /// <inheritdoc/>
-    public DateTime End { get; }
+    public DateTime End { get; } = end;
 
     /// <inheritdoc/>
     public bool Equals(DateTimeRange other) => other is not null && Start.Equals(other.Start) && End.Equals(other.End);

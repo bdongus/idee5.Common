@@ -23,8 +23,11 @@ public class HashCodeCombiner {
     /// <param name="o">Object to add.</param>
     /// <exception cref="ArgumentNullException"><paramref name="o"/> is <c>null</c>.</exception>
     public void AddObject(object o) {
-        if (o == null)
-            throw new ArgumentNullException(nameof(o));
+#if NETSTANDARD2_0_OR_GREATER
+        if (o == null) throw new ArgumentNullException(nameof(o));
+#else
+        ArgumentNullException.ThrowIfNull(o);
+#endif
 
         AddInt(o.GetHashCode());
     }
@@ -50,8 +53,11 @@ public class HashCodeCombiner {
     /// <param name="f">File system Item to add.</param>
     /// <exception cref="ArgumentNullException"><paramref name="f"/> is <c>null</c>.</exception>
     public void AddFileSystemItem(FileSystemInfo f) {
-        if (f == null)
-            throw new ArgumentNullException(nameof(f));
+#if NETSTANDARD2_0_OR_GREATER
+        if (f == null) throw new ArgumentNullException(nameof(f));
+#else
+        ArgumentNullException.ThrowIfNull(f);
+#endif
         //if it doesn't exist, don't proceed.
         if (!f.Exists) return;
         AddCaseInsensitiveString(f.FullName);
