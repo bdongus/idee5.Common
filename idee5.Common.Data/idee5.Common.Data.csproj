@@ -16,19 +16,24 @@
     <Description>Data access abstractions used by idee5.</Description>
     <Copyright>Copyright © 2017 - 2023</Copyright>
     <PackageTags>idee5</PackageTags>
-    <Version>1.9</Version>
-    <AssemblyVersion>1.9.0</AssemblyVersion>
-    <FileVersion>1.9.0</FileVersion>
+    <Version>1.10</Version>
+    <AssemblyVersion>1.10</AssemblyVersion>
+    <FileVersion>1.10</FileVersion>
     <PackageReleaseNotes>Check the readme</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
     <Nullable>enable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageIcon>idee5 nuget icon.png</PackageIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\idee5 nuget icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\readme.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
