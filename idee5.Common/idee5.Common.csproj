@@ -12,10 +12,10 @@
     <Company>idee5 GmbH</Company>
     <Copyright>Copyright © 2013 - 2023</Copyright>
     <Description>Collection of often used stuff</Description>
-    <AssemblyVersion>3.7</AssemblyVersion>
-    <FileVersion>3.7</FileVersion>
+    <AssemblyVersion>4.0</AssemblyVersion>
+    <FileVersion>4.0</FileVersion>
     <PackageTags>idee5</PackageTags>
-    <Version>3.7</Version>
+    <Version>4.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>idee5.snk</AssemblyOriginatorKeyFile>
@@ -44,11 +44,15 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
+  <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
     <PackageReference Include="IsExternalInit" Version="1.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework) != 'netstandard2.0'">
+    <Compile Remove="ObservableSortedDictionary.cs" />
+    <Compile Remove="ObservableDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />

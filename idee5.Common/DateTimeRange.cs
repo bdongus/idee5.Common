@@ -18,10 +18,10 @@ public class DateTimeRange(DateTime start, DateTime end) : IRange<DateTime>, IEq
     public DateTime End { get; } = end;
 
     /// <inheritdoc/>
-    public bool Equals(DateTimeRange other) => other is not null && Start.Equals(other.Start) && End.Equals(other.End);
+    public bool Equals(DateTimeRange? other) => other is not null && Start.Equals(other.Start) && End.Equals(other.End);
 
     /// <inheritdoc/>
-    public override bool Equals(object obj) => obj is DateTimeRange timeSlot && Equals(timeSlot);
+    public override bool Equals(object? obj) => obj is DateTimeRange timeSlot && Equals(timeSlot);
 
     /// <inheritdoc/>
     public static bool operator ==(DateTimeRange left, DateTimeRange right) => (left is null && right is null) || (left?.Equals(right) == true);

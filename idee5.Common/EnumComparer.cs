@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace idee5.Common;
@@ -10,7 +11,7 @@ public static class EnumComparer {
     /// <summary>
     /// Create a comparer for <typeparamref name="TEnum"/>.
     /// </summary>
-    /// <typeparam name="TEnum"></typeparam>
+    /// <typeparam name="TEnum">Enumeration type</typeparam>
     /// <returns>The comparer.</returns>
     public static EnumComparer<TEnum> For<TEnum>()
         where TEnum : struct, IComparable, IConvertible, IFormattable {
@@ -58,9 +59,11 @@ public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
     /// <param name="x">The first object of type <typeparamref name="TEnum"/> to compare.</param>
     /// <param name="y">The second object of type <typeparamref name="TEnum"/> to compare.</param>
     /// <returns>true if the specified objects are equal; otherwise, false.</returns>
-    public bool Equals(TEnum x, TEnum y) {
-        // call the generated method
-        return _equals.Value(x, y);
+    public bool Equals(TEnum? x, TEnum? y) {
+        // call the generated method if both enums are not null
+        if (x != null && y != null)
+            return _equals.Value(x, y);
+        return x == null && y == null;
     }
 
     /// <summary>
@@ -77,22 +80,18 @@ public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
     }
 
     private static void AssertTypeIsEnum() {
-        if (typeof(TEnum).IsEnum)
-            return;
-
-        string message =
-            $"The type parameter {typeof(TEnum)} is not an Enum.";
-        throw new NotSupportedException(message);
+        if (!typeof(TEnum).IsEnum) {
+            string message = $"The type parameter {typeof(TEnum)} is not an Enum.";
+            throw new NotSupportedException(message);
+        }
     }
 
     private static void AssertUnderlyingTypeIsSupported() {
         Type underlyingType = Enum.GetUnderlyingType(typeof(TEnum));
-        ICollection<Type> supportedTypes =
-            new[]
-                {
-                    typeof (byte), typeof (sbyte), typeof (short), typeof (ushort),
-                    typeof (int), typeof (uint), typeof (long), typeof (ulong)
-                };
+        Type[] supportedTypes = [
+            typeof (byte), typeof (sbyte), typeof (short), typeof (ushort),
+            typeof (int), typeof (uint), typeof (long), typeof (ulong)
+        ];
 
         if (supportedTypes.Contains(underlyingType))
             return;
@@ -107,7 +106,7 @@ public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
     /// <summary>
     /// Generates a comparison method similiar to this:
     /// <code>
-    /// bool Equals(TEnum x, TEnum y)
+    /// bool Equals(TEnum? x, TEnum? y)
     /// {
     ///     return x == y;
     /// }
@@ -115,11 +114,11 @@ public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
     /// </summary>
     /// <returns>The generated method.</returns>
     private static Func<TEnum, TEnum, bool> GenerateEquals() {
-        ParameterExpression xParam = Expression.Parameter(typeof(TEnum), "x");
-        ParameterExpression yParam = Expression.Parameter(typeof(TEnum), "y");
+        ParameterExpression xParam = Expression.Parameter(typeof(TEnum?), "x");
+        ParameterExpression yParam = Expression.Parameter(typeof(TEnum?), "y");
         BinaryExpression equalExpression = Expression.Equal(xParam, yParam);
-        ParameterExpression[] parameters = new[] { xParam, yParam };
-        return Expression.Lambda<Func<TEnum, TEnum, bool>>(equalExpression, parameters).Compile();
+        ParameterExpression[] parameters = [xParam, yParam];
+        return Expression.Lambda<Func<TEnum?, TEnum?, bool>>(equalExpression, parameters).Compile();
     }
 
     /// <summary>
@@ -138,6 +137,6 @@ public sealed class EnumComparer<TEnum> : IEqualityComparer<TEnum> {
         UnaryExpression convertExpression = Expression.Convert(objParam, underlyingType);
         System.Reflection.MethodInfo getHashCodeMethod = underlyingType.GetMethod(nameof(Object.GetHashCode))!;
         MethodCallExpression getHashCodeExpression = Expression.Call(convertExpression, getHashCodeMethod);
-        return Expression.Lambda<Func<TEnum, int>>(getHashCodeExpression, new[] { objParam }).Compile();
+        return Expression.Lambda<Func<TEnum, int>>(getHashCodeExpression, [objParam]).Compile();
     }
 }

@@ -14,11 +14,13 @@ public static class DataTableExtensions {
     /// <returns>T <see cref="DataTable"/> as CSV string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="dt"/> or <paramref name="separator"/> is <c>null</c>.</exception>
     public static string ExportToCsv(this DataTable dt, string separator = ",", string quotationMark = "\"", bool withHeader = false) {
-        if (dt == null)
-            throw new ArgumentNullException(nameof(dt));
-
-        if (separator == null)
-            throw new ArgumentNullException(nameof(separator));
+#if NETSTANDARD2_0_OR_GREATER
+        if (dt == null) throw new ArgumentNullException(nameof(dt));
+        if (separator == null) throw new ArgumentNullException(nameof(separator));
+#else
+        ArgumentNullException.ThrowIfNull(dt);
+        ArgumentNullException.ThrowIfNull(separator);
+#endif
 
         var sb = new StringBuilder();
         var quotationEscape = quotationMark + quotationMark;
@@ -32,7 +34,7 @@ public static class DataTableExtensions {
 
         foreach (DataRow row in dt.Rows) {
             foreach (var col in row.ItemArray)
-                sb.Append(quotationMark).Append(col.ToString().Replace(quotationMark, quotationEscape)).Append(quotationMark).Append(separator);
+                sb.Append(quotationMark).Append((col?.ToString() ?? "").Replace(quotationMark, quotationEscape)).Append(quotationMark).Append(separator);
             sb.Remove(sb.Length - separator.Length, separator.Length);
             sb.AppendLine();
         }

@@ -89,6 +89,11 @@ Moved localizable strings to internal resource file.
 * Multitargetting enabled
 * IsNotNull helper for .NET8+ added
 * Nullable cleanups
+### 4.0
+* Breaking Changes:
+    * ObservableDictionary and ObservableSortedDictionary removed for newer .NET versions.
+    * Plugin infrastructure removed. Modern DI containers now support most of it.
+* Further nullable and .net8 improvements
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -175,3 +180,5 @@ Nullable support in IAuditedEntity
 ### 1.9
 * Multitargetting enabled
 * Nullable cleanups
+### 1.10
+* Proper nullable support in the repositories

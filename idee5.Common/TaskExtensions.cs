@@ -5,7 +5,6 @@ namespace idee5.Common;
 /// <summary>
 /// Extension methods for System.Threading.Tasks.Task
 /// </summary>
-/// // Taken form https://github.com/brminnick/AsyncAwaitBestPractices/
 public static class TaskExtensions {
     /// <summary>
     /// Safely execute the <see cref="Task"/> without waiting for it to complete before moving to the next line of code;
@@ -17,6 +16,7 @@ public static class TaskExtensions {
     /// <param name="onException">If an exception is thrown in the Task, <c>onException</c> will execute. If onException is null, the exception will be re-thrown</param>
     /// <exception cref="ArgumentNullException"><paramref name="task"/> is <c>null</c>.</exception>
     public static async void SafeFireAndForget(this Task task, bool continueOnCapturedContext = true, Action<Exception>? onException = null) {
+    // Taken form https://github.com/brminnick/AsyncAwaitBestPractices/
 #if NETSTANDARD2_0_OR_GREATER
         if (task == null) throw new ArgumentNullException(nameof(task));
 #else

@@ -9,7 +9,7 @@ namespace idee5.Common.Data;
 /// <summary>
 /// Abstract composite key repository.
 /// </summary>
-/// <typeparam name="T"></typeparam>
+/// <typeparam name="T">Model type</typeparam>
 public abstract class ACompositeKeyRepository<T> : ICompositeKeyRepository<T> where T : class {
     /// <inheritdoc />
     public abstract void Add(T item);
@@ -23,7 +23,7 @@ public abstract class ACompositeKeyRepository<T> : ICompositeKeyRepository<T> wh
     public abstract Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> func, CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
-    public abstract Task<TResult?> GetAsync<TResult>(Func<IQueryable<T>, TResult> func, CancellationToken cancellationToken = default);
+    public abstract Task<TResult?> GetAsync<TResult>(Func<IQueryable<T>, TResult?> func, CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
     public abstract void Remove(T item);

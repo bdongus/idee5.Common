@@ -9,7 +9,7 @@ namespace idee5.Common;
 /// <summary>
 /// <see cref="string"/> extension methods
 /// </summary>
-public static class StringExtensions {
+public static partial class StringExtensions {
     private const string _nonAscii = @"[^\u0020-\u007F]";
     private const string _guidWithHyphensPattern = @"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$";
     private const string _guidPattern = @"^(\{{0,1}([0-9a-fA-F]){8}([0-9a-fA-F]){4}([0-9a-fA-F]){4}([0-9a-fA-F]){4}([0-9a-fA-F]){12}\}{0,1})$";
@@ -23,7 +23,11 @@ public static class StringExtensions {
     /// <returns>The truncated string.</returns>
     public static string Truncate(this string value, int maxLength) {
         if (value.HasValue() && value.Length > maxLength)
+#if NETSTANDARD2_0_OR_GREATER
             return value.Substring(startIndex: 0, length: maxLength);
+#else
+            return value[..maxLength];
+#endif
         return value;
     }
 
@@ -43,7 +47,11 @@ public static class StringExtensions {
 #endif
         int strLength = maxLength - suffix.Length;
         if (value.HasValue() && suffix.Length < value.Length && value.Length > maxLength)
+#if NETSTANDARD2_0_OR_GREATER
             return value.Substring(startIndex: 0, length: strLength).TrimEnd(" ") + suffix;
+#else
+            return value[..strLength].TrimEnd(" ") + suffix;
+#endif
 
         return value;
     }
@@ -93,7 +101,11 @@ public static class StringExtensions {
         }
 
         if (allowMissingEndDelimiter && at2 == -1)
+#if NETSTANDARD2_0_OR_GREATER
             return source.Substring(at1 + beginDelim.Length);
+#else
+            return source[(at1 + beginDelim.Length)..];
+#endif
 
         if (at1 > -1 && at2 > 1) {
             if (!returnDelimiters)
@@ -134,7 +146,11 @@ public static class StringExtensions {
                 if (x < instance - 1)
                     at1 += findString.Length;
             }
+#if NETSTANDARD2_0_OR_GREATER
             return origString.Substring(startIndex: 0, length: at1) + replaceWith + origString.Substring(at1 + findString.Length);
+#else
+            return string.Concat(origString.AsSpan(start: 0, length: at1), replaceWith, origString.AsSpan(at1 + findString.Length));
+#endif
         }
         return origString;
     }
@@ -154,11 +170,11 @@ public static class StringExtensions {
 #if NETSTANDARD2_0_OR_GREATER
         if (origString == null) throw new ArgumentNullException(nameof(origString));
         if (findString == null) throw new ArgumentNullException(nameof(findString));
-        if (replaceString == null) throw new ArgumentNullException(nameof(replaceString)); 
+        if (replaceString == null) throw new ArgumentNullException(nameof(replaceString));
 #else
         ArgumentNullException.ThrowIfNull(origString);
         ArgumentNullException.ThrowIfNull(findString);
-        ArgumentNullException.ThrowIfNull(replaceString); 
+        ArgumentNullException.ThrowIfNull(replaceString);
 #endif
         int at1 = 0;
         while (true) {
@@ -170,7 +186,11 @@ public static class StringExtensions {
             if (at1 == -1)
                 break;
 
+#if NETSTANDARD2_0_OR_GREATER
             origString = origString.Substring(startIndex: 0, length: at1) + replaceString + origString.Substring(at1 + findString.Length);
+#else
+            origString = string.Concat(origString.AsSpan(start: 0, length: at1), replaceString, origString.AsSpan(at1 + findString.Length));
+#endif
 
             at1 += replaceString.Length;
         }
@@ -211,8 +231,11 @@ public static class StringExtensions {
         int start = phrase.FindIndex(ch => char.IsLetterOrDigit(ch) && !char.IsWhiteSpace(ch));
         var sb = new StringBuilder(phrase.Length - start);
         bool nextUpper = firstUpper;
-
+#if NETSTANDARD2_0_OR_GREATER
         foreach (char ch in phrase.Substring(start)) {
+#else
+        foreach (char ch in phrase[start..]) {
+#endif
             if (char.IsWhiteSpace(ch) || char.IsPunctuation(ch) || char.IsSeparator(ch) || !char.IsLetterOrDigit(ch)) {
                 nextUpper = true;
                 continue;
@@ -242,11 +265,12 @@ public static class StringExtensions {
     /// <exception cref="ArgumentNullException"><paramref name="word"/> is <c>null</c>.</exception>
     public static string PascalToCamelCase(this string word) {
 #if NETSTANDARD2_0_OR_GREATER
-        if (word == null) throw new ArgumentNullException(nameof(word)); 
+        if (word == null) throw new ArgumentNullException(nameof(word));
+        return char.ToLowerInvariant(word[0]) + word.Substring(startIndex: 1);
 #else
         ArgumentNullException.ThrowIfNull(word);
+        return char.ToLowerInvariant(word[0]) + word[1..];
 #endif
-        return char.ToLowerInvariant(word[0]) + word.Substring(startIndex: 1);
     }
 
     /// <summary>
@@ -257,11 +281,12 @@ public static class StringExtensions {
     /// <exception cref="ArgumentNullException"><paramref name="word"/> is <c>null</c>.</exception>
     public static string CamelToPascalCase(this string word) {
 #if NETSTANDARD2_0_OR_GREATER
-        if (word == null) throw new ArgumentNullException(nameof(word)); 
+        if (word == null) throw new ArgumentNullException(nameof(word));
+        return char.ToUpperInvariant(word[0]) + word.Substring(startIndex: 1);
 #else
         ArgumentNullException.ThrowIfNull(word);
+        return char.ToUpperInvariant(word[0]) + word[1..];
 #endif
-        return char.ToUpperInvariant(word[0]) + word.Substring(startIndex: 1);
     }
 
     /// <summary>
@@ -358,7 +383,11 @@ public static class StringExtensions {
     /// <returns>Changed string.</returns>
     public static string RemoveTags(this string input) {
         // Will this simple expression replace all tags???
-        var tagsExpression = new Regex(pattern: "</?.+?>");
+#if NETSTANDARD2_0_OR_GREATER
+        Regex tagsExpression = new Regex(pattern: "</?.+?>");
+#else
+        Regex tagsExpression = XMLTagRegex();
+#endif
         return tagsExpression.Replace(input, replacement: " ");
     }
 
@@ -396,14 +425,15 @@ public static class StringExtensions {
     /// <returns>A new, trimmed string.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="forRemoving"/> is <c>null</c>.</exception>
     public static string TrimStart(this string value, string forRemoving) {
-#if NETSTANDARD2_0_OR_GREATER
-        if (forRemoving == null) throw new ArgumentNullException(nameof(forRemoving));
-#else
-        ArgumentNullException.ThrowIfNull(forRemoving);
-#endif
         if (string.IsNullOrEmpty(value))
             return value;
+#if NETSTANDARD2_0_OR_GREATER
+        if (forRemoving == null) throw new ArgumentNullException(nameof(forRemoving));
         while (value.StartsWith(forRemoving, StringComparison.OrdinalIgnoreCase)) { value = value.Substring(forRemoving.Length); }
+#else
+        ArgumentNullException.ThrowIfNull(forRemoving);
+        while (value.StartsWith(forRemoving, StringComparison.OrdinalIgnoreCase)) { value = value[forRemoving.Length..]; }
+#endif
         return value;
     }
 
@@ -458,7 +488,11 @@ public static class StringExtensions {
     public static Guid EncodeAsGuid(this string value) {
         string convertToHex = value.ToHex();
         int hexLength = convertToHex.Length < 32 ? convertToHex.Length : 32;
+#if NETSTANDARD2_0_OR_GREATER
         string hex = convertToHex.Substring(startIndex: 0, length: hexLength).PadLeft(totalWidth: 32, paddingChar: '0');
+#else
+        string hex = convertToHex[..hexLength].PadLeft(totalWidth: 32, paddingChar: '0');
+#endif
         return Guid.TryParse(hex, out Guid output) ? output : Guid.Empty;
     }
 
@@ -539,7 +573,7 @@ public static class StringExtensions {
         ArgumentNullException.ThrowIfNull(input);
 #endif
         int length = input.Length;
-        if (length < 1) { return Array.Empty<byte>(); }
+        if (length < 1) { return []; }
 
         var remain = length % 4;
         if (remain != 0) {
@@ -608,7 +642,7 @@ public static class StringExtensions {
     /// <param name="s">String to check for lines</param>
     /// <returns>array of strings, or null if the string passed was a null</returns>
     public static string[] GetLines(this string s)
-        => s?.Replace(oldValue: "\r\n", newValue: "\n").Split(new char[] { '\n' }) ?? Array.Empty<string>();
+        => s?.Replace(oldValue: "\r\n", newValue: "\n").Split(['\n']) ?? [];
 
     /// <summary>
     /// Returns a line count for a string
@@ -773,4 +807,9 @@ public static class StringExtensions {
         TypeConverter tc = TypeDescriptor.GetConverter(type);
         return tc.ConvertFrom(value);
     }
+#if !NETSTANDARD2_0_OR_GREATER
+
+    [GeneratedRegex("</?.+?>")]
+    private static partial Regex XMLTagRegex();
+#endif
 }

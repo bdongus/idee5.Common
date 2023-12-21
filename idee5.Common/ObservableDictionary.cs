@@ -65,8 +65,11 @@ public class ObservableDictionary<TKey, TValue> :
     /// </summary>
     /// <param name="dictionary"></param>
     public ObservableDictionary(IDictionary<TKey, TValue> dictionary) {
-        if (dictionary == null)
-            throw new ArgumentNullException(nameof(dictionary));
+#if NETSTANDARD2_0_OR_GREATER
+        if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+#else
+        ArgumentNullException.ThrowIfNull(dictionary);
+#endif
 
         keyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>();
 
@@ -79,8 +82,11 @@ public class ObservableDictionary<TKey, TValue> :
     }
 
     public ObservableDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) {
-        if (dictionary == null)
-            throw new ArgumentNullException(nameof(dictionary));
+#if NETSTANDARD2_0_OR_GREATER
+        if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+#else
+        ArgumentNullException.ThrowIfNull(dictionary);
+#endif
 
         keyedEntryCollection = new KeyedDictionaryEntryCollection<TKey>(comparer);
 
@@ -600,7 +606,7 @@ public class ObservableDictionary<TKey, TValue> :
 
         #region public
 
-        public KeyValuePair<T, TVal> Current {
+        public readonly KeyValuePair<T, TVal> Current {
             get {
                 ValidateCurrent();
                 return _current;
@@ -615,7 +621,7 @@ public class ObservableDictionary<TKey, TValue> :
 
         #region public
 
-        public void Dispose() {
+        public readonly void Dispose() {
         }
 
         public bool MoveNext() {
@@ -634,7 +640,7 @@ public class ObservableDictionary<TKey, TValue> :
 
         #region private
 
-        private void ValidateCurrent() {
+        private readonly void ValidateCurrent() {
             if (_index == -1) {
                 throw new InvalidOperationException(Resources.TheEnumeratorHasNotBeenStarted);
             } else if (_index == -2) {
@@ -642,7 +648,7 @@ public class ObservableDictionary<TKey, TValue> :
             }
         }
 
-        private void ValidateVersion() {
+        private readonly void ValidateVersion() {
             if (_version != _dictionary._version) {
                 throw new InvalidOperationException(Resources.TheEnumeratorIsNotValidBecauseTheDictionaryChanged);
             }
@@ -717,7 +723,7 @@ public class ObservableDictionary<TKey, TValue> :
     protected KeyedDictionaryEntryCollection<TKey> keyedEntryCollection;
 
     private int _countCache;
-    private readonly Dictionary<TKey, TValue> _dictionaryCache = new();
+    private readonly Dictionary<TKey, TValue> _dictionaryCache = [];
     private int _dictionaryCacheVersion;
     private int _version;
 
