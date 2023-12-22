@@ -31,10 +31,6 @@ public class RepositoryTests {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<TestEntity>> GetAsync(Func<IQueryable<TestEntity>, IQueryable<TestEntity>> func, CancellationToken cancellationToken = default) {
-            return Task.Run(() => func(TestEntities.AsQueryable()).AsEnumerable(), cancellationToken);
-        }
-
         public Task RemoveAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) => Task.Run(() => TestEntities.RemoveAll(predicate.Compile()));
 
         public void Remove(TestEntity item) => TestEntities.Remove(item);
@@ -48,11 +44,6 @@ public class RepositoryTests {
             if (listItem != null) listItem = item;
             listItem.ModifiedBy = "me";
         }
-
-        public void Update(Expression<Func<TestEntity, bool>> predicate, Action<TestEntity> action) {
-            throw new NotImplementedException();
-        }
-
         public void Update(IEnumerable<TestEntity> items) {
             throw new NotImplementedException();
         }
@@ -69,16 +60,24 @@ public class RepositoryTests {
             throw new NotImplementedException();
         }
 
-        public Task<bool> ExistsAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
+        public Task<List<TestEntity>> GetAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
             throw new NotImplementedException();
         }
 
-        public Task<int> CountAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
+        public Task<List<TestEntity>> GetAllAsync(CancellationToken cancellationToken = default) {
             throw new NotImplementedException();
         }
 
-        public Task<TestEntity> GetSingleAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
-            var result = TestEntities.SingleOrDefault(predicate);
+        public Task<bool> ExistsAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> CountAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            throw new NotImplementedException();
+        }
+
+        public Task<TestEntity> GetSingleAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            var result = TestEntities.SingleOrDefault(predicate.Compile());
             return Task.FromResult(result);
         }
     }

@@ -33,17 +33,12 @@ public class ARepositoryTests {
 
         public override void Add(TestEntity item) => TestEntities.Add(item);
 
-        public override Task<IEnumerable<TestEntity>> GetAsync(Func<IQueryable<TestEntity>, IQueryable<TestEntity>> func, CancellationToken cancellationToken = default) {
-            return Task.Factory.StartNew(() => func(TestEntities.AsQueryable()).AsEnumerable(), cancellationToken);
-        }
-
-        public override Task<TResult> GetAsync<TResult>(Func<IQueryable<TestEntity>, TResult> func, CancellationToken cancellationToken = default) {
-            return Task<TResult>.Factory.StartNew(() => func(TestEntities.AsQueryable()), cancellationToken);
-        }
-
         public override void Remove(TestEntity item) => TestEntities.Remove(item);
 
-        public override Task RemoveAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) => Task.Factory.StartNew(() => TestEntities.RemoveAll(predicate.Compile()));
+        public override Task RemoveAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            TestEntities.RemoveAll(predicate.Compile());
+            return Task.CompletedTask;
+        }
 
         public override void Update(TestEntity item) {
             TestEntity listItem = TestEntities.SingleOrDefault(te => te == item);
@@ -66,18 +61,26 @@ public class ARepositoryTests {
             return Task.CompletedTask;
         }
 
-        public override Task<bool> ExistsAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
-            var result = TestEntities.Any(predicate);
+        public override Task<List<TestEntity>> GetAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<TestEntity>> GetAllAsync(CancellationToken cancellationToken = default) {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> ExistsAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            var result = TestEntities.Any(predicate.Compile());
             return Task.FromResult(result);
         }
 
-        public override Task<int> CountAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
-            var result = TestEntities.Count(predicate);
+        public override Task<int> CountAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            var result = TestEntities.Count(predicate.Compile());
             return Task.FromResult(result);
         }
 
-        public override Task<TestEntity> GetSingleAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
-            var result = TestEntities.SingleOrDefault(predicate);
+        public override Task<TestEntity> GetSingleAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            var result = TestEntities.SingleOrDefault(predicate.Compile());
             return Task.FromResult(result);
         }
     }
@@ -127,10 +130,10 @@ public class ARepositoryTests {
         // Arrange
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
-        TestEntity[] listOfItems = {
+        TestEntity[] listOfItems = [
             new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" },
             new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 43, Label = "toAdd2", MasterSystemHierarchy = "001", MasterSystemId = "43" }
-        };
+        ];
 
         // Act
         _testRepository.Add(listOfItems);
@@ -235,7 +238,7 @@ public class ARepositoryTests {
         _testRepository.Update(listOfItems);
 
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
+        int result = _testRepository.TestEntities.Count;
         Assert.AreEqual(4, result);
         Assert.AreEqual(2, listOfItems.Count(i => i.ModifiedBy == "me"));
     }

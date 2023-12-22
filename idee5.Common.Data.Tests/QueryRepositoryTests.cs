@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,21 +25,28 @@ namespace idee5.Common.Data.Tests {
         ];
 
         internal class TransientQueryRepository : IQueryRepository<TransientEntity> {
-
-            public Task<int> CountAsync(Func<TransientEntity, bool> predicate, CancellationToken cancellationToken = default) {
-                return Task.Run(() => _transientEntities.Count(predicate), cancellationToken);
+            public Task<int> CountAsync(Expression<Func<TransientEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+                var result = _transientEntities.Count(predicate.Compile());
+                return Task.FromResult(result);
             }
 
-            public Task<bool> ExistsAsync(Func<TransientEntity, bool> predicate, CancellationToken cancellationToken = default) {
-                return Task.Run(() => _transientEntities.Any(predicate), cancellationToken);
+            public Task<bool> ExistsAsync(Expression<Func<TransientEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+                return Task.Run(() => _transientEntities.Any(predicate.Compile()), cancellationToken);
+                throw new NotImplementedException();
             }
 
-            public Task<IEnumerable<TransientEntity>> GetAsync(Func<IQueryable<TransientEntity>, IQueryable<TransientEntity>> func, CancellationToken cancellationToken) {
-                return Task.Run(() => func(_transientEntities.AsQueryable()).AsEnumerable(), cancellationToken);
+            public Task<List<TransientEntity>> GetAllAsync(CancellationToken cancellationToken = default) {
+                return Task.FromResult(_transientEntities);
             }
 
-            public Task<TransientEntity> GetSingleAsync(Func<TransientEntity, bool> expression, CancellationToken cancellationToken = default) {
-                return Task<TransientEntity>.Factory.StartNew(() => _transientEntities.SingleOrDefault(expression), cancellationToken);
+            public Task<List<TransientEntity>> GetAsync(Expression<Func<TransientEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+                var result = _transientEntities.Where(predicate.Compile());
+                return Task.FromResult(result.ToList());
+            }
+
+            public Task<TransientEntity> GetSingleAsync(Expression<Func<TransientEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+                var result = _transientEntities.SingleOrDefault(predicate.Compile());
+                return Task.FromResult(result);
             }
         }
 
@@ -72,11 +80,11 @@ namespace idee5.Common.Data.Tests {
             var repo = new TransientQueryRepository();
 
             // Act
-            IEnumerable<TransientEntity> result = await repo.GetAsync(q => q.Where(e => e.Id == 2), new CancellationToken()).ConfigureAwait(false);
+            var result = await repo.GetAsync(e => e.Id == 2).ConfigureAwait(false);
 
             // Assert
-            Assert.AreEqual(expected: 1, actual: result.Count());
-            Assert.AreEqual(expected: "wl2", actual: result.First().Workload);
+            Assert.AreEqual(expected: 1, actual: result.Count);
+            Assert.AreEqual(expected: "wl2", actual: result[0].Workload);
         }
 
         [UnitTest, TestMethod]
@@ -85,10 +93,10 @@ namespace idee5.Common.Data.Tests {
             var repo = new TransientQueryRepository();
 
             // Act
-            IEnumerable<TransientEntity> result = await repo.GetAsync(e => e, new CancellationToken()).ConfigureAwait(false);
+            var result = await repo.GetAllAsync().ConfigureAwait(false);
 
             // Assert
-            Assert.AreEqual(expected: 3, actual: result.Count());
+            Assert.AreEqual(expected: 3, actual: result.Count);
         }
 
         [UnitTest, TestMethod]

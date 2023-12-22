@@ -13,7 +13,6 @@ public class ACompositeRepositoryTests {
         public string GetCurrentUserId() => "me";
     }
 #pragma warning disable CS0618 // Typ oder Element ist veraltet
-
     internal class TestRepository : ACompositeKeyRepository<TestEntity> {
         private readonly AmbientTimeProvider _timeProvider;
         private readonly AmbientUserProvider _currentUserIdProvider;
@@ -32,10 +31,6 @@ public class ACompositeRepositoryTests {
         }
 
         public override void Add(TestEntity item) => TestEntities.Add(item);
-
-        public override Task<IEnumerable<TestEntity>> GetAsync(Func<IQueryable<TestEntity>, IQueryable<TestEntity>> func, CancellationToken cancellationToken = default) {
-            return Task.Run(() => func(TestEntities.AsQueryable()).AsEnumerable(), cancellationToken);
-        }
 
         public override void Remove(TestEntity item) => TestEntities.Remove(item);
 
@@ -63,16 +58,24 @@ public class ACompositeRepositoryTests {
             return Task.CompletedTask;
         }
 
-        public override Task<bool> ExistsAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
+        public override Task<List<TestEntity>> GetAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            return Task.FromResult(TestEntities.Where(predicate.Compile()).ToList());
+        }
+
+        public override Task<bool> ExistsAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
             throw new NotImplementedException();
         }
 
-        public override Task<int> CountAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
+        public override Task<int> CountAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
             throw new NotImplementedException();
         }
 
-        public override Task<TestEntity> GetSingleAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
-            return Task.FromResult(TestEntities.SingleOrDefault(predicate));
+        public override Task<TestEntity> GetSingleAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) {
+            return Task.FromResult(TestEntities.SingleOrDefault(predicate.Compile()));
+        }
+
+        public override Task<List<TestEntity>> GetAllAsync(CancellationToken cancellationToken = default) {
+            return Task.FromResult(TestEntities);
         }
     }
 
@@ -119,10 +122,10 @@ public class ACompositeRepositoryTests {
         // Arrange
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
-        TestEntity[] listOfItems = {
+        TestEntity[] listOfItems = [
             new(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" },
             new(_timeProvider, _currentUserIdProvider) { Id = 43, Label = "toAdd2", MasterSystemHierarchy = "001", MasterSystemId = "43" }
-        };
+        ];
 
         // Act
         _testRepository.Add(listOfItems);

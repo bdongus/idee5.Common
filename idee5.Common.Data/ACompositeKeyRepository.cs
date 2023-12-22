@@ -20,9 +20,6 @@ public abstract class ACompositeKeyRepository<T> : ICompositeKeyRepository<T> wh
     }
 
     /// <inheritdoc />
-    public abstract Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> func, CancellationToken cancellationToken = default);
-
-    /// <inheritdoc />
     public abstract void Remove(T item);
 
     /// <inheritdoc />
@@ -58,9 +55,13 @@ public abstract class ACompositeKeyRepository<T> : ICompositeKeyRepository<T> wh
     }
 
     /// <inheritdoc />
-    public abstract Task<bool> ExistsAsync(Func<T, bool> predicate, CancellationToken cancellationToken = default);
+    public abstract Task<List<T>> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default);
     /// <inheritdoc />
-    public abstract Task<int> CountAsync(Func<T, bool> predicate, CancellationToken cancellationToken = default);
+    public abstract Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default);
     /// <inheritdoc />
-    public abstract Task<T?> GetSingleAsync(Func<T, bool> predicate, CancellationToken cancellationToken = default);
+    public abstract Task<int> CountAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default);
+    /// <inheritdoc />
+    public abstract Task<T?> GetSingleAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default);
+    /// <inheritdoc />
+    public abstract Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default);
 }
