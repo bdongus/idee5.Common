@@ -17,36 +17,33 @@ public class ACompositeRepositoryTests {
     internal class TestRepository : ACompositeKeyRepository<TestEntity> {
         private readonly AmbientTimeProvider _timeProvider;
         private readonly AmbientUserProvider _currentUserIdProvider;
-        private readonly IList<TestEntity> _testEntities;
+        public readonly List<TestEntity> TestEntities;
 
         public TestRepository(AmbientTimeProvider timeProvider, AmbientUserProvider currentUserIdProvider) {
             _timeProvider = timeProvider;
             _currentUserIdProvider = currentUserIdProvider;
             _currentUserIdProvider.Instance = new MeUserProvider();
-            _testEntities = new List<TestEntity> {
-                new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 1, Label = "idee5", MasterSystemHierarchy = "001", MasterSystemId = "1"},
-                new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 2, Label = "IBM", MasterSystemHierarchy = "001", MasterSystemId = "2"},
-                new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 3, Label = "Atari", MasterSystemHierarchy = "", MasterSystemId = "3"},
-                new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 4, Label = "Atari", MasterSystemHierarchy = "001", MasterSystemId = "4"},
-            };
+            TestEntities = [
+                new(_timeProvider, _currentUserIdProvider) { Id = 1, Label = "idee5", MasterSystemHierarchy = "001", MasterSystemId = "1"},
+                new(_timeProvider, _currentUserIdProvider) { Id = 2, Label = "IBM", MasterSystemHierarchy = "001", MasterSystemId = "2"},
+                new(_timeProvider, _currentUserIdProvider) { Id = 3, Label = "Atari", MasterSystemHierarchy = "", MasterSystemId = "3"},
+                new(_timeProvider, _currentUserIdProvider) { Id = 4, Label = "Atari", MasterSystemHierarchy = "001", MasterSystemId = "4"},
+            ];
         }
 
-        public override void Add(TestEntity item) => _testEntities.Add(item);
+        public override void Add(TestEntity item) => TestEntities.Add(item);
 
         public override Task<IEnumerable<TestEntity>> GetAsync(Func<IQueryable<TestEntity>, IQueryable<TestEntity>> func, CancellationToken cancellationToken = default) {
-            return Task.Run(() => func(_testEntities.AsQueryable()).AsEnumerable(), cancellationToken);
+            return Task.Run(() => func(TestEntities.AsQueryable()).AsEnumerable(), cancellationToken);
         }
 
-        public override Task<TResult> GetAsync<TResult>(Func<IQueryable<TestEntity>, TResult> func, CancellationToken cancellationToken = default) {
-            return Task<TResult>.Factory.StartNew(() => func(_testEntities.AsQueryable()), cancellationToken);
-        }
+        public override void Remove(TestEntity item) => TestEntities.Remove(item);
 
-        public override void Remove(TestEntity item) => _testEntities.Remove(item);
-
-        public override Task RemoveAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default) => Task.Run(() => _testEntities.RemoveAll(predicate.Compile()));
+        public override Task RemoveAsync(Expression<Func<TestEntity, bool>> predicate, CancellationToken cancellationToken = default)
+            => Task.Run(() => TestEntities.RemoveAll(predicate.Compile()), cancellationToken);
 
         public override void Update(TestEntity item) {
-            TestEntity listItem = _testEntities.SingleOrDefault(te => te == item);
+            TestEntity listItem = TestEntities.SingleOrDefault(te => te == item);
             if (listItem != null) listItem = item;
             listItem.ModifiedBy = _currentUserIdProvider.GetCurrentUserId();
         }
@@ -56,14 +53,26 @@ public class ACompositeRepositoryTests {
         }
 
         public override Task UpdateOrAddAsync(TestEntity item, CancellationToken cancellationToken = default) {
-            TestEntity listItem = _testEntities.SingleOrDefault(te => te == item);
+            TestEntity listItem = TestEntities.SingleOrDefault(te => te == item);
             if (listItem != null) {
                 listItem = item;
                 listItem.ModifiedBy = _currentUserIdProvider.GetCurrentUserId();
             } else {
-                _testEntities.Add(item);
+                TestEntities.Add(item);
             }
             return Task.CompletedTask;
+        }
+
+        public override Task<bool> ExistsAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
+            throw new NotImplementedException();
+        }
+
+        public override Task<int> CountAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
+            throw new NotImplementedException();
+        }
+
+        public override Task<TestEntity> GetSingleAsync(Func<TestEntity, bool> predicate, CancellationToken cancellationToken = default) {
+            return Task.FromResult(TestEntities.SingleOrDefault(predicate));
         }
     }
 
@@ -78,7 +87,7 @@ public class ACompositeRepositoryTests {
 #pragma warning restore CS0618 // Typ oder Element ist veraltet
 
     [UnitTest, TestMethod]
-    public async Task CanAdd() {
+    public void CanAdd() {
         // Arrange
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
@@ -88,70 +97,65 @@ public class ACompositeRepositoryTests {
         _testRepository.Add(itemToAdd);
 
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
-        Assert.AreEqual(5, result);
+        Assert.AreEqual(5, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
-    public async Task CanIgnoreNullListOnAdd() {
+    public void CanIgnoreNullListOnAdd() {
         // Arrange
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
         IEnumerable<TestEntity> items = null;
-        int expectedCount = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
+        int expectedCount = _testRepository.TestEntities.Count;
 
         // Act
         _testRepository.Add(items);
-        int result = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
 
         // Assert
-        Assert.AreEqual(expectedCount, result);
+        Assert.AreEqual(expectedCount, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
-    public async Task CanAddMultiple() {
+    public void CanAddMultiple() {
         // Arrange
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
         TestEntity[] listOfItems = {
-            new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" },
-            new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 43, Label = "toAdd2", MasterSystemHierarchy = "001", MasterSystemId = "43" }
+            new(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" },
+            new(_timeProvider, _currentUserIdProvider) { Id = 43, Label = "toAdd2", MasterSystemHierarchy = "001", MasterSystemId = "43" }
         };
 
         // Act
         _testRepository.Add(listOfItems);
 
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
-        Assert.AreEqual(6, result);
+        Assert.AreEqual(6, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
     public async Task CanRemove() {
         // Arrange
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
-        TestEntity itemToRemove = (await _testRepository.GetAllAsync().ConfigureAwait(false)).Last();
+        TestEntity itemToRemove = await _testRepository.GetSingleAsync(t => t.Id == 4);
 
         // Act
         _testRepository.Remove(itemToRemove);
 
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
-        Assert.AreEqual(3, result);
+        Assert.AreEqual(3, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
-    public async Task CanIgnoreNullListOnRemove() {
+    public void CanIgnoreNullListOnRemove() {
         // Arrange
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
         IEnumerable<TestEntity> items = null;
-        int expectedCount = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
+        int expectedCount = _testRepository.TestEntities.Count;
 
         // Act
         _testRepository.Remove(items);
-        int result = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
 
         // Assert
-        Assert.AreEqual(expectedCount, result);
+        Assert.AreEqual(expectedCount, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
@@ -160,15 +164,14 @@ public class ACompositeRepositoryTests {
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
         var listOfItems = new List<TestEntity> {
-            (await _testRepository.GetAllAsync().ConfigureAwait(false)).Last(),
-            (await _testRepository.GetAllAsync().ConfigureAwait(false)).First()
+            await _testRepository.GetSingleAsync(e => e.Id == 1).ConfigureAwait(false),
+            await _testRepository.GetSingleAsync(e => e.Id == 4).ConfigureAwait(false)
         };
         // Act
         _testRepository.Remove(listOfItems);
 
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
-        Assert.AreEqual(2, result);
+        Assert.AreEqual(2, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
@@ -181,8 +184,7 @@ public class ACompositeRepositoryTests {
         await _testRepository.RemoveAsync(r => r.Label == "Atari", default).ConfigureAwait(false);
 
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
-        Assert.AreEqual(2, result);
+        Assert.AreEqual(2, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
@@ -199,18 +201,17 @@ public class ACompositeRepositoryTests {
     }
 
     [UnitTest, TestMethod]
-    public async Task CanIgnoreNullListOnUpdate() {
+    public void CanIgnoreNullListOnUpdate() {
         // Arrange
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
         IEnumerable<TestEntity> items = null;
-        int expectedCount = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
+        int expectedCount = _testRepository.TestEntities.Count;
 
         // Act
         _testRepository.Update(items);
-        int result = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
 
         // Assert
-        Assert.AreEqual(expectedCount, result);
+        Assert.AreEqual(expectedCount, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
@@ -219,15 +220,14 @@ public class ACompositeRepositoryTests {
         var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
 
         var listOfItems = new List<TestEntity> {
-            (await _testRepository.GetAllAsync().ConfigureAwait(false)).Last(),
-            (await _testRepository.GetAllAsync().ConfigureAwait(false)).First()
+            await _testRepository.GetSingleAsync(e => e.Id == 1).ConfigureAwait(false),
+            await _testRepository.GetSingleAsync(e => e.Id == 4).ConfigureAwait(false)
         };
         // Act
         _testRepository.Update(listOfItems);
 
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
-        Assert.AreEqual(4, result);
+        Assert.AreEqual(4, _testRepository.TestEntities.Count);
         Assert.AreEqual(2, listOfItems.Count(i => i.ModifiedBy == "me"));
     }
 
@@ -243,40 +243,37 @@ public class ACompositeRepositoryTests {
         _testRepository.Update(itemToUpdate);
 
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
-        Assert.AreEqual(5, result);
+        Assert.AreEqual(5, _testRepository.TestEntities.Count);
         Assert.AreEqual("me", itemToUpdate.ModifiedBy);
     }
 
     [UnitTest, TestMethod]
     public async Task CanIgnoreNullListOnUpdateOrAddAsync() {
         // Arrange
-        ICompositeKeyRepository<TestEntity> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+        var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
         IEnumerable<TestEntity> items = null;
-        int expectedCount = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
+        int expectedCount = _testRepository.TestEntities.Count;
 
         // Act
         await _testRepository.UpdateOrAddAsync(items).ConfigureAwait(false);
-        int result = await _testRepository.GetAsync(e => e.Count(), new CancellationToken()).ConfigureAwait(false);
 
         // Assert
-        Assert.AreEqual(expectedCount, result);
+        Assert.AreEqual(expectedCount, _testRepository.TestEntities.Count);
     }
 
     [UnitTest, TestMethod]
     public async Task CanUpdateOrAddAsyncMultiple() {
         // Arrange
-        ICompositeKeyRepository<TestEntity> _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
+        var _testRepository = new TestRepository(_timeProvider, _currentUserIdProvider);
         var listOfItems = new List<TestEntity> {
-            new TestEntity(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" },
+            new(_timeProvider, _currentUserIdProvider) { Id = 42, Label = "toAdd", MasterSystemHierarchy = "001", MasterSystemId = "42" },
             await _testRepository.GetSingleAsync(r => r.Id == 2).ConfigureAwait(false)
         };
 
         // Act
         await _testRepository.UpdateOrAddAsync(listOfItems).ConfigureAwait(false);
         // Assert
-        int result = await _testRepository.GetAsync(q => q.Count()).ConfigureAwait(false);
-        Assert.AreEqual(5, result);
+        Assert.AreEqual(5, _testRepository.TestEntities.Count);
         Assert.AreEqual(1, listOfItems.Count(i => i.ModifiedBy == "me"));
     }
 }

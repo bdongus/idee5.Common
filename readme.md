@@ -182,3 +182,5 @@ Nullable support in IAuditedEntity
 * Nullable cleanups
 ### 1.10
 * Proper nullable support in the repositories
+### 2.0
+* Breaking changes in the repository to reduce the possible ORM leak 

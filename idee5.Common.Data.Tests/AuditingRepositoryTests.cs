@@ -22,13 +22,13 @@ public class AuditingRepositoryTests {
     }
 
     internal class TestRepository : AuditingRepository<AuditedEntity, int> {
-        private readonly List<AuditedEntity> _testEntities;
+        public readonly List<AuditedEntity> TestEntities;
         public TestRepository(ITimeProvider timeProvider, ICurrentUserIdProvider currentUserProvider) : base(timeProvider, currentUserProvider) {
-            _testEntities = new List<AuditedEntity>();
+            TestEntities = [];
         }
 
         public override Task<IEnumerable<AuditedEntity>> GetAsync(Func<IQueryable<AuditedEntity>, IQueryable<AuditedEntity>> func, CancellationToken cancellationToken = default) {
-            return Task.Run(() => func(_testEntities.AsQueryable()).AsEnumerable(), cancellationToken);
+            return Task.Run(() => func(TestEntities.AsQueryable()).AsEnumerable(), cancellationToken);
         }
 
         public override Task<TResult> GetAsync<TResult>(Func<IQueryable<AuditedEntity>, TResult> func, CancellationToken cancellationToken = default) {
@@ -37,12 +37,12 @@ public class AuditingRepositoryTests {
             //    return Task.FromResult(func.Invoke(Array.Empty<AuditedEntity>().AsQueryable()));
             //else
             //    return Task.FromResult(func.Invoke(new List<AuditedEntity> { target }.AsQueryable()));
-            return Task.Run(() => func(_testEntities.AsQueryable()), cancellationToken);
+            return Task.Run(() => func(TestEntities.AsQueryable()), cancellationToken);
         }
 
         public override void Add(AuditedEntity item) {
             base.Add(item); // set the auditing properties
-            _testEntities.Add(item);
+            TestEntities.Add(item);
         }
         public override void Remove(AuditedEntity item) {
             throw new NotImplementedException();
@@ -53,6 +53,18 @@ public class AuditingRepositoryTests {
         }
 
         public override Task ExecuteAsync(Expression<Func<AuditedEntity, bool>> predicate, Action<AuditedEntity> action, CancellationToken cancellationToken) {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> ExistsAsync(Func<AuditedEntity, bool> predicate, CancellationToken cancellationToken = default) {
+            return Task.FromResult(TestEntities.Any(predicate));
+        }
+
+        public override Task<int> CountAsync(Func<AuditedEntity, bool> predicate, CancellationToken cancellationToken = default) {
+            throw new NotImplementedException();
+        }
+
+        public override Task<AuditedEntity> GetSingleAsync(Func<AuditedEntity, bool> predicate, CancellationToken cancellationToken = default) {
             throw new NotImplementedException();
         }
     }

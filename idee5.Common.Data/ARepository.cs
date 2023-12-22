@@ -62,7 +62,7 @@ public abstract class ARepository<T, TPrimaryKey> : IRepository<T, TPrimaryKey>
     /// </list>
     /// </remarks>
     public virtual async Task UpdateOrAddAsync(T item, CancellationToken cancellationToken = default) {
-        bool exists = await GetAsync(q => q.Any(i => i.Id.Equals(item.Id)), cancellationToken).ConfigureAwait(false);
+        bool exists = await ExistsAsync(i => i.Id.Equals(item.Id), cancellationToken).ConfigureAwait(false);
         if (!exists)
             Add(item);
         else
@@ -78,4 +78,13 @@ public abstract class ARepository<T, TPrimaryKey> : IRepository<T, TPrimaryKey>
             }
         }
     }
+
+    /// <inheritdoc/>
+    public abstract Task<bool> ExistsAsync(Func<T, bool> predicate, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc/>
+    public abstract Task<int> CountAsync(Func<T, bool> predicate, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc/>
+    public abstract Task<T?> GetSingleAsync(Func<T, bool> predicate, CancellationToken cancellationToken = default);
 }

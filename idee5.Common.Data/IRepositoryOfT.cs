@@ -60,7 +60,7 @@ public interface IRepository<T, TPrimaryKey> : IQueryRepository<T>
     void Update(T item);
 
     /// <summary>
-    /// Performs a bulk <see cref="Action"/> all items meeting the specified conditions.
+    /// Performs a bulk <see cref="Action"/> on all items meeting the specified conditions.
     /// </summary>
     /// <param name="predicate">Condition(s) to be met.</param>
     /// <param name="action">Action to perform.</param>
