@@ -13,10 +13,10 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Bernd Dongus</Authors>
     <Company>idee5 GmbH</Company>
-    <Description>Data access abstractions used by idee5.</Description>
+    <Description>Data access abstractions used by idee5</Description>
     <Copyright>Copyright © 2017 - 2023</Copyright>
     <PackageTags>idee5</PackageTags>
-    <Version>2.0.0-alpha.2</Version>
+    <Version>2.0.0</Version>
     <AssemblyVersion>2.0.0</AssemblyVersion>
     <FileVersion>2.0.0</FileVersion>
     <PackageReleaseNotes>Check the readme</PackageReleaseNotes>
