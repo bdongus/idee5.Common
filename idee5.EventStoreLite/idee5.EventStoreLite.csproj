@@ -9,15 +9,22 @@
     <Version>1.0.0-alpha1</Version>
     <Copyright>Copyright © 2024</Copyright>
     <PackageIcon>idee5 nuget icon.png</PackageIcon>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
     <PackageTags>idee5;EventStore;CQRSlite</PackageTags>
     <Description>Basic event store implementation</Description>
     <Title>Lightweight event store implementation using CQRSLight and EFCore.</Title>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\idee5 nuget icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="readme.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
