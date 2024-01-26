@@ -29,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.SourceGenerators", "i
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.SoureGeneratorTests", "idee5.SoureGeneratorTests\idee5.SoureGeneratorTests.csproj", "{616969E3-8AD2-485A-A961-680B07EE7059}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idee5.EventStoreLite", "idee5.EventStoreLite\idee5.EventStoreLite.csproj", "{61ABCBCB-4787-4AB4-844E-A4E1F30CAFFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.EventStoreLite", "idee5.EventStoreLite\idee5.EventStoreLite.csproj", "{61ABCBCB-4787-4AB4-844E-A4E1F30CAFFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "idee5.EventStorLiteTests", "idee5.EventStorLiteTests\idee5.EventStorLiteTests.csproj", "{23142EE7-9C06-4CFA-8D17-332021B93E91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "idee5.EventStoreLiteTests", "idee5.EventStoreLiteTests\idee5.EventStoreLiteTests.csproj", "{23142EE7-9C06-4CFA-8D17-332021B93E91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
