@@ -40,7 +40,7 @@ jobs:
     - name: Publish event store lite
       uses: alirezanet/publish-nuget@v3.1.0
       with:
-       PROJECT_FILE_PATH: idee5.EventStoreLite/idee5.EvenStoreLite.csproj
+       PROJECT_FILE_PATH: idee5.EventStoreLite/idee5.EventStoreLite.csproj
        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
        NO_BUILD: true
     - name: Publish source generators
