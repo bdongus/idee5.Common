@@ -37,6 +37,12 @@ jobs:
        PROJECT_FILE_PATH: idee5.Common.Data/idee5.Common.Data.csproj
        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
        NO_BUILD: true
+    - name: Publish event store lite
+      uses: alirezanet/publish-nuget@v3.1.0
+      with:
+       PROJECT_FILE_PATH: idee5.EventStoreLite/idee5.EvenStoreLite.csproj
+       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+       NO_BUILD: true
     - name: Publish source generators
       uses: alirezanet/publish-nuget@v3.1.0
       with:

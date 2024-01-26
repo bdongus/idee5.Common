@@ -1,5 +1,8 @@
-﻿namespace idee5.Common.Data;
+﻿using System;
+
+namespace idee5.Common.Data;
 /// <inheritdoc />
+[Obsolete("Use the new AsyncDataImporter")]
 public class DataConverterAsync<TInput, TIntermediate> : ADataConverterAsync<TInput, TIntermediate> where TInput : IQuery<TIntermediate> {
     /// <summary>
     /// Create a new <see cref="DataConverterAsync{TInput, TIntermediate}"/>.

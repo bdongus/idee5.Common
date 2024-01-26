@@ -11,6 +11,7 @@ namespace idee5.Common.Data;
 /// The input handler returns this type and the output handler takes it to produce the desired output.
 /// This split is done for better reusability of both handlers.
 /// </typeparam>
+[Obsolete("Use the new AsyncDataImporter")]
 public abstract class ADataConverterAsync<TInput, TIntermediate> where TInput : IQuery<TIntermediate> {
     /// <summary>
     /// <see cref="IQueryHandlerAsync{TQuery, TResult}"/> providing the input for the <see cref="_outputHandler"/>.

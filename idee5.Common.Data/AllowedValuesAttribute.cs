@@ -16,11 +16,11 @@ public abstract class AllowedValuesAttribute : ValidationAttribute {
     protected abstract object[] GetValues(ValidationContext validationContext);
 
     /// <summary>
-    /// Creates a useful validation message. 
+    /// Creates a useful validation message
     /// </summary>
-    /// <param name="invalidValue">The invalid value.</param>
-    /// <param name="validValues">The list of valid values.</param>
-    /// <returns>The validation info/message.</returns>
+    /// <param name="invalidValue">The invalid value</param>
+    /// <param name="validValues">The list of valid values</param>
+    /// <returns>The validation info/message</returns>
     protected abstract string GetInvalidValueMessage(object? invalidValue, object[] validValues);
 
     /// <inheritdoc/>

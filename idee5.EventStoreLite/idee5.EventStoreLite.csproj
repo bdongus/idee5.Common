@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>Bernd Dongus</Authors>
+    <Company>idee5 GmbH</Company>
+    <Version>1.0.0-alpha1</Version>
+    <Copyright>Copyright © 2024</Copyright>
+    <PackageIcon>idee5 nuget icon.png</PackageIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
+    <PackageTags>idee5;EventStore;CQRSlite</PackageTags>
+    <Description>Basic event store implementation</Description>
+    <Title>Lightweight event store implementation using CQRSLight and EFCore.</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\idee5 nuget icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Boxed.Mapping" Version="7.0.0" />
+    <PackageReference Include="CqrsLite" Version="1.35.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\idee5.Common.Data\idee5.Common.Data.csproj" />
+  </ItemGroup>
+
+</Project>

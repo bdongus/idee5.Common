@@ -16,14 +16,14 @@ public class ServiceCollectionTests {
     [TestMethod]
     public void CanAddAsyncCommandHandlers() {
         // Arrange
-        List<ServiceDescriptor> serviceDescriptors = new List<ServiceDescriptor>();
+        List<ServiceDescriptor> serviceDescriptors = [];
         var services = Mock.Create<IServiceCollection>();
         Mock.Arrange(() => services.Add(Arg.IsAny<ServiceDescriptor>())).DoInstead((ServiceDescriptor sd) => serviceDescriptors.Add(sd));
         // Act
         services.RegisterHandlers(typeof(ICommandHandlerAsync<>));
 
         // Assert
-        Assert.AreEqual(2, serviceDescriptors.Count);
+        Assert.AreEqual(4, serviceDescriptors.Count);
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public class ServiceCollectionTests {
     [TestMethod]
     public void CanAddAsyncQueryHandlers() {
         // Arrange
-        List<ServiceDescriptor> serviceDescriptors = new List<ServiceDescriptor>();
+        List<ServiceDescriptor> serviceDescriptors = [];
         var services = Mock.Create<IServiceCollection>();
         Mock.Arrange(() => services.Add(Arg.IsAny<ServiceDescriptor>())).DoInstead((ServiceDescriptor sd) => serviceDescriptors.Add(sd));
         // Act

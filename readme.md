@@ -183,4 +183,6 @@ Nullable support in IAuditedEntity
 ### 1.10
 * Proper nullable support in the repositories
 ### 2.0
-* Breaking changes in the repository to reduce the possible ORM leak 
+* Breaking changes in the repository to reduce the possible ORM leak
+### 2.1
+* New data importer added as replacement for the data converter.
