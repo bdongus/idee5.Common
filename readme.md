@@ -187,3 +187,5 @@ Nullable support in IAuditedEntity
 ### 2.1
 * New data importer added as replacement for the data converter.
 * Improved handler registration, ignoring all decorators not just those with names starting with "Validat".
+### 2.1.1
+* Registration for command and query handlers added to the service collection extensions

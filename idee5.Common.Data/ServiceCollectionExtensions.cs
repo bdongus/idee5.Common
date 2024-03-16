@@ -10,6 +10,23 @@ namespace idee5.Common.Data;
 /// </summary>
 public static class ServiceCollectionExtensions {
     /// <summary>
+    /// Registers the query handlers.
+    /// </summary>
+    /// <param name="services">The services.</param>
+    /// <param name="serviceLifetime">The service lifetime.</param>
+    public static void RegisterQueryHandlers(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped) {
+        services.RegisterHandlers(typeof(IQueryHandlerAsync<,>), serviceLifetime);
+    }
+    /// <summary>
+    /// Register the command handlers.
+    /// </summary>
+    /// <param name="services">The services.</param>
+    /// <param name="serviceLifetime">The service lifetime.</param>
+    public static void RegisterCommandHandlers(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped) {
+        services.RegisterHandlers(typeof(ICommandHandlerAsync<>), serviceLifetime);
+    }
+
+    /// <summary>
     /// Registers command or query handlers. Ignores decorators like validation.
     /// </summary>
     /// <param name="services">The service collection.</param>

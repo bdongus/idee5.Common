@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <Authors>Bernd Dongus</Authors>
     <Company>idee5 GmbH</Company>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Copyright>Copyright © 2024</Copyright>
     <PackageIcon>idee5 nuget icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
@@ -14,6 +14,8 @@
     <Description>Basic event store implementation</Description>
     <Title>Lightweight event store implementation using CQRSLight and EFCore.</Title>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
