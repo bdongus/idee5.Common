@@ -186,3 +186,4 @@ Nullable support in IAuditedEntity
 * Breaking changes in the repository to reduce the possible ORM leak
 ### 2.1
 * New data importer added as replacement for the data converter.
+* Improved handler registration, ignoring all decorators not just those with names starting with "Validat".

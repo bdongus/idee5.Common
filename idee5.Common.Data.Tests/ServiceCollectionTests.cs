@@ -1,8 +1,6 @@
 ﻿#if !NETSTANDARD
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using Telerik.JustMock;
 
 namespace idee5.Common.Data.Tests;
 /// <summary>
@@ -16,14 +14,12 @@ public class ServiceCollectionTests {
     [TestMethod]
     public void CanAddAsyncCommandHandlers() {
         // Arrange
-        List<ServiceDescriptor> serviceDescriptors = [];
-        var services = Mock.Create<IServiceCollection>();
-        Mock.Arrange(() => services.Add(Arg.IsAny<ServiceDescriptor>())).DoInstead((ServiceDescriptor sd) => serviceDescriptors.Add(sd));
+        var services= new ServiceCollection();
         // Act
         services.RegisterHandlers(typeof(ICommandHandlerAsync<>));
 
         // Assert
-        Assert.AreEqual(4, serviceDescriptors.Count);
+        Assert.AreEqual(3, services.Count);
     }
 
     /// <summary>
@@ -32,14 +28,13 @@ public class ServiceCollectionTests {
     [TestMethod]
     public void CanAddAsyncQueryHandlers() {
         // Arrange
-        List<ServiceDescriptor> serviceDescriptors = [];
-        var services = Mock.Create<IServiceCollection>();
-        Mock.Arrange(() => services.Add(Arg.IsAny<ServiceDescriptor>())).DoInstead((ServiceDescriptor sd) => serviceDescriptors.Add(sd));
+        var services = new ServiceCollection();
+
         // Act
         services.RegisterHandlers(typeof(IQueryHandlerAsync<,>));
 
         // Assert
-        Assert.AreEqual(1, serviceDescriptors.Count);
+        Assert.AreEqual(1, services.Count);
     }
 }
 
