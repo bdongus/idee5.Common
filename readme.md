@@ -189,3 +189,5 @@ Nullable support in IAuditedEntity
 * Improved handler registration, ignoring all decorators not just those with names starting with "Validat".
 ### 2.1.1
 * Registration for command and query handlers added to the service collection extensions
+### 2.2
+* No cleanup command and handler added for scenarios without a cleanup
