@@ -15,4 +15,16 @@ internal static partial class Log {
     public static partial void Importing(this ILogger logger, int rowNumber, string rowData);
     [LoggerMessage(5, LogLevel.Error, "Row with invalid data detected: {errorMessage}")]
     public static partial void ImportError(this ILogger logger, string errorMessage);
+    [LoggerMessage(6, LogLevel.Trace, "Invoking command {commandName}")]
+    public static partial void InvokingCommand(this ILogger logger, string commandName);
+    [LoggerMessage(7, LogLevel.Information, "Command parameters are : {commandParameters}")]
+    public static partial void CommandParametersAre(this ILogger logger, string commandParameters);
+    [LoggerMessage(8, LogLevel.Trace, "Command {commandName} executed")]
+    public static partial void CommandExecuted(this ILogger logger, string commandName);
+    [LoggerMessage(9, LogLevel.Error, "Validation failed : {errorMessage}")]
+    public static partial void ValidationError(this ILogger logger, string errorMessage);
+    [LoggerMessage(10, LogLevel.Warning, "Validation result is NULL")]
+    public static partial void NoValidationResult(this ILogger logger);
+    [LoggerMessage(11, LogLevel.Error, "Invalid members : {memberNames}")]
+    public static partial void InvalidMembers(this ILogger logger, string memberNames);
 }

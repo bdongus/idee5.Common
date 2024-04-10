@@ -19,7 +19,7 @@ public class ServiceCollectionTests {
         services.RegisterHandlers(typeof(ICommandHandlerAsync<>));
 
         // Assert
-        Assert.AreEqual(3, services.Count);
+        Assert.AreEqual(4, services.Count);
     }
 
     /// <summary>

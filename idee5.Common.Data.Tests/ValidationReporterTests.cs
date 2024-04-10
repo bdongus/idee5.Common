@@ -41,7 +41,7 @@ namespace idee5.Common.Data.Tests {
             reporter.Report(validationResult);
 
             // Assert
-            Assert.AreEqual("Member names : ", loggerFactory.Sink.LogEntries.First().Message);
+            Assert.AreEqual("Invalid members : ", loggerFactory.Sink.LogEntries.First().Message);
         }
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace idee5.Common.Data.Tests {
             reporter.Report(null);
 
             // Assert
-            Assert.AreEqual("Validation result is NULL.", loggerFactory.Sink.LogEntries.First().Message);
+            Assert.AreEqual("Validation result is NULL", loggerFactory.Sink.LogEntries.First().Message);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace idee5.Common.Data.Tests {
             await reporter.ReportAsync(validationResult).ConfigureAwait(false);
 
             // Assert
-            Assert.AreEqual("Member names : ", loggerFactory.Sink.LogEntries.First().Message);
+            Assert.AreEqual("Invalid members : ", loggerFactory.Sink.LogEntries.First().Message);
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace idee5.Common.Data.Tests {
             await reporter.ReportAsync(null).ConfigureAwait(false);
 
             // Assert
-            Assert.AreEqual("Validation result is NULL.", loggerFactory.Sink.LogEntries.First().Message);
+            Assert.AreEqual("Validation result is NULL", loggerFactory.Sink.LogEntries.First().Message);
         }
     }
 }

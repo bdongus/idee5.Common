@@ -23,21 +23,16 @@ public class LogValidationReporter : IValidationResultReporter {
     /// <inheritdoc/>
     public void Report(ValidationResult validationResult) {
         if (validationResult == null) {
-            _logger.LogWarning(Resources.NoValidationResult);
+            _logger.NoValidationResult();
         } else {
-            _logger.LogError(Resources.MemberNames, validationResult.MemberNames.JoinAsString(","));
-            _logger.LogError(Resources.Error, validationResult.ErrorMessage);
+            _logger.InvalidMembers(validationResult.MemberNames.JoinAsString(","));
+            _logger.ValidationError(validationResult.ErrorMessage ?? "");
         }
     }
 
     /// <inheritdoc/>
     public Task ReportAsync(ValidationResult validationResult, CancellationToken cancellationToken = default) {
-        if (validationResult == null) {
-            _logger.LogWarning(Resources.NoValidationResult);
-        } else {
-            _logger.LogError(Resources.MemberNames, validationResult.MemberNames.JoinAsString(","));
-            _logger.LogError(Resources.Error, validationResult.ErrorMessage);
-        }
+        Report(validationResult);
         return Task.CompletedTask;
     }
 }
