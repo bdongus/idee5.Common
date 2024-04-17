@@ -16,7 +16,7 @@
     <Description>Data access abstractions used by idee5</Description>
     <Copyright>Copyright © 2017 - 2024</Copyright>
     <PackageTags>idee5</PackageTags>
-    <Version>2.2</Version>
+    <Version>2.3</Version>
     <PackageReleaseNotes>Check the readme</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
     <Nullable>enable</Nullable>

@@ -191,3 +191,6 @@ Nullable support in IAuditedEntity
 * Registration for command and query handlers added to the service collection extensions
 ### 2.2
 * No cleanup command and handler added for scenarios without a cleanup
+### 2.3
+* KeyNamePair added
+* Generic data paging support for queries
