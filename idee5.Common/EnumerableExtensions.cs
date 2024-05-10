@@ -110,6 +110,7 @@ public static class EnumerableExtensions {
     /// // 8
     /// </code>
     /// </remarks>
+    [Obsolete("Same functionality as ForEach")]
     public static IEnumerable<T> Execute<T>(this IEnumerable<T> source, Action<T> func) {
 #if NETSTANDARD2_0_OR_GREATER
         if (source == null) throw new ArgumentNullException(nameof(source));
@@ -119,9 +120,9 @@ public static class EnumerableExtensions {
         ArgumentNullException.ThrowIfNull(func);
 #endif
 
-        return TiggertImmediateValidation();
+        return TiggerImmediateValidation();
 
-        IEnumerable<T> TiggertImmediateValidation() {
+        IEnumerable<T> TiggerImmediateValidation() {
             foreach (T t in source) {
                 func(t);
                 yield return t;

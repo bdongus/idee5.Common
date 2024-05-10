@@ -115,15 +115,6 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        public void CanExecute() {
-            int[] ie = new[] { 1, 2, 3 };
-            int outer = 0;
-            string formatted = ie.Execute(x => outer += x).Format(separator: ",");
-            Assert.AreEqual(expected: 6, actual: outer);
-            Assert.AreEqual(expected: "1,2,3", actual: formatted);
-        }
-
-        [UnitTest, TestMethod]
         public void CanCheckContainsAll() {
             var v1 = new string[] { "idee", "5", "St. Gallen", "Berlin" };
             var v2 = new string[] { "idee", "5" };
