@@ -194,3 +194,5 @@ Nullable support in IAuditedEntity
 ### 2.3
 * KeyNamePair added
 * Generic data paging support for queries
+## 2.3.1
+* Interface IASyncDataImporter added to enable the decorator pattern

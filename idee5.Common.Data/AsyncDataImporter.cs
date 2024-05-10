@@ -5,12 +5,8 @@ using System.Threading.Tasks;
 using System.Threading;
 
 namespace idee5.Common.Data;
-/// <summary>
-/// The asynchronous data importer
-/// </summary>
-/// <typeparam name="TQuery">The query parameter type</typeparam>
-/// <typeparam name="TCommand">The command data type</typeparam>
-public class AsyncDataImporter<TQuery, TCommand, TCleanupCmd> where TQuery : IQuery<TCommand> where TCleanupCmd : ICleanupCommand {
+/// <inheritdoc/>
+public class AsyncDataImporter<TQuery, TCommand, TCleanupCmd> : IAsyncDataImporter<TQuery, TCommand, TCleanupCmd> where TQuery : IQuery<TCommand> where TCleanupCmd : ICleanupCommand {
     protected readonly IAsyncInputHandler<TQuery, TCommand> inputHandler;
     protected readonly ICommandHandlerAsync<TCommand> outputHandler;
     private readonly ITimeProvider _timeProvider;
@@ -33,19 +29,15 @@ public class AsyncDataImporter<TQuery, TCommand, TCleanupCmd> where TQuery : IQu
         this.cleanupHandler = cleanupHandler ?? throw new ArgumentNullException(nameof(cleanupHandler));
         _logger = logger ?? NullLogger<AsyncDataImporter<TQuery, TCommand, TCleanupCmd>>.Instance;
     }
-    /// <summary>
-    /// <summary>
-    /// Executes the <see cref="Task"/>
-    /// </summary>
-    /// <param name="query">The query parameters</param>
-    /// <param name="cleanupCmd">The cleanup parameters</param>
-    /// <param name="cancellationToken">The cancellation token</param>
-    /// <exception cref="ArgumentNullException"></exception>
+    /// <inheritdoc />
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="query"/> or <paramref name="cleanupCmd"/> is <c>NULL</c></exception>
     public virtual async Task ExecuteAsync(TQuery query, TCleanupCmd cleanupCmd, CancellationToken cancellationToken = default) {
 #if NETSTANDARD2_0_OR_GREATER
         if (query == null) throw new ArgumentNullException(nameof(query));
+        if (cleanupCmd == null) throw new ArgumentNullException(nameof(cleanupCmd));
 #else
         ArgumentNullException.ThrowIfNull(query);
+        ArgumentNullException.ThrowIfNull(cleanupCmd);
 #endif
         DateTime importStartedAt = _timeProvider.UtcNow;
         int importCount = 0;
