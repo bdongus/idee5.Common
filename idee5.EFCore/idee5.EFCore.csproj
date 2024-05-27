@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Title></Title>
+    <Authors>Bernd Dongus</Authors>
+    <Company>idee5 GmbH</Company>
+    <Copyright>Copyright © 2024</Copyright>
+    <Description>EF Core ultilities and implementations of idee5.Common.Data concepts</Description>
+    <PackageIcon>idee5 nuget icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
+    <PackageTags>idee5;EntityFrameworkCore</PackageTags>
+    <PackageReleaseNotes>First release with support for AuditedEntityRepository and UnitOfWork</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\idee5 nuget icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\idee5.Common.Data\idee5.Common.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

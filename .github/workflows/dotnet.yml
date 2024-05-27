@@ -24,7 +24,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --filter FullyQualifiedName\!~NtpClientTests --configuration Release --no-build --verbosity normal
-    - name: Pack
+    - name: Publish idee5.Common
       uses: alirezanet/publish-nuget@v3.1.0
       with:
        PROJECT_FILE_PATH: idee5.Common/idee5.Common.csproj
@@ -40,6 +40,12 @@ jobs:
       uses: alirezanet/publish-nuget@v3.1.0
       with:
        PROJECT_FILE_PATH: idee5.EventStoreLite/idee5.EventStoreLite.csproj
+       NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+       NO_BUILD: true
+    - name: Publish EF Core package
+      uses: alirezanet/publish-nuget@v3.1.0
+      with:
+       PROJECT_FILE_PATH: idee5.EFCore/idee5.EFCore.csproj
        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
        NO_BUILD: true
     - name: Publish source generators
