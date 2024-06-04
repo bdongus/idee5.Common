@@ -7,10 +7,16 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
 namespace idee5.EFCore;
-public abstract class EFCoreAuditingRepository<TEntity, TKey, TContext> : AuditingRepository<TEntity, TKey>
+/// <summary>
+/// The EF core auditing repository
+/// </summary>
+/// <inheritdoc cref="IEntity{TPrimaryKey}" path="/typeparam[@name='TPrimaryKey']"/>
+/// <typeparam name="TEntity">Type of the auited entity</typeparam>
+/// <typeparam name="TContext">Database context type</typeparam>
+public abstract class EFCoreAuditingRepository<TEntity, TPrimaryKey, TContext> : AuditingRepository<TEntity, TPrimaryKey>
     where TContext : DbContext
-    where TEntity : class, IAuditedEntity, IEntity<TKey>
-    where TKey : notnull {
+    where TEntity : class, IAuditedEntity, IEntity<TPrimaryKey>
+    where TPrimaryKey : notnull {
     protected readonly TContext dbContext;
 
     public EFCoreAuditingRepository(TContext dbContext, ITimeProvider timeProvider, ICurrentUserIdProvider currentUserProvider) : base(timeProvider, currentUserProvider) {
