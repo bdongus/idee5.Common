@@ -28,8 +28,8 @@ public abstract class AuditingRepository<T, TKey> : ARepository<T, TKey>
     /// <summary>
     /// Repository supporting <see cref="IAuditedEntity"/>.
     /// </summary>
-    /// <param name="timeProvider">Date and time provider. Can be a <see cref="AmbientTimeProvider"/>.</param>
-    /// <param name="currentUserProvider"></param>
+    /// <param name="timeProvider">Date and time provider</param>
+    /// <param name="currentUserProvider">The current user provider</param>
     protected AuditingRepository(ITimeProvider timeProvider, ICurrentUserIdProvider currentUserProvider) {
         TimeProvider = timeProvider;
         CurrentUserProvider = currentUserProvider;

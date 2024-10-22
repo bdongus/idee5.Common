@@ -12,11 +12,11 @@
     <PackageIcon>idee5 nuget icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/bdongus/idee5.Common</RepositoryUrl>
     <PackageTags>idee5;EntityFrameworkCore</PackageTags>
-    <PackageReleaseNotes>First release with support for AuditedEntityRepository and UnitOfWork</PackageReleaseNotes>
+    <PackageReleaseNotes>nuget / security updates</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Version>1.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.10" />
   </ItemGroup>
 
   <ItemGroup>

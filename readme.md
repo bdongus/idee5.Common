@@ -198,3 +198,5 @@ Nullable support in IAuditedEntity
 * Interface IASyncDataImporter added to enable the decorator pattern
 ## 2.3.2
 * Master system configuration options added
+## 2.3.3
+* nuget / security updates

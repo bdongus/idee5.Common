@@ -12,7 +12,7 @@ namespace idee5.EFCore;
 /// The EF core unit of work base implementation.
 /// Supports simple concurrency conflict resolution
 /// </summary>
-/// <typeparam name="TDBContext"/>
+/// <typeparam name="TDBContext">Database context type</typeparam>
 public abstract class EFCoreUnitOfWork<TDBContext> : IUnitOfWork
     where TDBContext : DbContext {
     protected TDBContext dbContext;

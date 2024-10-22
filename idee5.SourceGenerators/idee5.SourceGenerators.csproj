@@ -9,11 +9,11 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <Title>idee5 Sourcegenerators</Title>
     <Description>Source generator and analyzer for the "GenerateCommands" attribute and the command handler interface defined in idee5.Common</Description>
-    <Copyright>© 2022 idee5 GmbH</Copyright>
+    <Copyright>© 2022 - 2024 idee5 GmbH</Copyright>
     <PackageTags>idee5;source generator</PackageTags>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>1.0.0</FileVersion>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Authors>Bernd Dongus</Authors>
@@ -21,6 +21,7 @@
     <RepositoryUrl>https://github.com/bdongus/idee5.Common/tree/master/idee5.SourceGenerators</RepositoryUrl>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <PackageIcon>idee5 nuget icon.png</PackageIcon>
+    <PackageReleaseNotes>nuget / security updates</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,11 +41,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
   </ItemGroup>
   <!-- This ensures the library will be packaged as a source generator when we use `dotnet pack` -->
   <ItemGroup>

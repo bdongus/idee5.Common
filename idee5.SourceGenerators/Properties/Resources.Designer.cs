@@ -106,7 +106,7 @@ namespace idee5.SourceGenerators.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Code template not found. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Code template not found ähnelt.
         /// </summary>
         public static string Title0002 {
             get {

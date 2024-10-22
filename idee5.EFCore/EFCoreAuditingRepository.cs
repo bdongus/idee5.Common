@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace idee5.EFCore;
 /// <summary>
-/// The EF core auditing repository
+/// An EF core auditing repository base implementation
 /// </summary>
 /// <inheritdoc cref="IEntity{TPrimaryKey}" path="/typeparam[@name='TPrimaryKey']"/>
 /// <typeparam name="TEntity">Type of the auited entity</typeparam>
@@ -19,7 +19,13 @@ public abstract class EFCoreAuditingRepository<TEntity, TPrimaryKey, TContext> :
     where TPrimaryKey : notnull {
     protected readonly TContext dbContext;
 
-    public EFCoreAuditingRepository(TContext dbContext, ITimeProvider timeProvider, ICurrentUserIdProvider currentUserProvider) : base(timeProvider, currentUserProvider) {
+    /// <summary>
+    /// Repository supporting <see cref="IAuditedEntity" />.
+    /// </summary>
+    /// <param name="dbContext">The <see cref="DbContext"/> to use in this repository</param>
+    /// <param name="timeProvider">Date and time provider</param>
+    /// <param name="currentUserProvider">The current user provider</param>
+    protected EFCoreAuditingRepository(TContext dbContext, ITimeProvider timeProvider, ICurrentUserIdProvider currentUserProvider) : base(timeProvider, currentUserProvider) {
         this.dbContext = dbContext;
     }
     /// <inheritdoc/>

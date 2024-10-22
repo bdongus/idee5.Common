@@ -6,3 +6,7 @@ Sometimes an application is designed with DDD, CQRS and/or event sourcing in min
 
 In those cases a lightweight, but extensible, path might be a good start.Which is the purpose of this library.
 
+# Releases
+## 1.0.2
+- nuget / security updates
+
