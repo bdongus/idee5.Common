@@ -94,6 +94,8 @@ Moved localizable strings to internal resource file.
     * ObservableDictionary and ObservableSortedDictionary removed for newer .NET versions.
     * Plugin infrastructure removed. Modern DI containers now support most of it.
 * Further nullable and .net8 improvements
+### 4.0.1
+* nuget updates
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -199,4 +201,6 @@ Nullable support in IAuditedEntity
 ## 2.3.2
 * Master system configuration options added
 ## 2.3.3
+* nuget / security updates
+## 2.3.4
 * nuget / security updates
