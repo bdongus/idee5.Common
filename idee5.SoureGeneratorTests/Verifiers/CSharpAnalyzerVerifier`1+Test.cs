@@ -1,11 +1,11 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Testing.Verifiers;
+using Microsoft.CodeAnalysis.Testing;
 
 namespace idee5.SoureGeneratorTests.Verifiers {
     public static partial class CSharpAnalyzerVerifier<TAnalyzer>
     where TAnalyzer : DiagnosticAnalyzer, new() {
-        public class Test : CSharpAnalyzerTest<TAnalyzer, MSTestVerifier> {
+        public class Test : CSharpAnalyzerTest<TAnalyzer, DefaultVerifier> {
             public Test() {
                 SolutionTransforms.Add((solution, projectId) => {
                     var compilationOptions = solution.GetProject(projectId).CompilationOptions;

@@ -5,3 +5,5 @@
 - nuget / security updates
 ## 1.1.0
 - EF 9 / .NET support (stuff ike ExecuteDelete and ExecuteUpdate moved from the relational extension to the core)
+## 1.1.1
+- nuget / security updates

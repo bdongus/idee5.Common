@@ -11,3 +11,5 @@ In those cases a lightweight, but extensible, path might be a good start.Which i
 - nuget / security updates
 ## 1.0.3
 * nuget / security updates
+## 1.0.4
+* nuget / security updates

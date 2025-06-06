@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using System.Reflection;
+
 namespace idee5.Common.Data.Tests;
 /// <summary>
 /// The service collection tests.
@@ -14,12 +16,26 @@ public class ServiceCollectionTests {
     [TestMethod]
     public void CanAddAsyncCommandHandlers() {
         // Arrange
-        var services= new ServiceCollection();
+        var services = new ServiceCollection();
         // Act
         services.RegisterHandlers(typeof(ICommandHandlerAsync<>));
 
         // Assert
         Assert.AreEqual(4, services.Count);
+    }
+
+    /// <summary>
+    /// Can add asynchronous command handlers.
+    /// </summary>
+    [TestMethod]
+    public void CanAddAsyncCommandHandlersFromAssembly() {
+        // Arrange
+        var services = new ServiceCollection();
+        // Act
+        services.RegisterHandlers(Assembly.GetExecutingAssembly(), typeof(ICommandHandlerAsync<>));
+
+        // Assert
+        Assert.AreEqual(3, services.Count);
     }
 
     /// <summary>
@@ -32,6 +48,20 @@ public class ServiceCollectionTests {
 
         // Act
         services.RegisterHandlers(typeof(IQueryHandlerAsync<,>));
+
+        // Assert
+        Assert.AreEqual(1, services.Count);
+    }
+    /// <summary>
+    /// Can add asynchronous query handlers.
+    /// </summary>
+    [TestMethod]
+    public void CanAddAsyncQueryHandlersFRomAssembly() {
+        // Arrange
+        var services = new ServiceCollection();
+
+        // Act
+        services.RegisterHandlers(Assembly.GetExecutingAssembly(), typeof(IQueryHandlerAsync<,>));
 
         // Assert
         Assert.AreEqual(1, services.Count);

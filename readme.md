@@ -96,6 +96,8 @@ Moved localizable strings to internal resource file.
 * Further nullable and .net8 improvements
 ### 4.0.1
 * nuget updates
+### 4.0.2
+* nuget updates
 ## Release notes idee5.Common.Data
 ### 1.0.0
 Initial release
@@ -204,3 +206,5 @@ Nullable support in IAuditedEntity
 * nuget / security updates
 ## 2.3.4
 * nuget / security updates
+## 2.3.5
+* Ability to register handlers only from a specific assembly

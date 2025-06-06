@@ -1,7 +1,11 @@
 ﻿using idee5.Common;
 using idee5.SourceGenerators;
+
 using System.IO;
 using System.Threading.Tasks;
+
+using static Microsoft.CodeAnalysis.Testing.ReferenceAssemblies;
+
 using VerifyCS = idee5.SoureGeneratorTests.Verifiers.CSharpAnalyzerVerifier<idee5.SourceGenerators.GeneratorTemplateAnalyzer>;
 
 namespace idee5.SoureGeneratorTests {
@@ -46,6 +50,7 @@ namespace idee5.SoureGeneratorTests {
                     Sources = {testSource},
                     ExpectedDiagnostics = {expected},
                     AdditionalReferences = { typeof(GenerateCommandsAttribute).Assembly},
+                    ReferenceAssemblies = Net.Net80, // custom because there is no net70 version in the provided Nuget yet
                     AdditionalFiles = {
                         ("HandlerTemplate.txt", "// just do nothing")
                     }
@@ -80,6 +85,7 @@ namespace idee5.SoureGeneratorTests {
                     Sources = {testSource},
                     ExpectedDiagnostics = {expected},
                     AdditionalReferences = { typeof(GenerateCommandsAttribute).Assembly},
+                    ReferenceAssemblies = Net.Net80, // custom because there is no net70 version in the provided Nuget yet
                     AdditionalFiles = {
                         ("HandlerTemplate.txt", "// just do nothing")
                     }
@@ -105,6 +111,7 @@ namespace idee5.SoureGeneratorTests {
                 TestState = {
                     Sources = {testSource},
                     AdditionalReferences = { typeof(GenerateCommandsAttribute).Assembly},
+                    ReferenceAssemblies = Net.Net80, // custom because there is no net70 version in the provided Nuget yet
                     AdditionalFiles = {
                         ("HandlerTemplate.txt", "// just do nothing"),
                         ("NoDocProperty.txt","\t\tpublic {{PropertyType}} {{PropertyName}} { get; }")
@@ -132,6 +139,7 @@ namespace idee5.SoureGeneratorTests {
                     Sources = {testSource},
                     ExpectedDiagnostics ={expected},
                     AdditionalReferences = { typeof(GenerateCommandsAttribute).Assembly},
+                    ReferenceAssemblies = Net.Net80, // custom because there is no net70 version in the provided Nuget yet
                     AdditionalFiles = {
                         ("HandlerTemplate.txt", "// just do nothing")
                     }
