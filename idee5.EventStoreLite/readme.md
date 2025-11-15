@@ -13,3 +13,5 @@ In those cases a lightweight, but extensible, path might be a good start.Which i
 * nuget / security updates
 ## 1.0.4
 * nuget / security updates
+## 2.0.0
+* Upgrade to .NET 10 / EFCore 10

@@ -27,7 +27,7 @@ namespace idee5.Common.Tests {
             Action instance = () => {
                 var x = sut.Instance;
             };
-            Assert.ThrowsException<Exception>(instance);
+            Assert.Throws<Exception>(instance);
         }
 
         [UnitTest, TestMethod]
@@ -87,7 +87,7 @@ namespace idee5.Common.Tests {
             // Act
             Action setInstanceToNull = () => sut.Instance = null;
             // Assert
-            Assert.ThrowsException<ArgumentNullException>(setInstanceToNull);
+            Assert.ThrowsExactly<ArgumentNullException>(setInstanceToNull);
         }
     }
 }

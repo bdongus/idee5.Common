@@ -32,12 +32,11 @@ namespace idee5.Common.Tests {
             Assert.AreEqual(expected: 1, actual: cmd.Counter);
         }
         [UnitTest, TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
         public void CanUseRecordAsCommand() {
             var cmd = new TestCommandRecord(42);
             var command = new RecordCommandHandler();
 
-            command.Handle(cmd);
+            Assert.ThrowsExactly<NotImplementedException>(() => command.Handle(cmd));
         }
     }
 }

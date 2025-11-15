@@ -83,7 +83,7 @@ namespace idee5.Common.Data.Tests {
             var result = await repo.GetAsync(e => e.Id == 2).ConfigureAwait(false);
 
             // Assert
-            Assert.AreEqual(expected: 1, actual: result.Count);
+            Assert.HasCount(expected: 1, result);
             Assert.AreEqual(expected: "wl2", actual: result[0].Workload);
         }
 
@@ -96,7 +96,7 @@ namespace idee5.Common.Data.Tests {
             var result = await repo.GetAllAsync().ConfigureAwait(false);
 
             // Assert
-            Assert.AreEqual(expected: 3, actual: result.Count);
+            Assert.HasCount(expected: 3, result);
         }
 
         [UnitTest, TestMethod]

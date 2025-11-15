@@ -16,7 +16,7 @@ namespace idee5.Common.Tests {
             collection.AddIfNotContains("blabla");
 
             // Assert
-            Assert.AreEqual(expected: 1, actual: collection.Count);
+            Assert.HasCount(expected: 1, collection);
         }
 
         [UnitTest, TestMethod]
@@ -29,19 +29,16 @@ namespace idee5.Common.Tests {
             collection.AddIfNotContains("blablubb");
 
             // Assert
-            Assert.AreEqual(expected: 2, actual: collection.Count);
+            Assert.HasCount(expected: 2, collection);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ThrowsNullException() {
             // Arrange
-            ICollection<String> collection = null;
+            ICollection<string> collection = null;
 
             // Act
-            collection.AddIfNotContains(null);
-
-            // Assert - exception expected
+            Assert.ThrowsExactly<ArgumentNullException>(() => collection.AddIfNotContains(null));
         }
     }
 }

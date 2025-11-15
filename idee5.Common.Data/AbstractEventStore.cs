@@ -5,6 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Json;
+#if !NETSTANDARD2_0_OR_GREATER
+using System.Threading;
+#endif
 
 namespace idee5.Common.Data;
 /// <summary>
@@ -14,7 +17,11 @@ namespace idee5.Common.Data;
 public abstract class AbstractEventStore<TEvent> {
     protected readonly Dictionary<Type, Delegate> _registeredTypes = new();
 
-    protected object _locker = new();
+#if NETSTANDARD2_0_OR_GREATER
+    protected static readonly object _lock = new();
+#else
+    protected static readonly Lock _lock = new();
+#endif
 
     /// <summary>
     /// Create event object from the stored event entry. an
@@ -29,7 +36,7 @@ public abstract class AbstractEventStore<TEvent> {
             ParameterInfo[] paramsInfo = cInfo.GetParameters();
             // create the event constructor
             Delegate? ctor;
-            lock (_locker) {
+            lock (_lock) {
                 // check the cache
                 if (!_registeredTypes.TryGetValue(eventType, out ctor)) {
                     var argsExp = new Expression[paramsInfo.Length];

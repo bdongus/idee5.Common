@@ -25,8 +25,8 @@ namespace idee5.Common.Tests {
             // Act
 
             // Assert
-            Assert.ThrowsException<TypeInitializationException>(() => EnumUtils<DateTime>.Count);
-            Assert.ThrowsException<TypeInitializationException>(() => EnumUtils<byte>.Count);
+            Assert.ThrowsExactly<TypeInitializationException>(() => EnumUtils<DateTime>.Count);
+            Assert.ThrowsExactly<TypeInitializationException>(() => EnumUtils<byte>.Count);
         }
 
         [TestMethod]

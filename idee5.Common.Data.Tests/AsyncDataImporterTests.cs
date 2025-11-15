@@ -40,7 +40,7 @@ public class AsyncDataImporterTests {
         // Assert
         Assert.IsFalse(command.Executed);
         Assert.IsTrue(cleanupHandler.Executed);
-        Assert.AreEqual(1, outputHandler.ValidationResults.Count);
+        Assert.HasCount(1, outputHandler.ValidationResults);
         Assert.AreEqual("The Label field is required.", outputHandler.ValidationResults[0].ErrorMessage);
     }
 }

@@ -103,7 +103,7 @@ public class RepositoryTests {
         _testRepository.Add(itemToAdd);
 
         // Assert
-        Assert.AreEqual(5, _testRepository.TestEntities.Count);
+        Assert.HasCount(5, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -116,7 +116,7 @@ public class RepositoryTests {
         _testRepository.Remove(itemToRemove);
 
         // Assert
-        Assert.AreEqual(3, _testRepository.TestEntities.Count);
+        Assert.HasCount(3, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -129,7 +129,7 @@ public class RepositoryTests {
         await _testRepository.RemoveAsync(r => r.Label == "Atari", default).ConfigureAwait(false);
 
         // Assert
-        Assert.AreEqual(2, _testRepository.TestEntities.Count);
+        Assert.HasCount(2, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -157,7 +157,7 @@ public class RepositoryTests {
         _testRepository.Update(itemToUpdate);
 
         // Assert
-        Assert.AreEqual(5, _testRepository.TestEntities.Count);
+        Assert.HasCount(5, _testRepository.TestEntities);
         Assert.AreEqual("me", itemToUpdate.ModifiedBy);
     }
 }

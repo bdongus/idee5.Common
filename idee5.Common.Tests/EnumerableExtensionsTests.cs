@@ -62,14 +62,14 @@ namespace idee5.Common.Tests {
 
             int[] flattened = groupsOfTwo.SelectMany(x => x).ToArray();
 
-            Assert.AreEqual(expected: groupsOfTwo.Length, actual: 5);
-            Assert.AreEqual(flattened.Length, integers.Length);
+            Assert.HasCount(5, groupsOfTwo);
+            Assert.HasCount(flattened.Length, integers);
             CollectionAssert.AreEquivalent(integers, flattened);
 
             IEnumerable<int>[] groupsOfMassive = integers.InGroupsOf(groupSize: 100).ToArray();
-            Assert.AreEqual(expected: groupsOfMassive.Length, actual: 1);
+            Assert.HasCount(1, groupsOfMassive);
             flattened = groupsOfMassive.SelectMany(x => x).ToArray();
-            Assert.AreEqual(flattened.Length, integers.Length);
+            Assert.HasCount(flattened.Length, integers);
             CollectionAssert.AreEquivalent(integers, flattened);
         }
 
@@ -135,14 +135,14 @@ namespace idee5.Common.Tests {
         public void CanFormat() {
             var v1 = new string[] { "idee", "5", "St. Gallen", "Berlin" };
 
-            Assert.IsTrue(v1.Format(separator: ";") == "idee;5;St. Gallen;Berlin");
+            Assert.AreEqual("idee;5;St. Gallen;Berlin", v1.Format(separator: ";"));
         }
 
         [UnitTest, TestMethod]
         public void CanFormatWithFunction() {
             var v1 = new string[] { "idee", "5", "St. Gallen", "Berlin" };
 
-            Assert.IsTrue(v1.Format(separator: ";", toString: s => String.Format(format: "\"{0}\"", arg0: s)) == "\"idee\";\"5\";\"St. Gallen\";\"Berlin\"");
+            Assert.AreEqual("\"idee\";\"5\";\"St. Gallen\";\"Berlin\"", v1.Format(separator: ";", toString: s => String.Format(format: "\"{0}\"", arg0: s)));
         }
 
         [UnitTest, TestMethod]
@@ -287,7 +287,6 @@ namespace idee5.Common.Tests {
         }
 
         [UnitTest, TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowsOnChunkSizeZero() {
             // Arrange
             int[] list = { 1, 2, 3 };
@@ -296,8 +295,7 @@ namespace idee5.Common.Tests {
             var chunked = list.Chunk(0);
 
             // Assert
-            // due to the "yield" in the extension method we need to do something with "chunked"
-            Assert.AreEqual(0, chunked.Count());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => chunked.Count());
         }
 
         [UnitTest, TestMethod]

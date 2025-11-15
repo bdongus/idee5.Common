@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+#if !NETSTANDARD2_0_OR_GREATER
+using System.Threading;
+#endif
 
 namespace idee5.Common;
 /// <summary>
@@ -13,9 +16,14 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
     #region Private Fields
 
     private static readonly Type _enumType = typeof(TEnum);
-    private static readonly bool _isSigned = new TypeCode[] { TypeCode.SByte, TypeCode.Int16, TypeCode.Int32, TypeCode.Int64 }.IndexOf(_typeCode) > -1;
-    private static readonly object _syncRoot = new();
     private static readonly TypeCode _typeCode = Type.GetTypeCode(Enum.GetUnderlyingType(_enumType));
+    private static readonly bool _isSigned = new TypeCode[] { TypeCode.SByte, TypeCode.Int16, TypeCode.Int32, TypeCode.Int64 }.IndexOf(_typeCode) > -1;
+
+#if NETSTANDARD2_0_OR_GREATER
+    private static readonly object _syncRoot = new();
+#else
+    private static readonly Lock _syncRoot = new();
+#endif
 
     // locks are used so that multiple threads may assign a field multiple times but it is still faster than locking fields even on non-null access
 
@@ -24,7 +32,7 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
     private static Dictionary<TEnum, string>? _valueNamePairs;
     private static TEnum[]? _values;
 
-    #endregion Private Fields
+#endregion Private Fields
 
     #region Public Properties
 
@@ -51,9 +59,11 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
                         _intNamePairs = new Dictionary<int, string>(Names.Length);
                         // Values is used to ensure _values is filled
                         for (int i = 0; i < Values.Length; i++) {
-                            int key = CastTo<int>.From(_values[i]);
-                            if (!_intNamePairs.ContainsKey(key))
-                                _intNamePairs.Add(key, _names[i]);
+                            if (_values != null && _names != null) {
+                                int key = CastTo<int>.From(_values[i]);
+                                if (!_intNamePairs.ContainsKey(key))
+                                    _intNamePairs.Add(key, _names[i]);
+                            }
                         }
                     }
                 }
@@ -92,8 +102,10 @@ public static class EnumUtils<TEnum> where TEnum : struct, IComparable, IConvert
                         _valueNamePairs = new Dictionary<TEnum, string>(Names.Length, comparer);
                         for (int i = 0; i < Values.Length; i++) {
                             // avoiding duplicated keys (multiple names for the same value)
-                            if (!_valueNamePairs.ContainsKey(_values[i]))
-                                _valueNamePairs.Add(_values[i], _names[i]);
+                            if (_values != null && _names != null) {
+                                if (!_valueNamePairs.ContainsKey(_values[i]))
+                                    _valueNamePairs.Add(_values[i], _names[i]);
+                            }
                         }
                     }
                 }

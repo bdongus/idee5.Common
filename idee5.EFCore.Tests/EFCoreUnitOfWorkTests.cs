@@ -27,7 +27,7 @@ public class EFCoreUnitOfWorkTests : IDisposable {
         Func<object?> action = () => new TestUnitOfWork(null, null);
 
         // Assert
-        Assert.ThrowsException<ArgumentNullException>(action);
+        Assert.ThrowsExactly<ArgumentNullException>(action);
     }
 
     [TestMethod()]

@@ -100,7 +100,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Add(itemToAdd);
 
         // Assert
-        Assert.AreEqual(5, _testRepository.TestEntities.Count);
+        Assert.HasCount(5, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -114,7 +114,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Add(items);
 
         // Assert
-        Assert.AreEqual(expectedCount, _testRepository.TestEntities.Count);
+        Assert.HasCount(expectedCount, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -131,7 +131,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Add(listOfItems);
 
         // Assert
-        Assert.AreEqual(6, _testRepository.TestEntities.Count);
+        Assert.HasCount(6, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -144,7 +144,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Remove(itemToRemove);
 
         // Assert
-        Assert.AreEqual(3, _testRepository.TestEntities.Count);
+        Assert.HasCount(3, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -158,7 +158,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Remove(items);
 
         // Assert
-        Assert.AreEqual(expectedCount, _testRepository.TestEntities.Count);
+        Assert.HasCount(expectedCount, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -174,7 +174,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Remove(listOfItems);
 
         // Assert
-        Assert.AreEqual(2, _testRepository.TestEntities.Count);
+        Assert.HasCount(2, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -187,7 +187,7 @@ public class ACompositeRepositoryTests {
         await _testRepository.RemoveAsync(r => r.Label == "Atari", default).ConfigureAwait(false);
 
         // Assert
-        Assert.AreEqual(2, _testRepository.TestEntities.Count);
+        Assert.HasCount(2, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -214,7 +214,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Update(items);
 
         // Assert
-        Assert.AreEqual(expectedCount, _testRepository.TestEntities.Count);
+        Assert.HasCount(expectedCount, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -230,7 +230,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Update(listOfItems);
 
         // Assert
-        Assert.AreEqual(4, _testRepository.TestEntities.Count);
+        Assert.HasCount(4, _testRepository.TestEntities);
         Assert.AreEqual(2, listOfItems.Count(i => i.ModifiedBy == "me"));
     }
 
@@ -246,7 +246,7 @@ public class ACompositeRepositoryTests {
         _testRepository.Update(itemToUpdate);
 
         // Assert
-        Assert.AreEqual(5, _testRepository.TestEntities.Count);
+        Assert.HasCount(5, _testRepository.TestEntities);
         Assert.AreEqual("me", itemToUpdate.ModifiedBy);
     }
 
@@ -261,7 +261,7 @@ public class ACompositeRepositoryTests {
         await _testRepository.UpdateOrAddAsync(items).ConfigureAwait(false);
 
         // Assert
-        Assert.AreEqual(expectedCount, _testRepository.TestEntities.Count);
+        Assert.HasCount(expectedCount, _testRepository.TestEntities);
     }
 
     [UnitTest, TestMethod]
@@ -276,7 +276,7 @@ public class ACompositeRepositoryTests {
         // Act
         await _testRepository.UpdateOrAddAsync(listOfItems).ConfigureAwait(false);
         // Assert
-        Assert.AreEqual(5, _testRepository.TestEntities.Count);
+        Assert.HasCount(5, _testRepository.TestEntities);
         Assert.AreEqual(1, listOfItems.Count(i => i.ModifiedBy == "me"));
     }
 }

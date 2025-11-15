@@ -22,16 +22,12 @@ namespace idee5.Common.Data.Tests {
         }
 
         [UnitTest, TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ThrowsArgumentNullException() {
             // Arrange
             System.Data.DataTable dataTable = null;
 
             // Act
-            dataTable.ExportToCsv();
-
-            // Assert - Exception expected
-
+            Assert.ThrowsExactly<ArgumentNullException>(() => dataTable.ExportToCsv());
         }
 
         [TestMethod]

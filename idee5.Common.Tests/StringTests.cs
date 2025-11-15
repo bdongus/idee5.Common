@@ -42,7 +42,7 @@ namespace idee5.Common.Tests {
         public void RemovesNonAsciiByReplace() {
             string result = "Test©string".ReplaceSpecialCharacters();
             Assert.AreEqual(expected: "Teststring", actual: result);
-            Assert.AreNotEqual(result, actual: "Test©string");
+            Assert.AreNotEqual("Test©string", actual: result);
         }
 
         [UnitTest, TestMethod]
@@ -194,25 +194,25 @@ namespace idee5.Common.Tests {
         [UnitTest, TestMethod]
         public void CanValidateMod10WithBlanks() {
             const string s1 = "4 0 1 2 8 8 8 8 8 8 8 8 1 8 8 1  ";
-            Assert.AreEqual(expected: true, actual: s1.IsValidMod10());
+            Assert.IsTrue(s1.IsValidMod10());
         }
 
         [UnitTest, TestMethod]
         public void CanValidateMod10WithSeparators() {
             const string s1 = "4-012888(88888188)1";
-            Assert.AreEqual(expected: true, actual: s1.IsValidMod10());
+            Assert.IsTrue(s1.IsValidMod10());
         }
 
         [UnitTest, TestMethod]
         public void CanValidateCleanMod10() {
             const string s1 = "4012888888881881";
-            Assert.AreEqual(expected: true, actual: s1.IsValidMod10());
+            Assert.IsTrue(s1.IsValidMod10());
         }
 
         [UnitTest, TestMethod]
         public void FailsToValidateWrongMod10() {
             const string s1 = "4012888888881882";
-            Assert.AreEqual(expected: false, actual: s1.IsValidMod10());
+            Assert.IsFalse(s1.IsValidMod10());
         }
 
         [UnitTest, TestMethod]
@@ -263,7 +263,7 @@ namespace idee5.Common.Tests {
             // Act
 
             // Assert
-            Assert.ThrowsException<System.FormatException>(() => "treu".ParseInto<bool>());
+            Assert.ThrowsExactly<System.FormatException>(() => "treu".ParseInto<bool>());
         }
 
         [TestMethod()]

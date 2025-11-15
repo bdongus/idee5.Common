@@ -50,12 +50,11 @@ namespace idee5.Common.Tests {
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         public void ThrowsOnIntAsEnum() {
             // Arrange
 
             // Act
-            _ = getEnumComparer<int>();
+            Assert.ThrowsExactly<NotSupportedException>(() => _ = getEnumComparer<int>());
             // Assert         
         }
     }

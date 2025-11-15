@@ -9,7 +9,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <Title>idee5 Sourcegenerators</Title>
     <Description>Source generator and analyzer for the "GenerateCommands" attribute and the command handler interface defined in idee5.Common</Description>
-    <Copyright>© 2022 - 2024 idee5 GmbH</Copyright>
+    <Copyright>© 2022 - 2025 idee5 GmbH</Copyright>
     <PackageTags>idee5;source generator</PackageTags>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>1.0.0</FileVersion>

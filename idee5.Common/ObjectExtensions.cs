@@ -41,7 +41,7 @@ public static class ObjectExtensions {
     /// <param name="obj">Object to check.</param>
     /// <param name="type">The type.</param>
     /// <returns>true if type of, false if not.</returns>
-    public static bool IsTypeOf<T>(this T obj, Type type) => obj.GetType() == type;
+    public static bool IsTypeOf<T>(this T obj, Type type) => obj?.GetType() == type;
 
     /// <summary>
     /// Gets an object's property value.

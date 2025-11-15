@@ -33,7 +33,7 @@ namespace idee5.Common.Data.Tests {
             // Assert
             Assert.IsFalse(command.Executed);
             Assert.IsFalse(handler.Success);
-            Assert.AreEqual(2, handler.ValidationResults.Count);
+            Assert.HasCount(2, handler.ValidationResults);
         }
 
         #region RecursiveAnnotationsValidator
@@ -47,7 +47,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObject(parent, validationResults);
 
             Assert.IsTrue(result);
-            Assert.IsTrue(validationResults.Count == 0);
+            Assert.IsEmpty(validationResults);
         }
 
         [UnitTest, TestMethod]
@@ -58,7 +58,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObject(parent, validationResults);
 
             Assert.IsFalse(result);
-            Assert.AreEqual(2, validationResults.Count);
+            Assert.HasCount(2, validationResults);
             Assert.AreEqual(1, validationResults.ToList().Count(x => x.ErrorMessage == "Parent PropertyA is required"));
             Assert.AreEqual(1, validationResults.ToList().Count(x => x.ErrorMessage == "Parent PropertyB is required"));
         }
@@ -71,7 +71,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObject(parent, validationResults);
 
             Assert.IsFalse(result);
-            Assert.IsTrue(validationResults.Count == 1);
+            Assert.HasCount(1, validationResults);
             Assert.AreEqual("Parent PropertyA and PropertyB cannot add up to more than 10", validationResults[0].ErrorMessage);
         }
 
@@ -84,7 +84,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObjectRecursive(parent, validationResults);
 
             Assert.IsFalse(result);
-            Assert.IsTrue(validationResults.Count == 1);
+            Assert.HasCount(1, validationResults);
             Assert.AreEqual("Child PropertyA is required", validationResults[0].ErrorMessage);
         }
 
@@ -109,7 +109,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObjectRecursive(parent, validationResults);
 
             Assert.IsFalse(result);
-            Assert.IsTrue(validationResults.Count == 1);
+            Assert.HasCount(1, validationResults);
             Assert.AreEqual("Child PropertyA and PropertyB cannot add up to more than 10", validationResults[0].ErrorMessage);
         }
 
@@ -127,7 +127,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObjectRecursive(parent, validationResults);
 
             Assert.IsFalse(result);
-            Assert.AreEqual(2, validationResults.Count);
+            Assert.HasCount(2, validationResults);
             Assert.AreEqual(1, validationResults.ToList().Count(x => x.ErrorMessage == "GrandChild PropertyA not within range"));
             Assert.AreEqual(1, validationResults.ToList().Count(x => x.ErrorMessage == "GrandChild PropertyB not within range"));
         }
@@ -146,7 +146,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObjectRecursive(parent, validationResults);
 
             Assert.IsFalse(result);
-            Assert.IsTrue(validationResults.Count == 1);
+            Assert.HasCount(1, validationResults);
             Assert.AreEqual(1, validationResults.ToList().Count(x => x.ErrorMessage == "GrandChild PropertyA and PropertyB cannot add up to more than 10"));
         }
 
@@ -164,7 +164,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObjectRecursive(parent, validationResults);
 
             Assert.IsFalse(result);
-            Assert.AreEqual(3, validationResults.Count);
+            Assert.HasCount(3, validationResults);
             Assert.AreEqual(1, validationResults.ToList().Count(x => x.ErrorMessage == "Parent PropertyA and PropertyB cannot add up to more than 10"));
             Assert.AreEqual(1, validationResults.ToList().Count(x => x.ErrorMessage == "Child PropertyA and PropertyB cannot add up to more than 10"));
             Assert.AreEqual(1, validationResults.ToList().Count(x => x.ErrorMessage == "GrandChild PropertyA and PropertyB cannot add up to more than 10"));
@@ -179,7 +179,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObjectRecursive(parent, validationResults);
 
             Assert.IsFalse(result);
-            Assert.IsTrue(validationResults.Count == 1);
+            Assert.HasCount(1, validationResults);
             Assert.AreEqual("Child PropertyA is required", validationResults[0].ErrorMessage);
             Assert.AreEqual("Child.PropertyA", validationResults[0].MemberNames.First());
         }
@@ -208,7 +208,7 @@ namespace idee5.Common.Data.Tests {
             var result = _validator.TryValidateObjectRecursive(classWithDictionary, validationResults);
 
             Assert.IsTrue(result);
-            Assert.IsTrue(validationResults.Count == 0);
+            Assert.IsEmpty(validationResults);
         }
 #pragma warning restore CA1707 // Identifiers should not contain underscores
 

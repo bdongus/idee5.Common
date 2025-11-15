@@ -35,12 +35,11 @@ namespace idee5.Common.Tests {
             Assert.AreEqual(expected: 1, actual: cmd.Counter);
         }
         [UnitTest, TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
         public async Task CanUseRecordAsCommandAsync() {
             var cmd = new TestCommandRecord(42);
             var command = new RecordCommandHandlerAsync();
 
-            await command.HandleAsync(cmd, CancellationToken.None).ConfigureAwait(false);
+            await Assert.ThrowsExactlyAsync<NotImplementedException>(async () => await command.HandleAsync(cmd, CancellationToken.None));
         }
     }
 }
